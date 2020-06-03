@@ -129,16 +129,14 @@
 
                     <div class="row mt-4">
                         <div class="col-md-12">
-                            <div class="section-title">Produk</div>
-
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover table-md">
                                     <tr class="text-center">
                                         <th data-width="40">#</th>
                                         <th>Produk</th>
-                                        <th class="text-center">Harga</th>
-                                        <th class="text-center">Kuantitas</th>
-                                        <th class="text-right">Total</th>
+                                        <th>Harga</th>
+                                        <th>Kuantitas</th>
+                                        <th>Total</th>
                                     </tr>
                                     <?php foreach ($data['produk'] as $key => $produk) : ?>
 
@@ -169,20 +167,14 @@
                         </div>
                     </div>
                 </div>
-                <hr>
+
                 <div class="text-right">
-
                     <button type="submit" onclick="window.history.back()" class="btn btn-warning mr-2">Kembali</button>
-
-
                     <form class="d-inline" action="<?= url('admin/transaksi/updatebarangtiba') ?>" method="post">
                         <input type="hidden" name="invoice" value="<?= $data['order']['o_invoice'] ?>">
                         <button type="submit" class="btn btn-primary mr-2">Selesai (Barang Telah Tiba)</button>
                     </form>
-                    <!-- <button class="btn btn-primary btn-icon icon-left"><i class="fas fa-credit-card"></i> Process Payment</button>
 
-
-                    <button class="btn btn-warning btn-icon icon-left"><i class="fas fa-print"></i> Print</button> -->
                 </div>
             </div>
         </div>

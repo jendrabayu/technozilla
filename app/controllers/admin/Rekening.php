@@ -40,7 +40,7 @@ class Rekening extends Controller
 
     public function store()
     {
-        $this->db->insert('rekening_bank', [
+        if ($this->db->insert('rekening_bank', [
             'id' => null,
             'nama' => $_POST['nama_bank'],
             'atas_nama' => $_POST['atas_nama'],
@@ -49,8 +49,11 @@ class Rekening extends Controller
             'created_at' => date("Y-m-d h:i:sa"),
             'updated_at' => date("Y-m-d h:i:sa"),
             'deleted_at' => null
-        ]);
-        Flash::setFlash('Berhasil menambahkan rekening bank baru', 'success');
+        ])) {
+            Flash::setFlash('Rekening Baru Berhasil Ditambahkan', 'success');
+        } else {
+            Flash::setFlash('Rekening Baru Gagal Ditambahkan', 'danger');
+        }
         Redirect::to('admin/rekening');
     }
 
@@ -63,28 +66,46 @@ class Rekening extends Controller
             ->whereIsNull('deleted_at')
             ->andWhere('slug', '=', $slug)
             ->first();
-        $this->view('admin/templates/header', $data);
-        $this->view('admin/rekening/edit', $data);
-        $this->view('admin/templates/footer');
+        if ($data['rekening']) {
+            $this->view('admin/templates/header', $data);
+            $this->view('admin/rekening/edit', $data);
+            $this->view('admin/templates/footer');
+        } else {
+            Redirect::to('admin/rekening');
+        }
     }
 
     public function update($id)
     {
-        $this->db->update('rekening_bank', [
+        if ($this->db->update('rekening_bank', [
             'nama' => $_POST['nama_bank'],
             'atas_nama' => $_POST['atas_nama'],
             'nomor' => $_POST['no_rekening'],
             'slug' => textToSlug($_POST['no_rekening'] . '' . date('yds')),
             'updated_at' => date('Y-m-d H:i:s')
-        ], 'id', '=', $id);
-        Flash::setFlash('Rekening bank berhasil diupdate', 'success');
+        ], 'id', '=', $id)) {
+            Flash::setFlash('Rekening Berhasil Diupdate', 'success');
+        } else {
+            Flash::setFlash('Rekening Gagal Diupdate', 'danger');
+        }
         Redirect::to('admin/rekening');
     }
 
     public function destroy()
     {
-        $this->db->update('rekening_bank', ['deleted_at' => date("Y-m-d h:i:sa")], 'id', '=', $_POST['id']);
-        Flash::setFlash('Rekening bank berhasil dihapus', 'success');
+        if ($this->db
+            ->update(
+                'rekening_bank',
+                ['deleted_at' => date("Y-m-d h:i:sa")],
+                'id',
+                '=',
+                $_POST['id']
+            )
+        ) {
+            Flash::setFlash('Rekening Berhasil Dihapus', 'success');
+        } else {
+            Flash::setFlash('Rekening Gagal Dihapus', 'danger');
+        }
         Redirect::to('admin/rekening');
     }
 }

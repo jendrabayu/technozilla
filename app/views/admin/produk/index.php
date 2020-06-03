@@ -16,26 +16,25 @@
                             <div class="table-responsive">
                                 <table class="table table-striped" id="table-1">
                                     <thead>
-                                        <tr>
-                                            <th class="text-center">No.</th>
+                                        <tr class="text-center">
+                                            <th>No.</th>
                                             <th>Nama Produk</th>
                                             <th>Kategori</th>
                                             <th>Merk</th>
                                             <th>Harga</th>
                                             <th>Stok</th>
-                                            <th class="text-center">Gambar</th>
+                                            <th>Gambar</th>
                                             <th style="min-width: 50px;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <?php foreach ($data['produk'] as $key => $produk) : ?>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <td class="text-center"><?= 1 + $key++ ?></td>
                                                 <td><?= $produk['p_nama'] ?></td>
                                                 <td><?= $produk['k_nama'] ?></td>
                                                 <td><?= $produk['m_nama'] ?></td>
-                                                <td><?= number_format($produk['p_harga'], 0, ".", ",")  ?></td>
+                                                <td><?= number_format($produk['p_harga'], 0, ".", ",") ?></td>
                                                 <td><?= $produk['p_stok'] ?></td>
                                                 <td>
                                                     <img style="max-width: 70px;" src=" <?= url('images/' . $produk['p_gambar']) ?>" alt="">
@@ -52,9 +51,7 @@
                                                     </form>
                                                 </td>
                                             </tr>
-
                                         <?php endforeach; ?>
-
                                     </tbody>
                                 </table>
                             </div>

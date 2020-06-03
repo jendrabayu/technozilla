@@ -1,7 +1,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Pesanan Baru</h1>
+            <h1>Pesanan Baru - Belum Dibayar</h1>
         </div>
         <div class="section-body">
             <div class="invoice">
@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="invoice-title">
-                                <h4>Detail Pesanan <?= $data['order']['c_nama']; ?></h4>
+                                <h5>Detail Pesanan <?= $data['order']['c_nama']; ?></h5>
                                 <div class="invoice-number"><?= $data['order']['o_invoice']; ?></div>
                             </div>
                             <hr>
@@ -103,16 +103,16 @@
 
                     <div class="row mt-4">
                         <div class="col-md-12">
-                            <div class="section-title">Produk</div>
+
 
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover table-md">
                                     <tr class="text-center">
                                         <th data-width="40">#</th>
                                         <th>Produk</th>
-                                        <th class="text-center">Harga</th>
-                                        <th class="text-center">Kuantitas</th>
-                                        <th class="text-right">Total</th>
+                                        <th>Harga</th>
+                                        <th>Kuantitas</th>
+                                        <th>Total</th>
                                     </tr>
                                     <?php foreach ($data['produk'] as $key => $produk) : ?>
                                         <tr class="text-center">
@@ -120,8 +120,7 @@
                                             <td><?= $produk['p_nama']; ?></td>
                                             <td><?= $produk['p_harga']; ?></td>
                                             <td><?= $produk['od_qty']; ?></td>
-                                            <td>
-                                                Rp. <?= number_format($produk['p_harga'] * $produk['od_qty'], 0, ".", ",") ?></td>
+                                            <td>Rp. <?= number_format($produk['p_harga'] * $produk['od_qty'], 0, ".", ",") ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </table>
@@ -140,7 +139,7 @@
                         </div>
                     </div>
                 </div>
-                <hr>
+
                 <div class="text-right">
                     <a href="<?= url('admin/transaksi/pesananbaru') ?>" class="btn btn-warning mr-2">Kembali</a>
                     <?php if ($data['order']['o_status_id'] == 1 || $data['order']['o_status_id'] == 2) : ?>

@@ -177,7 +177,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="<?= url('admin/produk') ?>">Produk</a></li>
                                 <li><a class="nav-link" href="<?= url('admin/kategori') ?>">Kategori</a></li>
-                                <li><a class="nav-link" href="<?= url('admin/brand') ?>">Merk</a></li>
+                                <li><a class="nav-link" href="<?= url('admin/merk') ?>">Merk</a></li>
                                 <li><a class="nav-link" href="<?= url('admin/gallery') ?>">Galeri Foto</a></li>
                             </ul>
                         </li>
@@ -196,6 +196,7 @@
                         </li>
 
                         <li class=""><a class="nav-link" href="<?= url('admin/rekening') ?>"><i class="fas fa-credit-card"></i> <span>Rekening Bank</span></a></li>
+                        <li class=""><a class="nav-link" href="<?= url('admin/rekap') ?>"><i class="fas fa-credit-card"></i> <span>Rekap Penjualan</span></a></li>
 
                 </aside>
             </div>

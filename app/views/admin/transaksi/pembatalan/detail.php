@@ -1,8 +1,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Pesanan Yang Dibatalkan</h1>
-
+            <h1>Pesanan Dibatalkan</h1>
         </div>
 
         <div class="section-body">
@@ -11,7 +10,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="invoice-title">
-                                <h3>Detail Pesanan <?= $data['order']['c_nama']; ?></h3>
+                                <h5>Detail Pesanan <?= $data['order']['c_nama']; ?></h5>
                                 <div class="invoice-number">Order <?= $data['order']['o_invoice']; ?></div>
                             </div>
                             <hr>
@@ -82,13 +81,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-
-
-
                                             </div>
                                         </div>
-
                                     </address>
                                 </div>
                                 <div class="col-md-6 text-md-right">
@@ -121,7 +115,6 @@
 
                     <div class="row mt-4">
                         <div class="col-md-12">
-                            <div class="section-title">Produk</div>
 
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover table-md">
@@ -161,8 +154,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </section>

@@ -41,8 +41,8 @@ class Kategori extends Controller
     {
         if ($this->db->insert('kategori', [
             'id' => null,
-            'nama' => $_POST['nama_kategori'],
-            'slug' => textToSlug($_POST['nama_kategori']) . '' . date('yds'),
+            'nama' => $_POST['kategori'],
+            'slug' => textToSlug($_POST['kategori']) . '' . date('yds'),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             'deleted_at' => null
@@ -75,8 +75,8 @@ class Kategori extends Controller
     public function update($id)
     {
         if ($this->db->update('kategori', [
-            'nama' => $_POST['nama_kategori'],
-            'slug' => textToSlug($_POST['nama_kategori']) . '' . date('yds'),
+            'nama' => $_POST['kategori'],
+            'slug' => textToSlug($_POST['kategori']) . '' . date('yds'),
             'updated_at' => date("Y-m-d h:i:s")
         ], 'id', '=', $id)) {
             Flash::setFlash('Kategori Berhasil Diupdate', 'success');

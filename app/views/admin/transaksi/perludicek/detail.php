@@ -2,7 +2,6 @@
     <section class="section">
         <div class="section-header">
             <h1>Pembayaran Perlu Dicek</h1>
-
         </div>
 
         <div class="section-body">
@@ -11,7 +10,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="invoice-title">
-                                <h4>Detail Pesanan <?= $data['order']['c_nama']; ?></h4>
+                                <h5>Detail Pesanan <?= $data['order']['c_nama']; ?></h5>
                                 <div class="invoice-number"><?= $data['order']['o_invoice']; ?></div>
                             </div>
                             <hr>
@@ -116,27 +115,23 @@
 
                     <div class="row mt-4">
                         <div class="col-md-12">
-                            <div class="section-title">Produk</div>
 
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover table-md">
                                     <tr class="text-center">
                                         <th data-width="40">#</th>
                                         <th>Produk</th>
-                                        <th class="text-center">Harga</th>
-                                        <th class="text-center">Kuantitas</th>
-                                        <th class="text-right">Total</th>
+                                        <th>Harga</th>
+                                        <th>Kuantitas</th>
+                                        <th>Total</th>
                                     </tr>
                                     <?php foreach ($data['produk'] as $key => $produk) : ?>
-
                                         <tr class="text-center">
                                             <td><?= 1 + $key++; ?></td>
                                             <td><?= $produk['p_nama']; ?></td>
                                             <td><?= $produk['p_harga']; ?></td>
                                             <td><?= $produk['od_qty']; ?></td>
-                                            <td>
-                                                Rp. <?= number_format($produk['p_harga'] * $produk['od_qty'], 0, ".", ",") ?></td>
-
+                                            <td>Rp. <?= number_format($produk['p_harga'] * $produk['od_qty'], 0, ".", ",") ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </table>
@@ -146,7 +141,6 @@
 
                                 </div>
                                 <div class="col-lg-4 text-right">
-
                                     <div class="invoice-detail-item">
                                         <div class="invoice-detail-name">Total</div>
                                         <div class="invoice-detail-value invoice-detail-value-lg">Rp. <?= number_format($data['order']['o_total'], 0, ".", ",") ?></div>
@@ -156,17 +150,13 @@
                         </div>
                     </div>
                 </div>
-                <hr>
                 <div class="text-right">
-
                     <a href="<?= url('admin/transaksi/perludicek') ?>" class="btn btn-warning mr-2">Kembali</a>
-
 
                     <form class="d-inline" action="<?= url('admin/transaksi/updatepembayaran') ?>" method="post">
                         <input type="hidden" name="invoice" value="<?= $data['order']['o_invoice'] ?>">
                         <button type="submit" class="btn btn-primary mr-2">Konfirmasi Pembayaran</button>
                     </form>
-
 
                     <?php if ($data['order']['o_status_id'] == 1 || $data['order']['o_status_id'] == 2) : ?>
                         <form action="<?= url('admin/transaksi/batal') ?>" method="POST" class="d-inline">
@@ -174,24 +164,14 @@
                             <button type="submit" class="btn btn-danger btn-icon icon-left"><i class="fas fa-times"></i> Batalkan</button>
                         </form>
                     <?php endif; ?>
-
                 </div>
             </div>
         </div>
     </section>
 </div>
 
-
-
-<!-- The Modal -->
 <div id="myModal" class="modal">
-
-    <!-- The Close Button -->
     <span class="close">&times;</span>
-
-    <!-- Modal Content (The Image) -->
     <img class="modal-content" id="img01">
-
-    <!-- Modal Caption (Image Text) -->
     <div id="caption"></div>
 </div>

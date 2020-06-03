@@ -6,7 +6,7 @@ use App\Helpers\DB;
 use App\Helpers\Redirect;
 use App\Helpers\Flash;
 
-class Brand extends Controller
+class Merk extends Controller
 {
     protected $db;
 
@@ -18,23 +18,23 @@ class Brand extends Controller
 
     public function index()
     {
-        $data['judul'] = 'Brand';
-        $data['brand']
+        $data['judul'] = 'Merk';
+        $data['merk']
             = $this->db
             ->select('*')
             ->from('merk')
             ->whereIsNull('deleted_at')
             ->get();
         $this->view('admin/templates/header', $data);
-        $this->view('admin/brand/index', $data);
+        $this->view('admin/merk/index', $data);
         $this->view('admin/templates/footer');
     }
 
     public function create()
     {
-        $data = ['judul' => 'Tambah Brand'];
+        $data = ['judul' => 'Tambah merk'];
         $this->view('admin/templates/header', $data);
-        $this->view('admin/brand/tambah');
+        $this->view('admin/merk/tambah');
         $this->view('admin/templates/footer');
     }
 
@@ -42,8 +42,8 @@ class Brand extends Controller
     {
         if ($this->db->insert('merk', [
             'id' => null,
-            'nama' => $_POST['nama_brand'],
-            'slug' => textToSlug($_POST['nama_brand'] . '' . date('yds')),
+            'nama' => $_POST['merk'],
+            'slug' => textToSlug($_POST['merk'] . '' . date('yds')),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
             'deleted_at' => null
@@ -52,39 +52,39 @@ class Brand extends Controller
         } else {
             Flash::setFlash('Gagal Menambahkan Merk Baru', 'danger');
         }
-        Redirect::to('admin/brand');
+        Redirect::to('admin/merk');
     }
 
     public function edit($id)
     {
-        $data['judul'] = 'Tambah Brand';
-        $data['brand'] = $this->db
+        $data['judul'] = 'Tambah merk';
+        $data['merk'] = $this->db
             ->select('*')
             ->from('merk')
             ->whereIsNull('deleted_at')
             ->andWhere('id', '=', $id)
             ->first();
-        if ($data['brand']) {
+        if ($data['merk']) {
             $this->view('admin/templates/header', $data);
-            $this->view('admin/brand/edit', $data);
+            $this->view('admin/merk/edit', $data);
             $this->view('admin/templates/footer');
         } else {
-            Redirect::to('admin/brand');
+            Redirect::to('admin/merk');
         }
     }
 
     public function update($id)
     {
         if ($this->db->update('merk', [
-            'nama' => $_POST['nama_brand'],
-            'slug' => textToSlug($_POST['nama_brand']) . '' . date('yds'),
+            'nama' => $_POST['merk'],
+            'slug' => textToSlug($_POST['merk']) . '' . date('yds'),
             'updated_at' => date("Y-m-d h:i:s"),
         ], 'id', '=', $id)) {
-            Flash::setFlash('Merk Gagal Diupdate', 'success');
+            Flash::setFlash('Merk Berhasil  Diupdate', 'success');
         } else {
-            Flash::setFlash('Merk Berhasil Diupdate', 'danger');
+            Flash::setFlash('Merk Gagal Diupdate', 'danger');
         }
-        Redirect::to('admin/brand');
+        Redirect::to('admin/merk');
     }
 
     public function destroy()
@@ -100,6 +100,6 @@ class Brand extends Controller
         } else {
             Flash::setFlash('Merk Gagal Dihapus', 'danger');
         }
-        Redirect::to('admin/brand');
+        Redirect::to('admin/merk');
     }
 }
