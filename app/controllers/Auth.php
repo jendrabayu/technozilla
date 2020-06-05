@@ -5,6 +5,7 @@ use App\Helpers\Auth as Authentication;
 use App\Helpers\Redirect;
 use App\Helpers\Session;
 use App\Helpers\DB;
+use App\Helpers\Flash;
 
 class Auth extends Controller
 {
@@ -70,9 +71,11 @@ class Auth extends Controller
                     'qty' => $qty['qty']
                 ]]
             );
+            Redirect::to('');
+        } else {
+            Flash::setFlash('Email / Password Salah', 'danger');
+            Redirect::to('auth');
         }
-
-        Redirect::to('');
     }
 
 

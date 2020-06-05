@@ -13,7 +13,6 @@ class Transaksi extends Controller
     protected $db;
     protected $orderModel;
 
-
     /* status
         1. Belum Dibayar
         2. Perlu Dicek
@@ -247,8 +246,6 @@ class Transaksi extends Controller
             Redirect::to('admin/transaksi/perludikirim');
         }
     }
-
-
 
     public function updatebarangtiba()
     {

@@ -39,9 +39,9 @@ class DB
         return $this;
     }
 
-    public function limit($limit)
+    public function limit($start, $end)
     {
-        $this->sql = sprintf('%s LIMIT %s', $this->sql, $limit);
+        $this->sql = sprintf('%s LIMIT %s, %s', $this->sql, $start, $end);
         return $this;
     }
 

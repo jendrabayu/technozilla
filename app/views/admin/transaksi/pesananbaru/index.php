@@ -9,6 +9,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Pesanan Baru - Belum Dibayar</h4>
+                            <a href="<?= url('admin/transaksi/perludicek') ?>" class="btn btn-icon btn-primary ml-auto">Perlu Dicek<i class="fa fa-arrow-circle-right pl-2" aria-hidden="true"></i></a>
                         </div>
                         <div class=" card-body">
                             <?php

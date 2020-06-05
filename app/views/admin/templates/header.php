@@ -196,7 +196,7 @@
                         </li>
 
                         <li class=""><a class="nav-link" href="<?= url('admin/rekening') ?>"><i class="fas fa-credit-card"></i> <span>Rekening Bank</span></a></li>
-                        <li class=""><a class="nav-link" href="<?= url('admin/rekap') ?>"><i class="fas fa-credit-card"></i> <span>Rekap Penjualan</span></a></li>
+                        <li class=""><a class="nav-link" href="<?= url('admin/rekap') ?>"><i class="fas fa-table" aria-hidden="true"></i> <span>Rekap Data</span></a></li>
 
                 </aside>
             </div>

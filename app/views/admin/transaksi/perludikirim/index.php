@@ -11,6 +11,10 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Perlu Dikirim - Sudah Dibayar</h4>
+                            <div class="ml-auto">
+                                <a href="<?= url('admin/transaksi/perludicek') ?>" class="btn btn-icon btn-info mr-3"><i class="fa fa-arrow-circle-left pr-2" aria-hidden="true"></i>Perlu Dicek</a>
+                                <a href="<?= url('admin/transaksi/barangdikirim') ?>" class="btn btn-icon btn-primary">Barang Dikirim<i class="fa fa-arrow-circle-right pl-2" aria-hidden="true"></i></a>
+                            </div>
                         </div>
                         <div class=" card-body">
                             <?php
@@ -36,8 +40,7 @@
                                                 <td><?= $order['c_nama']; ?></td>
                                                 <td>Rp. <?= number_format(($order['o_total']), 0, ".", ",") ?></td>
                                                 <td><?= $order['s_nama']; ?></td>
-                                                <td class="text-center">
-                                                    <a href="<?= url('admin/transaksi/detail/' . $order['o_invoice'] . '/perludikirim/' . $order['o_status_id']) ?>" class="btn btn-warning">Input Nomor Resi</a>
+                                                <td class="text-center"><a href="<?= url('admin/transaksi/detail/' . $order['o_invoice'] . '/perludikirim/' . $order['o_status_id']) ?>" class="btn btn-warning">Input Nomor Resi</a>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>

@@ -8,23 +8,16 @@
                      </div>
 
                      <div class="card-body">
-                         <form method="POST" action="<?= url('auth/do_login') ?>" class="needs-validation" novalidate="">
+                         <?php App\Helpers\Flash::getFlash(); ?>
+                         <form method="POST" action="<?= url('auth/do_login') ?>">
                              <div class="form-group">
                                  <label for="email">Email</label>
-                                 <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
-                                 <div class="invalid-feedback">
-                                     Please fill in your email
-                                 </div>
+                                 <input id="email" type="email" class="form-control" name="email" required>
                              </div>
 
                              <div class="form-group">
-
                                  <label for="password" class="control-label">Password</label>
-
-                                 <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
-                                 <div class="invalid-feedback">
-                                     please fill in your password
-                                 </div>
+                                 <input id="password" type="password" class="form-control" name="password" required>
                              </div>
 
                              <div class="form-group">

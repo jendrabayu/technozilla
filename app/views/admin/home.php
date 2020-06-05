@@ -7,44 +7,44 @@
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
                         <div class="card-icon bg-primary">
-                            <i class="fas fa-shopping-bag"></i>
+                            <i class="far fa-user"></i>
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Perlu Dicek</h4>
+                                <h4>Customers</h4>
                             </div>
                             <div class="card-body">
-                                10
+                                <?= $data['customer']; ?>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
-                        <div class="card-icon bg-primary">
+                        <div class="card-icon bg-danger">
                             <i class="fas fa-shopping-bag"></i>
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Perlu Dikirim</h4>
+                                <h4>Pesanan Perlu Dicek</h4>
                             </div>
                             <div class="card-body">
-                                42
+                                <?= $data['perlu_dicek']; ?>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
-                        <div class="card-icon bg-primary">
+                        <div class="card-icon bg-warning">
                             <i class="fas fa-shopping-bag"></i>
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>Selesai</h4>
+                                <h4>Pesanan Perlu Dikirim</h4>
                             </div>
                             <div class="card-body">
-                                1,201
+                                <?= $data['perlu_dikirim']  ?>
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                                 <h4>Pendapatan</h4>
                             </div>
                             <div class="card-body">
-                                47
+                                <span style="font-size: 13px;"> Rp. <?= number_format(($data['pendapatan']), 0, ".", ",") ?></span>
                             </div>
                         </div>
                     </div>

@@ -47,7 +47,7 @@ class Home extends Controller
                 ->join('merk', 'merk.id', '=', ' produk.merk_id')
                 ->whereIsNull('produk.deleted_at')
                 ->orderBy('produk.created_at')
-
+                ->limit(0, 6)
                 ->get();
             $this->view('templates/header', $data);
             $this->view('home', $data);

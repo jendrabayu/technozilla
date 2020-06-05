@@ -8,7 +8,6 @@ use App\Helpers\DB;
 
 
 class Auth
-
 {
 
 
@@ -37,9 +36,5 @@ class Auth
             'created_at' => date("Y-m-d h:i:sa"),
             'updated_at' => date("Y-m-d h:i:sa")
         ]);
-    }
-
-    public function login($role)
-    {
     }
 }

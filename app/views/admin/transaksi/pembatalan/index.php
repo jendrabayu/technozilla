@@ -12,6 +12,7 @@
                       <div class="card">
                           <div class="card-header">
                               <h4>Pesanan Selesai</h4>
+                              <a href="<?= url('admin/transaksi/selesai') ?>" class="ml-auto btn btn-icon btn-info mr-3"><i class="fa fa-arrow-circle-left pr-2" aria-hidden="true"></i>Transaksi Selesai</a>
 
                           </div>
                           <div class=" card-body">

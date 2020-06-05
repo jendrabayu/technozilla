@@ -11,6 +11,10 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Perlu Dicek - Sudah Upload Bukti Transfer</h4>
+                            <div class="ml-auto">
+                                <a href="<?= url('admin/transaksi/pesananbaru') ?>" class="btn btn-icon btn-info mr-3"><i class="fa fa-arrow-circle-left pr-2" aria-hidden="true"></i>Pesanan Baru</a>
+                                <a href="<?= url('admin/transaksi/perludikirim') ?>" class="btn btn-icon btn-primary">Perlu Dikirim<i class="fa fa-arrow-circle-right pl-2" aria-hidden="true"></i></a>
+                            </div>
                         </div>
                         <div class=" card-body">
                             <?php

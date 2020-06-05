@@ -10,7 +10,11 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Barang Dikirim </h4>
+                            <h4>Barang Dikirim</h4>
+                            <div class="ml-auto">
+                                <a href="<?= url('admin/transaksi/perludikirim') ?>" class="btn btn-icon btn-info mr-3"><i class="fa fa-arrow-circle-left pr-2" aria-hidden="true"></i>Perlu Dikirim</a>
+                                <a href="<?= url('admin/transaksi/selesai') ?>" class="btn btn-icon btn-primary">Transaksi Selesai<i class="fa fa-arrow-circle-right pl-2" aria-hidden="true"></i></a>
+                            </div>
 
                         </div>
                         <div class=" card-body">

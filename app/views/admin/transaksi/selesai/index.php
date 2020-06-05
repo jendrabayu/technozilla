@@ -12,7 +12,10 @@
                       <div class="card">
                           <div class="card-header">
                               <h4>Barang Telah Tiba</h4>
-
+                              <div class="ml-auto">
+                                  <a href="<?= url('admin/transaksi/barangdikirim') ?>" class="btn btn-icon btn-info mr-3"><i class="fa fa-arrow-circle-left pr-2" aria-hidden="true"></i>Barang Sedang Dikirim</a>
+                                  <a href="<?= url('admin/transaksi/pembatalan') ?>" class="btn btn-icon btn-primary">Transaksi Batal<i class="fa fa-arrow-circle-right pl-2" aria-hidden="true"></i></a>
+                              </div>
                           </div>
                           <div class=" card-body">
                               <?php
