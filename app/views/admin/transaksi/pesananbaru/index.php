@@ -12,9 +12,7 @@
                             <a href="<?= url('admin/transaksi/perludicek') ?>" class="btn btn-icon btn-primary ml-auto">Perlu Dicek<i class="fa fa-arrow-circle-right pl-2" aria-hidden="true"></i></a>
                         </div>
                         <div class=" card-body">
-                            <?php
-                            \App\Helpers\Flash::getFlash();
-                            ?>
+                            <?= \App\Core\Session::getFlash() ?>
                             <div class="table-responsive">
                                 <table class="table table-striped" id="table-1">
                                     <thead>

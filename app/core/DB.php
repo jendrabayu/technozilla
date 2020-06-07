@@ -2,18 +2,93 @@
 
 namespace App\Core;
 
-use App\Core\Database;
+use PDO;
 
 class DB
 {
-    protected $db;
     protected $sql;
+    protected $db;
+
+    private $host = DB_HOST;
+    private $user = DB_USER;
+    private $pass = DB_PASS;
+    private $db_name = DB_NAME;
+
+    private $dbh;
+    private $stmt;
 
     public function __construct()
     {
-        $this->db = new Database();
+        try {
+            $this->dbh = new PDO(
+                'mysql:host=' . $this->host . ';dbname=' . $this->db_name,
+                $this->user,
+                $this->pass,
+                [
+                    PDO::ATTR_PERSISTENT => true,
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                ]
+            );
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
     }
 
+    public function query($query)
+    {
+        $this->stmt = $this->dbh->prepare($query);
+    }
+
+    public function bind($param, $value, $type = null)
+    {
+        if (is_null($type)) {
+            switch (true) {
+                case is_int($value):
+                    $type = PDO::PARAM_INT;
+                    break;
+                case is_bool($value):
+                    $type = PDO::PARAM_BOOL;
+                    break;
+                case is_null($value):
+                    $type = PDO::PARAM_NULL;
+                    break;
+                default:
+                    $type = PDO::PARAM_STR;
+            }
+        }
+
+        $this->stmt->bindValue($param, $value, $type);
+    }
+
+    public function execute()
+    {
+        try {
+            $this->stmt->execute();
+        } catch (PDOException $e) {
+            return $e->errorInfo;
+        }
+    }
+
+    public function resultSet()
+    {
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function single()
+    {
+        $this->execute();
+        return $this->stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+    public function rowCount()
+    {
+        return $this->stmt->rowCount();
+    }
+
+
+    //query
     public function select(...$column)
     {
         $strColumn = '';
@@ -56,8 +131,6 @@ class DB
         return $this;
     }
 
-
-
     public function whereIsNull($column)
     {
         $this->sql = sprintf("%s WHERE %s IS NULL", $this->sql, $column);
@@ -89,8 +162,8 @@ class DB
         $table ? $query = sprintf('SELECT * FROM %s', $table) : $query = $this->sql;
         // var_dump($query);
 
-        $this->db->query($query);
-        return $this->db->resultSet();
+        $this->query($query);
+        return $this->resultSet();
     }
 
     public function first($table =  null)
@@ -100,8 +173,8 @@ class DB
 
         // var_dump($query);
         // die;
-        $this->db->query($query);
-        return $this->db->single();
+        $this->query($query);
+        return $this->single();
     }
 
 
@@ -138,11 +211,9 @@ class DB
         return $this;
     }
 
-    /* SELECT */
     public function insert($table, $array = [])
     {
         $strCoulumn = '';
-
         foreach ($array as $key => $value) {
             if (empty($strCoulumn)) {
 
@@ -151,23 +222,13 @@ class DB
                 $strCoulumn = $strCoulumn . ', :' . $key;
             }
         }
-
-
         $query = sprintf('INSERT INTO %s VALUES (%s)', $table, $strCoulumn);
-
-
-        $this->db->query($query);
-
-
-
+        $this->query($query);
         foreach ($array as $key => $value) {
-            $this->db->bind($key, $value);
+            $this->bind($key, $value);
         }
-
-
-        $this->db->execute();
-
-        return $this->db->rowCount();
+        $this->execute();
+        return $this->rowCount();
     }
 
     public function update($table, $array = [], $req, $operator, $val)
@@ -190,24 +251,24 @@ class DB
             $req
         );
 
-        $this->db->query($query);
+        $this->query($query);
 
         foreach ($array as $key => $value) {
-            $this->db->bind($key, $value);
+            $this->bind($key, $value);
         }
 
-        $this->db->bind($req, $val);
-        $this->db->execute();
-        return $this->db->rowCount();
+        $this->bind($req, $val);
+        $this->execute();
+        return $this->rowCount();
     }
 
     public function delete($table, $req, $operator, $val)
     {
         $query = sprintf('DELETE FROM %s WHERE %s %s :%s', $table, $req, $operator, $req);
-        $this->db->query($query);
-        $this->db->bind($req, $val);
-        $this->db->execute();
-        return $this->db->rowCount();
+        $this->query($query);
+        $this->bind($req, $val);
+        $this->execute();
+        return $this->rowCount();
     }
 
     public function __toString()

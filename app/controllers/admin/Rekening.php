@@ -50,9 +50,9 @@ class Rekening extends Controller
             'updated_at' => date("Y-m-d h:i:sa"),
             'deleted_at' => null
         ])) {
-            Flash::setFlash('Rekening Baru Berhasil Ditambahkan', 'success');
+            Session::setFlash('Rekening Baru Berhasil Ditambahkan', 'success');
         } else {
-            Flash::setFlash('Rekening Baru Gagal Ditambahkan', 'danger');
+            Session::setFlash('Rekening Baru Gagal Ditambahkan', 'danger');
         }
         Redirect::to('admin/rekening');
     }
@@ -84,9 +84,9 @@ class Rekening extends Controller
             'slug' => textToSlug($_POST['no_rekening'] . '' . date('yds')),
             'updated_at' => date('Y-m-d H:i:s')
         ], 'id', '=', $id)) {
-            Flash::setFlash('Rekening Berhasil Diupdate', 'success');
+            Session::setFlash('Rekening Berhasil Diupdate', 'success');
         } else {
-            Flash::setFlash('Rekening Gagal Diupdate', 'danger');
+            Session::setFlash('Rekening Gagal Diupdate', 'danger');
         }
         Redirect::to('admin/rekening');
     }
@@ -102,9 +102,9 @@ class Rekening extends Controller
                 $_POST['id']
             )
         ) {
-            Flash::setFlash('Rekening Berhasil Dihapus', 'success');
+            Session::setFlash('Rekening Berhasil Dihapus', 'success');
         } else {
-            Flash::setFlash('Rekening Gagal Dihapus', 'danger');
+            Session::setFlash('Rekening Gagal Dihapus', 'danger');
         }
         Redirect::to('admin/rekening');
     }

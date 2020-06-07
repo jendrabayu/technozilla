@@ -20,7 +20,6 @@ class Home extends Controller
 
     public function index($slug = null)
     {
-
         if (isset($_GET['q'])) {
             $keyword = $_GET['q'];
             if ($keyword == null) {

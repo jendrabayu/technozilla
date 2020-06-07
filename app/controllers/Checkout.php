@@ -3,9 +3,8 @@
 use App\Core\Controller;
 use App\Helpers\Auth;
 use App\Core\DB;
-use App\Helpers\Image;
 use App\Helpers\Redirect;
-use App\Helpers\Session;
+use App\Core\Session;
 use App\Models\Keranjang as KeranjangModel;
 
 class Checkout extends Controller

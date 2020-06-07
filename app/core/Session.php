@@ -1,14 +1,38 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Core;
 
-use App\Helpers\Session;
-
-class Flash
+class Session
 {
+
+    public static function set($array = [])
+    {
+        foreach ($array as $key => $value) {
+            $_SESSION[$key] = $value;
+        }
+    }
+
+    public static function get($name)
+    {
+        if (isset($_SESSION[$name])) {
+            return $_SESSION[$name];
+        }
+        return false;
+    }
+
+    public static function remove($name)
+    {
+        unset($_SESSION[$name]);
+    }
+
+    public static function destroy()
+    {
+        session_destroy();
+    }
+
     public static function setFlash($message, $type = null)
     {
-        Session::set([
+        self::set([
             'flash_data' => [
                 'message' => $message,
                 'type' => $type == null ? $type = 'primary' : $type
@@ -18,7 +42,7 @@ class Flash
 
     public static function getFlash()
     {
-        $flash = Session::get('flash_data');
+        $flash = self::get('flash_data');
         if (!empty($flash)) {
             echo sprintf(
                 '<div class="alert alert-%s alert-dismissible show fade">
@@ -33,7 +57,7 @@ class Flash
                 $flash['message']
             );
 
-            Session::remove('flash_data');
+            self::remove('flash_data');
         }
     }
 }

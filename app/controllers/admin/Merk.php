@@ -3,6 +3,7 @@
 use App\Core\Controller;
 use App\Helpers\Auth as Authentication;
 use App\Core\DB;
+use App\Core\Session;
 use App\Helpers\Redirect;
 use App\Helpers\Flash;
 
@@ -48,9 +49,9 @@ class Merk extends Controller
             'updated_at' => date('Y-m-d H:i:s'),
             'deleted_at' => null
         ])) {
-            Flash::setFlash('Berhasil Menambahkan Merk Baru', 'success');
+            Session::setFlash('Berhasil Menambahkan Merk Baru', 'success');
         } else {
-            Flash::setFlash('Gagal Menambahkan Merk Baru', 'danger');
+            Session::setFlash('Gagal Menambahkan Merk Baru', 'danger');
         }
         Redirect::to('admin/merk');
     }
@@ -80,9 +81,9 @@ class Merk extends Controller
             'slug' => textToSlug($_POST['merk']) . '' . date('yds'),
             'updated_at' => date("Y-m-d h:i:s"),
         ], 'id', '=', $id)) {
-            Flash::setFlash('Merk Berhasil  Diupdate', 'success');
+            Session::setFlash('Merk Berhasil  Diupdate', 'success');
         } else {
-            Flash::setFlash('Merk Gagal Diupdate', 'danger');
+            Session::setFlash('Merk Gagal Diupdate', 'danger');
         }
         Redirect::to('admin/merk');
     }
@@ -96,9 +97,9 @@ class Merk extends Controller
             '=',
             $_POST['id']
         )) {
-            Flash::setFlash('Merk Berhasil Dihapus', 'success');
+            Session::setFlash('Merk Berhasil Dihapus', 'success');
         } else {
-            Flash::setFlash('Merk Gagal Dihapus', 'danger');
+            Session::setFlash('Merk Gagal Dihapus', 'danger');
         }
         Redirect::to('admin/merk');
     }

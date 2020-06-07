@@ -3,7 +3,6 @@
 use App\Core\Controller;
 use App\Helpers\Auth as Authentication;
 use App\Core\DB;
-use App\Helpers\Flash;
 use App\Helpers\Redirect;
 use App\Models\Order as OrderModel;
 
@@ -205,7 +204,7 @@ class Transaksi extends Controller
             'alasan_pembatalan' => $alasan,
             'updated_at' => date('Y-m-d H:i:s')
         ], 'invoice', '=', $invoice)) {
-            Flash::setFlash("Pesanan Berhasil Dibatalkan", "primary");
+            Session::setFlash("Pesanan Berhasil Dibatalkan", "primary");
             Redirect::to('admin/transaksi/pesananbaru');
         } else {
 
@@ -221,7 +220,7 @@ class Transaksi extends Controller
             'status_order_id' => 3,
             'updated_at' => date('Y-m-d H:i:s')
         ], 'invoice', '=', $invoice)) {
-            Flash::setFlash("Pembayaran Berhasil Dikonfirmasi", "primary");
+            Session::setFlash("Pembayaran Berhasil Dikonfirmasi", "primary");
             Redirect::to('admin/transaksi/perludicek');
         } else {
 
@@ -242,7 +241,7 @@ class Transaksi extends Controller
             'nomor_resi' => $resi,
             'updated_at' => date('Y-m-d H:i:s')
         ], 'invoice', '=', $invoice)) {
-            Flash::setFlash("Resi Berhasil Diinput", "primary");
+            Session::setFlash("Resi Berhasil Diinput", "primary");
             Redirect::to('admin/transaksi/perludikirim');
         } else {
 
@@ -257,7 +256,7 @@ class Transaksi extends Controller
             'status_order_id' => 5,
             'updated_at' => date('Y-m-d H:i:s')
         ], 'invoice', '=', $invoice)) {
-            Flash::setFlash("Pembayaran Berhasil Dikonfirmasi", "primary");
+            Session::setFlash("Pembayaran Berhasil Dikonfirmasi", "primary");
             Redirect::to('admin/transaksi/barangdikirim');
         } else {
             Redirect::to('admin/transaksi/barangdikirim');

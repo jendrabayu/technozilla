@@ -110,7 +110,7 @@
                 <div class="row">
                   <div class="col-md-12">
                     <?php
-                    $db =  new \App\Helpers\DB;
+                    $db =  new \App\Core\DB;
                     $alamat = $db->select('*')
                       ->from('alamat')
                       ->where('customer_id', '=', $_SESSION['is_customer']['id'])

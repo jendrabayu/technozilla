@@ -3,9 +3,8 @@
 use App\Core\Controller;
 use App\Helpers\Auth;
 use App\Core\DB;
-use App\Helpers\Flash;
 use App\Helpers\Redirect;
-use App\Helpers\Session;
+use App\Core\Session;
 
 class Alamat extends Controller
 
@@ -76,7 +75,7 @@ class Alamat extends Controller
             '=',
             Session::get('is_customer')['id']
         );
-        Flash::setFlash('Alamat berhasil di update', 'primary');
+        Session::setFlash('Alamat berhasil di update', 'primary');
         Redirect::to('alamat');
     }
 }

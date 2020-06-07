@@ -5,7 +5,7 @@ use App\Helpers\Auth as Authentication;
 use App\Core\DB;
 use App\Helpers\Flash;
 use App\Helpers\Redirect;
-use App\Helpers\Session;
+use App\Core\Session;
 
 class Auth extends Controller
 {
@@ -61,15 +61,15 @@ class Auth extends Controller
     {
 
         if ($_POST['password'] != $_POST['repassword']) {
-            Flash::setFlash('Password Harus Sama!', 'danger');
+            Session::setFlash('Password Harus Sama!', 'danger');
             Redirect::to('admin/auth/register');
         } else {
 
             if (Authentication::register('admin')) {
-                Flash::setFlash('Registrasi Berhasil Silahkan Login', 'primary');
+                Session::setFlash('Registrasi Berhasil Silahkan Login', 'primary');
                 Redirect::to('admin/auth');
             } else {
-                Flash::setFlash('Registrasi Gagal', 'danger');
+                Session::setFlash('Registrasi Gagal', 'danger');
                 Redirect::to('admin/auth/register');
             }
         }

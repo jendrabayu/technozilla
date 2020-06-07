@@ -44,7 +44,7 @@
                         <div class="card card-primary">
 
                             <div class="card-body">
-                                <?= \App\Helpers\Flash::getFlash() ?>
+                                <?= \App\Core\Session::getFlash() ?>
                                 <form method="POST" action="<?= url('admin/auth/store') ?>" class="needs-validation" novalidate="">
 
                                     <div class="form-group">

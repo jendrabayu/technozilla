@@ -8,7 +8,7 @@
                      </div>
 
                      <div class="card-body">
-                         <?php App\Helpers\Flash::getFlash(); ?>
+                         <?php App\Core\Session::getFlash(); ?>
                          <form method="POST" action="<?= url('auth/do_login') ?>">
                              <div class="form-group">
                                  <label for="email">Email</label>

@@ -8,7 +8,7 @@
                      </div>
 
                      <div class="card-body">
-                         <?php App\Helpers\Flash::getFlash(); ?>
+                         <?php App\Core\Session::getFlash(); ?>
                          <form method="POST" action="<?= url('auth/store') ?>" class="needs-validation" novalidate="">
                              <div class="form-group">
                                  <label for="nama">Nama</label>

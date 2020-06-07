@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use App\Helpers\Session;
+use App\Core\Session;
 use App\Helpers\Redirect;
 use App\Helpers\DB;
 use App\Helpers\Flash;

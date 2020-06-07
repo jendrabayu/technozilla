@@ -107,7 +107,7 @@
 
                                         <?php
 
-                                        $db = new \App\Helpers\DB;
+                                        $db = new \App\Core\DB;
 
                                         $qty = $db->select('SUM(kuantitas) as qty')
                                             ->from('keranjang')

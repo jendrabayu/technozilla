@@ -2,7 +2,7 @@
 
 use App\Core\Controller;
 use App\Core\DB;
-use App\Helpers\Session;
+use App\Core\Session;
 use App\Models\Order as OrderModel;
 use App\Helpers\Image;
 

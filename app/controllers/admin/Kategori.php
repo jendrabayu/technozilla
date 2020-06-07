@@ -3,8 +3,9 @@
 use App\Core\Controller;
 use App\Helpers\Auth as Authentication;
 use App\Core\DB;
+use App\Core\Session;
 use App\Helpers\Redirect;
-use App\Helpers\Flash;
+
 
 class Kategori extends Controller
 {
@@ -47,9 +48,9 @@ class Kategori extends Controller
             'updated_at' => date('Y-m-d H:i:s'),
             'deleted_at' => null
         ])) {
-            Flash::setFlash('Berhasil Menambahkan Kategori Baru', 'success');
+            Session::setFlash('Berhasil Menambahkan Kategori Baru', 'success');
         } else {
-            Flash::setFlash('Gagal Menambahkan Kategori Baru', 'danger');
+            Session::setFlash('Gagal Menambahkan Kategori Baru', 'danger');
         }
         Redirect::to('admin/kategori');
     }
@@ -79,9 +80,9 @@ class Kategori extends Controller
             'slug' => textToSlug($_POST['kategori']) . '' . date('yds'),
             'updated_at' => date("Y-m-d h:i:s")
         ], 'id', '=', $id)) {
-            Flash::setFlash('Kategori Berhasil Diupdate', 'success');
+            Session::setFlash('Kategori Berhasil Diupdate', 'success');
         } else {
-            Flash::setFlash('Kategori Gagal Diupdate', 'danger');
+            Session::setFlash('Kategori Gagal Diupdate', 'danger');
         }
         Redirect::to('admin/kategori');
     }
@@ -95,9 +96,9 @@ class Kategori extends Controller
             '=',
             $_POST['id']
         )) {
-            Flash::setFlash('Kategori Berhasil Dihapus', 'success');
+            Session::setFlash('Kategori Berhasil Dihapus', 'success');
         } else {
-            Flash::setFlash('Kategori Gagal Dihapus', 'danger');
+            Session::setFlash('Kategori Gagal Dihapus', 'danger');
         }
         Redirect::to('admin/kategori');
     }

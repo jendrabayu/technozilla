@@ -3,9 +3,8 @@
 use App\Core\Controller;
 use App\Helpers\Auth as Authentication;
 use App\Helpers\Redirect;
-use App\Helpers\Session;
+use App\Core\Session;
 use App\Core\DB;
-use App\Helpers\Flash;
 
 class Auth extends Controller
 {
@@ -80,7 +79,7 @@ class Auth extends Controller
 
             Redirect::to('');
         } else {
-            Flash::setFlash('Email / Password Salah', 'danger');
+            Session::setFlash('Email / Password Salah', 'danger');
             Redirect::to('auth');
         }
     }
@@ -89,14 +88,14 @@ class Auth extends Controller
     public function store()
     {
         if ($_POST['password'] != $_POST['repassword']) {
-            Flash::setFlash('Password Harus Sama!', 'danger');
+            Session::setFlash('Password Harus Sama!', 'danger');
             Redirect::to('auth/register');
         } else {
             if (Authentication::register('customer')) {
-                Flash::setFlash('Registrasi Berhasil Silahkan Login', 'primary');
+                Session::setFlash('Registrasi Berhasil Silahkan Login', 'primary');
                 Redirect::to('auth');
             } else {
-                Flash::setFlash('Registrasi Gagal', 'danger');
+                Session::setFlash('Registrasi Gagal', 'danger');
                 Redirect::to('auth/register');
             }
         }

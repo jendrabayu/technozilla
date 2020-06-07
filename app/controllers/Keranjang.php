@@ -1,11 +1,10 @@
 <?php
 
 use App\Core\Controller;
-use App\Helpers\DB;
+use App\Core\DB;
 use App\Helpers\Redirect;
 use App\Helpers\Auth as Authentication;
-use App\Helpers\Flash;
-use App\Helpers\Session;
+use App\Core\Session;
 
 class Keranjang extends Controller
 {
@@ -58,7 +57,7 @@ class Keranjang extends Controller
             ->first();
 
         if ($_POST['kuantitas'] + $produk_sama['kuantitas'] > $qty['stok']) {
-            Flash::setFlash('Gagal Menambahkan produk, Kuantitas melebihi stok yang tersedia!', 'warning');
+            Session::setFlash('Gagal Menambahkan produk, Kuantitas melebihi stok yang tersedia!', 'warning');
             Redirect::to('keranjang');
         } else {
             if ($produk_sama) {
@@ -120,7 +119,7 @@ class Keranjang extends Controller
         // pengecekkan stok
         for ($i = 0; $i < count($stoks); $i++) {
             if ($stoks[$i] < $_POST['qty'][$i]) {
-                Flash::setFlash('Keranjang gagal diupdate, Kuantitas melebihi stok yang tersedia!', 'warning');
+                Session::setFlash('Keranjang gagal diupdate, Kuantitas melebihi stok yang tersedia!', 'warning');
                 Redirect::to('keranjang');
             }
         }
@@ -136,7 +135,7 @@ class Keranjang extends Controller
             );
         }
 
-        Flash::setFlash('Keranjang berhasil diupdate', 'primary');
+        Session::setFlash('Keranjang berhasil diupdate', 'primary');
         Redirect::to('keranjang');
     }
 }

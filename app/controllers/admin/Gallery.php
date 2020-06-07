@@ -3,6 +3,7 @@
 use App\Core\Controller;
 use App\Helpers\Auth;
 use App\Core\DB;
+use App\Core\Session;
 use App\Helpers\Flash;
 use App\Helpers\Image;
 use App\Helpers\Redirect;
@@ -65,9 +66,9 @@ class Gallery extends Controller
         }
 
         if ($insert) {
-            Flash::setFlash('Berhasil menambahkan foto produk baru', 'success');
+            Session::setFlash('Berhasil menambahkan foto produk baru', 'success');
         } else {
-            Flash::setFlash('Gagal menambahkan foto produk baru', 'danger');
+            Session::setFlash('Gagal menambahkan foto produk baru', 'danger');
         }
 
         Redirect::to('admin/gallery');
@@ -101,9 +102,9 @@ class Gallery extends Controller
         $delete = $this->db->delete('gambar_produk', 'id', '=', $_POST['id']);
         if ($delete) {
             unlink('images/' . $_POST['gambar']);
-            Flash::setFlash('Berhasil menghapus foto produk', 'success');
+            Session::setFlash('Berhasil menghapus foto produk', 'success');
         } else {
-            Flash::setFlash('Gagal menghapus foto produk', 'danger');
+            Session::setFlash('Gagal menghapus foto produk', 'danger');
         }
         Redirect::to('admin/gallery');
     }

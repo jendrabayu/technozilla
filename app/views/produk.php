@@ -1,5 +1,5 @@
 <?php
-$db = new \App\Helpers\DB;
+$db = new \App\Core\DB;
 $data['kategori'] =
     $this->db
     ->select('kategori.nama', 'COUNT(produk.kategori_id) as jumlah', 'kategori.slug')

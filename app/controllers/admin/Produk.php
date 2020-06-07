@@ -3,7 +3,7 @@
 use App\Core\Controller;
 use App\Helpers\Auth as Authentication;
 use App\Core\DB;
-use App\Helpers\Flash;
+use App\Core\Session;
 use App\Helpers\Image;
 use App\Helpers\Redirect;
 use App\Models\Produk as ProdukModel;
@@ -60,7 +60,7 @@ class Produk extends Controller
             ]);
         }
 
-        Flash::setFlash('Berhasil menambahkan produk baru', 'success');
+        Session::setFlash('Berhasil menambahkan produk baru', 'success');
         Redirect::to('admin/produk');
     }
 
@@ -106,7 +106,7 @@ class Produk extends Controller
             'updated_at' => date('Y-m-d H:i:s')
         ], 'id', '=', $id);
 
-        Flash::setFlash('Produk berhasil di update', 'success');
+        Session::setFlash('Produk berhasil di update', 'success');
         Redirect::to('admin/produk');
     }
 
@@ -126,9 +126,9 @@ class Produk extends Controller
                 ->where('id', '=', $_POST['id'])
                 ->first();
             unlink('images/' . $gambar['gambar']);
-            Flash::setFlash('Produk Berhasil Dihapus', 'success');
+            Session::setFlash('Produk Berhasil Dihapus', 'success');
         } else {
-            Flash::setFlash('Produk Gagal Dihapus', 'danger');
+            Session::setFlash('Produk Gagal Dihapus', 'danger');
         }
         Redirect::to('admin/produk');
     }

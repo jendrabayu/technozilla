@@ -13,9 +13,7 @@
                             <a href="<?= url('admin/kategori/create') ?>" class="btn btn-primary ml-auto">Tambah</a>
                         </div>
                         <div class=" card-body">
-                            <?php
-                            \App\Helpers\Flash::getFlash();
-                            ?>
+                            <?= \App\Core\Session::getFlash() ?>
                             <div class="table-responsive">
                                 <table class="table table-striped" id="table-1">
                                     <thead>
