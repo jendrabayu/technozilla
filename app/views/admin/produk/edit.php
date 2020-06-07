@@ -55,6 +55,9 @@
                                     <textarea class="form-control" name="deskripsi" required>
                                         <?= $data['produk']['p_desk'] ?>
                                     </textarea>
+                                    <script>
+                                        CKEDITOR.replace('deskripsi');
+                                    </script>
                                 </div>
 
                                 <div class="form-group col-md-6">

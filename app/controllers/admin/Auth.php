@@ -2,7 +2,8 @@
 
 use App\Core\Controller;
 use App\Helpers\Auth as Authentication;
-use App\Helpers\DB;
+use App\Core\DB;
+use App\Helpers\Flash;
 use App\Helpers\Redirect;
 use App\Helpers\Session;
 
@@ -56,9 +57,22 @@ class Auth extends Controller
     }
 
     public function store()
+
     {
-        Authentication::register('admin');
-        Redirect::to('admin/login');
+
+        if ($_POST['password'] != $_POST['repassword']) {
+            Flash::setFlash('Password Harus Sama!', 'danger');
+            Redirect::to('admin/auth/register');
+        } else {
+
+            if (Authentication::register('admin')) {
+                Flash::setFlash('Registrasi Berhasil Silahkan Login', 'primary');
+                Redirect::to('admin/auth');
+            } else {
+                Flash::setFlash('Registrasi Gagal', 'danger');
+                Redirect::to('admin/auth/register');
+            }
+        }
     }
 
     public function do_logout()

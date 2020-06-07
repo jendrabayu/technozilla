@@ -8,6 +8,7 @@
                      </div>
 
                      <div class="card-body">
+                         <?php App\Helpers\Flash::getFlash(); ?>
                          <form method="POST" action="<?= url('auth/store') ?>" class="needs-validation" novalidate="">
                              <div class="form-group">
                                  <label for="nama">Nama</label>
@@ -38,9 +39,9 @@
 
                                  <label for="password" class="control-label">Konfirmasi Password</label>
 
-                                 <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
+                                 <input id="password" type="password" class="form-control" name="repassword" tabindex="2" required>
                                  <div class="invalid-feedback">
-                                     please fill in your password
+                                     please fill in your password confirmation
                                  </div>
                              </div>
                              <div class="form-group">

@@ -22,7 +22,7 @@
                 <div class="single_product_thumbnails">
 
                     <ul class="d-flex flex-wrap mt-5 list-unstyled">
-                        <li class="mr-3 mb-3 border p-1">
+                        <li class="mr-3 mb-3 border p-1 active-image">
                             <img style="width: 100px" src="<?= url('images/' . $data['produk']['p_gambar']) ?>" alt="" data-image="<?= url('images/' . $data['produk']['p_gambar']) ?>">
                         </li>
 

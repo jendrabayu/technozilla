@@ -44,6 +44,7 @@
                         <div class="card card-primary">
 
                             <div class="card-body">
+                                <?= \App\Helpers\Flash::getFlash() ?>
                                 <form method="POST" action="<?= url('admin/auth/do_login') ?>" class="needs-validation" novalidate="">
                                     <div class="form-group">
                                         <label for="email">Email</label>
@@ -67,7 +68,7 @@
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                                            <label class="custom-control-label" for="remember-me">Remember Me</label>
+                                            <label class="custom-control-label" for="remember-me">Ingat Saya</label>
                                         </div>
                                     </div>
 
@@ -82,7 +83,7 @@
                             </div>
                         </div>
                         <div class="mt-5 text-muted text-center">
-                            Don't have an account? <a href="<?= url('admin/auth/register') ?>">Create One</a>
+                            Belum Punya Akun? <a href="<?= url('admin/auth/register') ?>">Buat Akun</a>
                         </div>
 
                     </div>

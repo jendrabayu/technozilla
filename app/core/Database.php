@@ -63,8 +63,8 @@ class Database
     {
         try {
             $this->stmt->execute();
-        } catch (\Throwable $e) {
-            return $e;
+        } catch (PDOException $e) {
+            return $e->errorInfo;
         }
     }
 

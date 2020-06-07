@@ -2,7 +2,7 @@
 
 use App\Core\Controller;
 use App\Helpers\Auth as Authentication;
-use App\Helpers\DB;
+use App\Core\DB;
 
 class Customer extends Controller
 {

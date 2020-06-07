@@ -4,7 +4,7 @@ use App\Core\Controller;
 use App\Helpers\Auth as Authentication;
 use App\Helpers\Redirect;
 use App\Helpers\Session;
-use App\Helpers\DB;
+use App\Core\DB;
 use App\Helpers\Flash;
 
 class Auth extends Controller
@@ -19,10 +19,13 @@ class Auth extends Controller
 
     public function index()
     {
+
         if (Session::get('is_customer')) {
             Redirect::to('');
         }
-        $this->view('templates/header');
+
+        $data['judul'] = 'Login';
+        $this->view('templates/header', $data);
         $this->view('auth/login');
         $this->view('templates/footer');
     }
@@ -32,7 +35,9 @@ class Auth extends Controller
         if (Session::get('is_customer')) {
             Redirect::to('');
         }
-        $this->view('templates/header');
+
+        $data['judul'] = 'Register';
+        $this->view('templates/header', $data);
         $this->view('auth/register');
         $this->view('templates/footer');
     }
@@ -83,8 +88,18 @@ class Auth extends Controller
 
     public function store()
     {
-        Authentication::register('customer');
-        Redirect::to('auth/login');
+        if ($_POST['password'] != $_POST['repassword']) {
+            Flash::setFlash('Password Harus Sama!', 'danger');
+            Redirect::to('auth/register');
+        } else {
+            if (Authentication::register('customer')) {
+                Flash::setFlash('Registrasi Berhasil Silahkan Login', 'primary');
+                Redirect::to('auth');
+            } else {
+                Flash::setFlash('Registrasi Gagal', 'danger');
+                Redirect::to('auth/register');
+            }
+        }
     }
 
     public function do_logout()

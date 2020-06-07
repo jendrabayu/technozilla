@@ -2,7 +2,7 @@
 
 use App\Core\Controller;
 use App\Helpers\Auth;
-use App\Helpers\DB;
+use App\Core\DB;
 use App\Helpers\Image;
 use App\Helpers\Redirect;
 use App\Helpers\Session;

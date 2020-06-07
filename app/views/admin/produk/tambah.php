@@ -59,6 +59,9 @@
                                 <div class="form-group">
                                     <label>Deskripsi</label>
                                     <textarea class="form-control" name="deskripsi" required></textarea>
+                                    <script>
+                                        CKEDITOR.replace('deskripsi');
+                                    </script>
                                 </div>
                             </div>
                             <div class="card-footer text-right">

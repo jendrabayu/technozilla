@@ -53,7 +53,7 @@
                           <input type="hidden" name="id[]" value="<?= $produk['id'] ?>">
                           <input type="hidden" name="produk_id[]" value="<?= $produk['produk_id'] ?>">
 
-                          <input type="text" name="qty[]" class="form-control text-center" value="<?= $produk['qty'] ?>" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                          <input type="number" name="qty[]" class="form-control text-center" value="<?= $produk['qty'] ?>" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
 
                           <div class="input-group-append">
                             <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>

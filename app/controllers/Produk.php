@@ -1,7 +1,7 @@
 <?php
 
 use App\Core\Controller;
-use App\Helpers\DB;
+use App\Core\DB;
 use App\Helpers\Redirect;
 use App\Models\Produk as ProdukModel;
 

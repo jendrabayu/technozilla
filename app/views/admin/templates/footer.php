@@ -29,45 +29,12 @@
 
       <!-- Page Specific JS File -->
       <script src="<?= asset('backend/js/page/modules-datatables.js') ?>"></script>
-      <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
-      <script>
-          CKEDITOR.replace('deskripsi');
-      </script>
+
       <!-- Template JS File -->
       <script src="<?= asset('backend/js/scripts.js') ?>"></script>
       <script src="<?= asset('backend/js/custom.js') ?>"></script>
 
-      <script>
-          // Get the modal
-          var modal = document.getElementById("myModal");
-
-          // Get the image and insert it inside the modal - use its "alt" text as a caption
-          var img = document.querySelectorAll(".img_bukti_transfer");
-
-          var modalImg = document.getElementById("img01");
-          var captionText = document.getElementById("caption");
-
-          img.forEach(e => {
-              e.onclick = function() {
-
-                  modal.style.display = "block";
-                  modalImg.src = this.src;
-                  captionText.innerHTML = this.alt;
-              }
-          });
-
-
-
-
-          // Get the <span> element that closes the modal
-          var span = document.getElementsByClassName("close")[0];
-
-          // When the user clicks on <span> (x), close the modal
-          span.onclick = function() {
-              modal.style.display = "none";
-          }
-      </script>
 
       </body>
 

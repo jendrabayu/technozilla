@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Helpers\DB;
+use App\Core\DB;
 
 class Produk
 {

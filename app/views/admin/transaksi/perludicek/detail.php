@@ -175,3 +175,25 @@
     <img class="modal-content" id="img01">
     <div id="caption"></div>
 </div>
+
+
+
+<script>
+    let modal = document.getElementById("myModal");
+    let img = document.querySelectorAll(".img_bukti_transfer");
+    let modalImg = document.getElementById("img01");
+    let captionText = document.getElementById("caption");
+
+    img.forEach(e => {
+        e.onclick = function() {
+
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+    });
+    let span = document.getElementsByClassName("close")[0];
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+</script>

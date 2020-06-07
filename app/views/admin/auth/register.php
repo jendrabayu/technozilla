@@ -44,6 +44,7 @@
                         <div class="card card-primary">
 
                             <div class="card-body">
+                                <?= \App\Helpers\Flash::getFlash() ?>
                                 <form method="POST" action="<?= url('admin/auth/store') ?>" class="needs-validation" novalidate="">
 
                                     <div class="form-group">
@@ -97,7 +98,7 @@
                             </div>
                         </div>
                         <div class="mt-5 text-muted text-center mb-5">
-                            Do you have an account? <a href="<?= url('admin/auth/login') ?>">Login</a>
+                            Sudah Punya Akun ? <a href="<?= url('admin/auth/login') ?>">Login</a>
                         </div>
 
                     </div>

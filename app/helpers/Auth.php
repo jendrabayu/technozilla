@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Helpers\Session;
 use App\Helpers\Redirect;
 use App\Helpers\DB;
+use App\Helpers\Flash;
 
 
 class Auth
@@ -27,6 +28,8 @@ class Auth
     public static function register($role)
     {
         $db = new DB;
+
+
 
         return $db->insert($role, [
             'id' => '',

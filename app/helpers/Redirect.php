@@ -15,7 +15,7 @@ class Redirect
                 str_replace('\\', '/', INC_ROOT)
             );
 
-        header("Location:" . $link . '/public/index.php?page=' . $url);
+        header("Location:" . $link . '/index.php?page=' . $url);
         die();
     }
 
