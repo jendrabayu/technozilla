@@ -7,15 +7,14 @@ class Redirect
 
     public static function to($url)
     {
-
         $link = 'http://' . $_SERVER['HTTP_HOST'] .
             str_replace(
                 $_SERVER['DOCUMENT_ROOT'],
                 '',
-                str_replace('\\', '/', INC_ROOT)
+                str_replace('\\', '/', INC_ROOT) . '/public'
             );
 
-        header("Location:" . $link . '/index.php?page=' . $url);
+        header('Location:' . $link . '/' . $url);
         die();
     }
 

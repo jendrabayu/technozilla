@@ -16,3 +16,5 @@ require_once 'models/Order.php';
 require_once 'models/Produk.php';
 
 require_once 'helpers.php';
+
+date_default_timezone_set('Asia/Jakarta');

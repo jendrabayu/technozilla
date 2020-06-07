@@ -5,8 +5,8 @@ namespace App\Core;
 class App
 {
 
-    protected  $controller = "home";
-    protected  $method = "index";
+    protected  $controller = 'home';
+    protected  $method = 'index';
     protected  $params = [];
 
     function __construct()
@@ -24,20 +24,20 @@ class App
 
         if ($admin) {
 
-            if (isset($url[1]) && file_exists('app/controllers/admin/' . ucfirst($url[1]) . '.php')) {
+            if (isset($url[1]) && file_exists('../app/controllers/admin/' . ucfirst($url[1]) . '.php')) {
                 $this->controller = $url[1];
                 unset($url[0]);
                 unset($url[1]);
             }
-            require_once 'app/controllers/admin/' . ucfirst($this->controller) . '.php';
+            require_once '../app/controllers/admin/' . ucfirst($this->controller) . '.php';
         } else {
 
-            if (isset($url[0]) && file_exists('app/controllers/' . ucfirst($url[0]) . '.php')) {
+            if (isset($url[0]) && file_exists('../app/controllers/' . ucfirst($url[0]) . '.php')) {
                 $this->controller = $url[0];
                 unset($url[0]);
             }
 
-            require_once 'app/controllers/' . ucfirst($this->controller) . '.php';
+            require_once '../app/controllers/' . ucfirst($this->controller) . '.php';
         }
 
         $this->controller = new $this->controller();

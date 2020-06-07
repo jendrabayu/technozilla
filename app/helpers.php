@@ -1,25 +1,15 @@
 <?php
 define('INC_ROOT', dirname(__DIR__));
 
-function url($url = null)
+function url($url)
 {
     $link = 'http://' . $_SERVER['HTTP_HOST'] .
         str_replace(
             $_SERVER['DOCUMENT_ROOT'],
             '',
-            str_replace('\\', '/', INC_ROOT)
+            str_replace('\\', '/', INC_ROOT) . '/public'
         );
-
-    if (explode('/', $url)[0] == 'images') {
-        return $link . '/public/' . $url;
-        die;
-    }
-
-    if ($url == '') {
-        return $link . '/index.php';
-        die;
-    }
-    return $link . '/index.php?page=' . $url;
+    return $link . '/' . $url;
 }
 
 
