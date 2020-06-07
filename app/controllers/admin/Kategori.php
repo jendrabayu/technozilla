@@ -4,7 +4,7 @@ use App\Core\Controller;
 use App\Helpers\Auth as Authentication;
 use App\Core\DB;
 use App\Core\Session;
-use App\Helpers\Redirect;
+use App\Core\Redirect;
 
 
 class Kategori extends Controller

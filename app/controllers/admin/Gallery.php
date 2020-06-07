@@ -4,9 +4,8 @@ use App\Core\Controller;
 use App\Helpers\Auth;
 use App\Core\DB;
 use App\Core\Session;
-use App\Helpers\Flash;
 use App\Helpers\Image;
-use App\Helpers\Redirect;
+use App\Core\Redirect;
 
 class Gallery extends Controller
 {

@@ -3,8 +3,7 @@
 use App\Core\Controller;
 use App\Helpers\Auth as Authentication;
 use App\Core\DB;
-use App\Helpers\Flash;
-use App\Helpers\Redirect;
+use App\Core\Redirect;
 use App\Core\Session;
 
 class Auth extends Controller

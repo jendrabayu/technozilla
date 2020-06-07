@@ -1,1 +1,13 @@
-Options -Multiviews
+#Options -Multiviews
+
+#RewriteEngine On
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^(.*)$ index.php?url=$1 [L]
+
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+</IfModule>

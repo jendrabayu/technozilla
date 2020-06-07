@@ -2,7 +2,7 @@
 
 use App\Core\Controller;
 use App\Helpers\Auth as Authentication;
-use App\Helpers\Redirect;
+use App\Core\Redirect;
 use App\Core\Session;
 use App\Core\DB;
 

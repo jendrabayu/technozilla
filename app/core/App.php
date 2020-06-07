@@ -6,16 +6,13 @@ class App
 {
 
     protected  $controller = "home";
-
     protected  $method = "index";
-
-    protected $params = [];
+    protected  $params = [];
 
     function __construct()
     {
         $url = [];
         $admin = false;
-
 
         if (isset($_GET['page'])) {
             $url = explode('/', filter_var(rtrim($_GET['page'], '/'), FILTER_SANITIZE_URL));
@@ -25,7 +22,6 @@ class App
             $url[0] == 'admin' ? $admin = true : $admin = false;
         }
 
-        // Controller
         if ($admin) {
 
             if (isset($url[1]) && file_exists('app/controllers/admin/' . ucfirst($url[1]) . '.php')) {
@@ -33,7 +29,6 @@ class App
                 unset($url[0]);
                 unset($url[1]);
             }
-
             require_once 'app/controllers/admin/' . ucfirst($this->controller) . '.php';
         } else {
 
@@ -47,7 +42,6 @@ class App
 
         $this->controller = new $this->controller();
 
-        // Method
         if ($admin) {
             if (isset($url[2])) {
                 if (method_exists($this->controller, $url[2])) {
@@ -63,8 +57,6 @@ class App
                 }
             }
         }
-
-        // Params
         $this->params = $url ? array_values($url) : [];
         call_user_func_array([$this->controller, $this->method], $this->params);
     }

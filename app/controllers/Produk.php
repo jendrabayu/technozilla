@@ -2,7 +2,7 @@
 
 use App\Core\Controller;
 use App\Core\DB;
-use App\Helpers\Redirect;
+use App\Core\Redirect;
 use App\Models\Produk as ProdukModel;
 
 class Produk extends Controller

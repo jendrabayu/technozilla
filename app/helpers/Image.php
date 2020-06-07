@@ -38,7 +38,8 @@ class Image
         $file_name = uniqid() . '' . rand(0, 99999) . '.' . $file_ext;
 
         if (empty($errors) == true) {
-            move_uploaded_file($file_tmp, "images/" . $file_name);
+
+            move_uploaded_file($file_tmp, "public/images/" . $file_name);
             return $file_name;
         } else {
 

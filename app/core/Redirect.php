@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Core;
 
 class Redirect
 {
@@ -22,7 +22,7 @@ class Redirect
     public static function back()
     {
         if (isset($_SERVER['HTTP_REFERER'])) {
-            echo $_SERVER['HTTP_REFERER'];
+            return $_SERVER['HTTP_REFERER'];
         }
     }
 }

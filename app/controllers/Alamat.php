@@ -3,7 +3,7 @@
 use App\Core\Controller;
 use App\Helpers\Auth;
 use App\Core\DB;
-use App\Helpers\Redirect;
+use App\Core\Redirect;
 use App\Core\Session;
 
 class Alamat extends Controller

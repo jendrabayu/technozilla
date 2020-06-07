@@ -17,7 +17,7 @@
           <form class="col-md-12" method="post" action="<?= url('keranjang/update') ?>">
             <div class="site-blocks-table">
 
-              <?= \App\Helpers\Flash::getFlash() ?>
+              <?= \App\Core\Session::getFlash() ?>
 
               <table class="table table-bordered">
                 <thead>

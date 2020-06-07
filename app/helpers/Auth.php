@@ -3,9 +3,9 @@
 namespace App\Helpers;
 
 use App\Core\Session;
-use App\Helpers\Redirect;
-use App\Helpers\DB;
-use App\Helpers\Flash;
+use App\Core\Redirect;
+use App\Core\DB;
+
 
 
 class Auth
@@ -28,9 +28,6 @@ class Auth
     public static function register($role)
     {
         $db = new DB;
-
-
-
         return $db->insert($role, [
             'id' => '',
             'nama' => $_POST['nama'],

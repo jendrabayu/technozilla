@@ -21,7 +21,7 @@
                         <div class="card-body">
                             <h3 class="text-black text-center mb-4">Pengaturan Alamat</h3>
                             <?php
-                            $db =  new \App\Helpers\DB;
+                            $db =  new \App\Core\DB;
                             $alamat = $db->select('*')
                                 ->from('alamat')
                                 ->where('customer_id', '=', $_SESSION['is_customer']['id'])

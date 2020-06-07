@@ -3,7 +3,7 @@
 use App\Core\Controller;
 use App\Helpers\Auth as Authentication;
 use App\Core\DB;
-use App\Helpers\Redirect;
+use App\Core\Redirect;
 use App\Models\Order as OrderModel;
 
 class Transaksi extends Controller
