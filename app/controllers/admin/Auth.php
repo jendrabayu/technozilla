@@ -27,13 +27,13 @@ class Auth extends Controller
 
     public function do_login()
     {
-
-
         $admin = $this->db
             ->select('*')
             ->from('admin')
-            ->where('email', '=', $_POST['email'])
-            ->andWhere('password', '=', md5($_POST['password']))
+            ->where([
+                ['email', '=', $_POST['email']],
+                ['password', '=', md5($_POST['password'])]
+            ])
             ->first();
 
         if ($admin) {

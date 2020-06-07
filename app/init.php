@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+date_default_timezone_set('Asia/Jakarta');
 
 require_once 'core/App.php';
 require_once 'core/Controller.php';
@@ -16,5 +17,3 @@ require_once 'models/Order.php';
 require_once 'models/Produk.php';
 
 require_once 'helpers.php';
-
-date_default_timezone_set('Asia/Jakarta');

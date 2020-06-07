@@ -112,8 +112,7 @@ class Transaksi extends Controller
             ->join('customer', 'order.customer_id', '=', 'customer.id')
             ->join('alamat', 'customer.id', '=', 'alamat.customer_id')
             ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
-            ->where('order.invoice', '=', $invoice)
-            ->andWhere('order.status_order_id', '=', $status)
+            ->where([['order.invoice', '=', $invoice], ['order.status_order_id', '=', $status]])
             ->first();
 
 
@@ -127,8 +126,10 @@ class Transaksi extends Controller
             ->from('`order`')
             ->join('order_detail', 'order.id', '=', 'order_detail.order_id')
             ->join('produk', 'order_detail.produk_id', '=', 'produk.id')
-            ->where('order.invoice', '=',  $invoice)
-            ->andWhere('order.status_order_id', '=', $status)
+            ->where([
+                ['order.invoice', '=',  $invoice],
+                ['order.status_order_id', '=', $status]
+            ])
             ->groupBy('produk.id')
             ->get();
 
@@ -169,8 +170,10 @@ class Transaksi extends Controller
             ->join('customer', 'order.customer_id', '=', 'customer.id')
             ->join('alamat', 'customer.id', '=', 'alamat.customer_id')
             ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
-            ->where('order.invoice', '=', $invoice)
-            ->andWhere('order.status_order_id', '=', $status)
+            ->where([
+                ['order.invoice', '=', $invoice],
+                ['order.status_order_id', '=', $status]
+            ])
             ->first();
 
 
@@ -184,8 +187,7 @@ class Transaksi extends Controller
             ->from('`order`')
             ->join('order_detail', 'order.id', '=', 'order_detail.order_id')
             ->join('produk', 'order_detail.produk_id', '=', 'produk.id')
-            ->where('order.invoice', '=', $invoice)
-            ->andWhere('order.status_order_id', '=', $status)
+            ->where([['order.invoice', '=', $invoice], ['order.status_order_id', '=', $status]])
             ->groupBy('produk.id')
             ->get();
 

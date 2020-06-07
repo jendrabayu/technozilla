@@ -123,9 +123,23 @@ class DB
         return $this;
     }
 
-    public function where($req, $operator, $value)
+    public function where($column, $operator = null, $value = null)
     {
-        $this->sql = sprintf("%s WHERE %s %s '%s'", $this->sql, $req, $operator, $value);
+        if (is_array($column)) {
+            $query = '';
+            foreach ($column as $key => $value) {
+                var_dump($key);
+                if ($key == (count($column) - 1)) {
+                    $query = $query . '' . sprintf("%s %s '%s'", $value[0], $value[1], $value[2]);
+                } else {
+                    $query = $query . '' . sprintf("%s %s '%s' AND ", $value[0], $value[1], $value[2]);
+                }
+            }
+
+            $this->sql = sprintf("%s WHERE %s", $this->sql, $query);
+            return $this;
+        }
+        $this->sql = sprintf("%s WHERE %s %s '%s'", $this->sql, $column, $operator, $value);
         return $this;
     }
 
@@ -164,8 +178,6 @@ class DB
     {
         $query = "";
         $table ? $query = sprintf('SELECT * FROM %s', $table) : $query = $this->sql;
-        // var_dump($query);
-
         $this->query($query);
         return $this->resultSet();
     }
@@ -174,9 +186,6 @@ class DB
     {
         $query = "";
         $table ? $query = sprintf('SELECT * FROM %s', $table) : $query = $this->sql;
-
-        // var_dump($query);
-        // die;
         $this->query($query);
         return $this->single();
     }

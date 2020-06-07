@@ -27,9 +27,7 @@ class Transaksi extends Controller
         $data['four'] = $this->orderModel->getOrderByCustId(Session::get('is_customer')['id'], 4);
         $data['five'] = $this->orderModel->getOrderByCustId(Session::get('is_customer')['id'], 5);
         $data['six'] = $this->orderModel->getOrderByCustId(Session::get('is_customer')['id'], 6);
-
         $data['judul'] = 'Transaksi';
-
         $this->view('templates/header', $data);
         $this->view('transaksi/index', $data);
         $this->view('templates/footer');

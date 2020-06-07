@@ -52,8 +52,10 @@ class Keranjang extends Controller
         $produk_sama = $this->db
             ->select('produk_id', 'kuantitas')
             ->from('keranjang')
-            ->where('produk_id', '=', $_POST['produk_id'])
-            ->andWhere('customer_id', '=', $_SESSION['is_customer']['id'])
+            ->where([
+                ['produk_id', '=', $_POST['produk_id']],
+                ['customer_id', '=', $_SESSION['is_customer']['id']]
+            ])
             ->first();
 
         if ($_POST['kuantitas'] + $produk_sama['kuantitas'] > $qty['stok']) {
@@ -64,8 +66,10 @@ class Keranjang extends Controller
                 $qty_awal = $this->db
                     ->select('kuantitas')
                     ->from('keranjang')
-                    ->where('produk_id', '=', $_POST['produk_id'])
-                    ->andWhere('customer_id', '=', $_SESSION['is_customer']['id'])
+                    ->where([
+                        ['produk_id', '=', $_POST['produk_id']],
+                        ['customer_id', '=', $_SESSION['is_customer']['id']]
+                    ])
                     ->first();
                 $qty_awal = $qty_awal['kuantitas'];
 

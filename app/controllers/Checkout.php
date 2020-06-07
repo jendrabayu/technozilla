@@ -128,7 +128,6 @@ class Checkout extends Controller
 
     public function sukses()
     {
-
         $this->view('templates/header');
         $this->view('invoice');
         $this->view('templates/footer');

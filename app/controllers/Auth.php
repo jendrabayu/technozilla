@@ -51,8 +51,10 @@ class Auth extends Controller
         $customer = $this->db
             ->select('*')
             ->from('customer')
-            ->where('email', '=', $_POST['email'])
-            ->andWhere('password', '=', md5($_POST['password']))
+            ->where([
+                ['email', '=', $_POST['email']],
+                ['password', '=', md5($_POST['password'])]
+            ])
             ->first();
 
         if ($customer) {

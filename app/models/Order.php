@@ -34,8 +34,10 @@ class Order
             ->from('`order`')
             ->join('rekening_bank', 'order.rekening_bank_id', '=', 'rekening_bank.id')
             ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
-            ->where('order.customer_id', '=', $id)
-            ->andWhere('order.status_order_id', '=', $status)
+            ->where([
+                ['order.customer_id', '=', $id],
+                ['order.status_order_id', '=', $status]
+            ])
             ->get();
 
         $order = $this->db
@@ -51,8 +53,7 @@ class Order
             ->from('`order`')
             ->join('order_detail', 'order.id', '=', 'order_detail.order_id')
             ->join('produk', 'order_detail.produk_id', '=', 'produk.id')
-            ->where('order.customer_id', '=', $id)
-            ->andWhere('order.status_order_id', '=', $status)
+            ->where([['order.customer_id', '=', $id], ['order.status_order_id', '=', $status]])
             ->get();
 
         return [
@@ -90,8 +91,10 @@ class Order
             )
             ->from('`order`')
             ->join('rekening_bank', 'order.rekening_bank_id', '=', 'rekening_bank.id')
-            ->where('order.invoice', '=', $invoice)
-            ->andWhere('order.status_order_id', '=', $status)
+            ->where([
+                ['order.invoice', '=', $invoice],
+                ['order.status_order_id', '=', $status]
+            ])
             ->get();
     }
 
