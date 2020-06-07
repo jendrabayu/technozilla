@@ -69,6 +69,8 @@ class DB
         }
     }
 
+
+
     public function resultSet()
     {
         $this->execute();
@@ -88,11 +90,6 @@ class DB
     }
 
 
-
-
-
-
-    //query
     public function select(...$column)
     {
         $strColumn = '';
@@ -128,7 +125,6 @@ class DB
         if (is_array($column)) {
             $query = '';
             foreach ($column as $key => $value) {
-                var_dump($key);
                 if ($key == (count($column) - 1)) {
                     $query = $query . '' . sprintf("%s %s '%s'", $value[0], $value[1], $value[2]);
                 } else {
@@ -240,6 +236,9 @@ class DB
         foreach ($array as $key => $value) {
             $this->bind($key, $value);
         }
+
+        var_dump($array);
+        die;
         $this->execute();
         return $this->rowCount();
     }

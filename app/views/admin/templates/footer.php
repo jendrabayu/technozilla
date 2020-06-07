@@ -15,15 +15,15 @@
       <script src="<?= asset('backend/modules/jquery.min.js') ?>"></script>
       <script src="<?= asset('backend/modules/popper.js') ?>"></script>
       <script src="<?= asset('backend/modules/tooltip.js') ?>"></script>
-      <script src="<?= asset('backend/modules/bootstrap/js/bootstrap.min.js') ?>"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
       <script src="<?= asset('backend/modules/nicescroll/jquery.nicescroll.min.js') ?>"></script>
       <script src="<?= asset('backend/modules/moment.min.js') ?>"></script>
       <script src="<?= asset('backend/js/stisla.js') ?>"></script>
 
       <!-- JS Libraies -->
-      <script src="<?= asset('backend/modules/datatables/datatables.min.js') ?>"></script>
-      <script src="<?= asset('backend/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') ?>"></script>
-      <script src="<?= asset('backend/modules/datatables/Select-1.2.4/js/dataTables.select.min.js') ?>"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+      <script src="https://cdn.datatables.net/select/1.2.4/js/dataTables.select.min.js"></script>
       <script src="<?= asset('backend/modules/jquery-ui/jquery-ui.min.js') ?>"></script>
 
 

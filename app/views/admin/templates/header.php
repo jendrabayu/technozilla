@@ -9,13 +9,13 @@
     <title>Toko Online &mdash; <?= $data['judul'] ?></title>
 
     <!-- General CSS Files -->
-    <link rel="stylesheet" href="<?= asset('backend/modules/bootstrap/css/bootstrap.min.css') ?>">
-    <link rel="stylesheet" href="<?= asset('backend/modules/fontawesome/css/all.min.css') ?>">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.min.css">
 
     <!-- CSS Libraries -->
-    <link rel="stylesheet" href="<?= asset('backend/modules/datatables/datatables.min.css') ?>">
-    <link rel="stylesheet" href="<?= asset('backend/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') ?>">
-    <link rel="stylesheet" href="<?= asset('backend/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css') ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.4/css/select.bootstrap4.min.css">
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
     <!-- Template CSS -->

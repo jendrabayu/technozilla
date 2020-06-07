@@ -9,7 +9,7 @@ class Kontak extends Controller
     {
         $data['judul'] = 'Kontak';
         $this->view('templates/header', $data);
-        $this->view('kontak',);
+        $this->view('kontak', $data);
         $this->view('templates/footer');
     }
 }

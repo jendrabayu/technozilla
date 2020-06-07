@@ -1,5 +1,5 @@
 <?php
-$db = new \App\Core\DB;
+$db = new App\Core\DB;
 $data['kategori'] =
     $this->db
     ->select('kategori.nama', 'COUNT(produk.kategori_id) as jumlah', 'kategori.slug')
@@ -8,6 +8,7 @@ $data['kategori'] =
     ->whereIsNull('produk.deleted_at')
     ->groupBy('kategori.nama')
     ->get();
+
 $data['merk'] =
     $this->db
     ->select(

@@ -53,6 +53,8 @@ class Gallery extends Controller
 
         $image = new Image;
         $gambar = $image->upload('gambar');
+
+        
         if ($gambar != false) {
 
             $insert = $this->db->insert('gambar_produk', [

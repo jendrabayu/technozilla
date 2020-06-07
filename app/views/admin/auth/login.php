@@ -7,11 +7,11 @@
     <title>Toko Online &mdash; <?= $data['judul']; ?></title>
 
     <!-- General CSS Files -->
-    <link rel="stylesheet" href="<?= asset('backend/modules/bootstrap/css/bootstrap.min.css') ?>">
-    <link rel="stylesheet" href="<?= asset('backend/modules/fontawesome/css/all.min.css') ?>">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.min.css">
 
     <!-- CSS Libraries -->
-    <link rel="stylesheet" href="<?= asset('backend/modules/bootstrap-social/bootstrap-social.css') ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="<?= asset('backend/css/style.css') ?>">
@@ -96,7 +96,7 @@
     <script src="<?= asset('backend/modules/jquery.min.js') ?>"></script>
     <script src="<?= asset('backend/modules/popper.js') ?>"></script>
     <script src="<?= asset('backend/modules/tooltip.js') ?>"></script>
-    <script src="<?= asset('backend/modules/bootstrap/js/bootstrap.min.js') ?>"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="<?= asset('backend/modules/nicescroll/jquery.nicescroll.min.js') ?>"></script>
     <script src="<?= asset('backend/modules/moment.min.js') ?>"></script>
     <script src="<?= asset('backend/js/stisla.js') ?>"></script>
