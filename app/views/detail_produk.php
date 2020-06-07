@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="col-md-9">
-                        <p><strong class="text-primary h3"> Rp. <?= number_format($data['produk']['p_harga'], 0, ".", ",")  ?></strong></p>
+                        <p><strong class="text-primary h3"><?= rupiahFormat($data['produk']['p_harga']) ?></strong></p>
                     </div>
                 </div>
 

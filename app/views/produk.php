@@ -55,20 +55,14 @@ $data['merk'] =
                                 </figure>
                                 <div class="p-2">
                                     <a href="<?= url($produk['p_slug']) ?>">
-                                        <h6 class="text-dark">
-                                            <?= substr($produk['p_nama'], 0, 60) . '...' ?>
-                                        </h6>
+                                        <h6 class="text-dark"><?= stringLimit($produk['p_nama'], 50) ?></h6>
                                     </a>
-                                    <p class="text-primary font-weight-bold h5">Rp. <?= number_format($produk['p_harga'], 2, ".", ",") ?></p>
+                                    <p class="text-primary font-weight-bold h5"><?= rupiahFormat($produk['p_harga']) ?></p>
                                 </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
-
-
-
                 </div>
-
             </div>
 
             <div class="col-md-3 order-1 mb-5 mb-md-0">

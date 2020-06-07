@@ -129,8 +129,6 @@
 
                     <div class="row mt-4">
                         <div class="col-md-12">
-                            <div class="section-title">Produk</div>
-
                             <div class="table-responsive">
                                 <table class="table table-striped table-hover table-md">
                                     <tr class="text-center">

@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use PDO;
+use PDOException;
 
 class Database
 {
@@ -17,16 +18,16 @@ class Database
 
     public function __construct()
     {
-        // dsn
-        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->db_name;
-
-        $option = [
-            PDO::ATTR_PERSISTENT => true,
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-        ];
-
         try {
-            $this->dbh = new PDO($dsn, $this->user, $this->pass, $option);
+            $this->dbh = new PDO(
+                'mysql:host=' . $this->host . ';dbname=' . $this->db_name,
+                $this->user,
+                $this->pass,
+                [
+                    PDO::ATTR_PERSISTENT => true,
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                ]
+            );
         } catch (PDOException $e) {
             die($e->getMessage());
         }
@@ -60,7 +61,11 @@ class Database
 
     public function execute()
     {
-        $this->stmt->execute();
+        try {
+            $this->stmt->execute();
+        } catch (\Throwable $e) {
+            return $e;
+        }
     }
 
     public function resultSet()

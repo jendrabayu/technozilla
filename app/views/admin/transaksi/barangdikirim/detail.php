@@ -46,6 +46,30 @@
                                                 <div class="form-group p-0 my-2">
                                                     <div class="row">
                                                         <div class="col-md-4">
+                                                            Kurir
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <?= $data['order']['o_kurir']; ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group p-0 my-2">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            Nomor Resi
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <?= $data['order']['o_no_resi']; ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group p-0 my-2">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
                                                             Total
                                                         </div>
                                                         <div class="col-md-8">

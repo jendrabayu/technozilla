@@ -54,7 +54,7 @@
                                            <?php foreach ($data['order'] as $order) : ?>
                                                <tr>
                                                    <td style="max-width: 300px;"><?= $order['nama']; ?><strong class="mx-2 ">x</strong><span class="font-weight-bold"><?= $order['qty']; ?></span></td>
-                                                   <td>Rp. <?= number_format(($order['harga'] * $order['qty']), 0, ".", ",") ?></td>
+                                                   <td><?= rupiahFormat($order['harga'] * $order['qty']) ?></td>
                                                </tr>
                                            <?php endforeach; ?>
                                            <tr>
@@ -65,7 +65,7 @@
                                                     $subtotal += $order['harga'] * $order['qty'];
                                                 }
                                                 ?>
-                                               <td>Rp. <?= number_format(($subtotal), 0, ".", ",") ?></td></strong></td>
+                                               <td><?= rupiahFormat($subtotal) ?></td></strong></td>
                                            </tr>
                                        </tbody>
                                    </table>

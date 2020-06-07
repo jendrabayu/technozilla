@@ -17,8 +17,8 @@ class App
         $admin = false;
 
 
-        if (isset($_GET['url'])) {
-            $url = explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
+        if (isset($_GET['page'])) {
+            $url = explode('/', filter_var(rtrim($_GET['page'], '/'), FILTER_SANITIZE_URL));
         }
 
         if (isset($url[0])) {

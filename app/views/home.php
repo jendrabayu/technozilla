@@ -50,8 +50,6 @@
         </div>
     </div>
 
-
-
     <div class="site-section block-3 site-blocks-2 bg-light">
         <div class="container">
             <div class="row justify-content-center">
@@ -73,18 +71,13 @@
                                         <a href="<?= url($produk['slug']) ?>">
                                             <h4 class="text-dark">
 
-                                                <?php
-                                                $nama = substr($produk['nama'], 0, 50);
-                                                $nama = $nama . '...';
-                                                echo $nama;
-
-                                                ?>
+                                                <?= stringLimit($produk['nama'], 50) ?>
 
                                             </h4>
                                         </a>
                                         <p class="mb-2"><?= $produk['brand']; ?></p>
                                         <p class="text-primary font-weight-bold h5">
-                                            Rp. <?= number_format($produk['harga'], 2, ".", ",")  ?>
+                                            <?= rupiahFormat($produk['harga']) ?>
                                         </p>
                                     </div>
                                 </div>

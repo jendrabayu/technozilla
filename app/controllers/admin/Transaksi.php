@@ -128,7 +128,7 @@ class Transaksi extends Controller
             ->from('`order`')
             ->join('order_detail', 'order.id', '=', 'order_detail.order_id')
             ->join('produk', 'order_detail.produk_id', '=', 'produk.id')
-            ->where('order.invoice', '=', $invoice)
+            ->where('order.invoice', '=',  $invoice)
             ->andWhere('order.status_order_id', '=', $status)
             ->groupBy('produk.id')
             ->get();
@@ -202,7 +202,8 @@ class Transaksi extends Controller
         $invoice = $_POST['invoice'];
         if ($this->db->update('`order`', [
             'status_order_id' => 6,
-            'alasan_pembatalan' => $alasan
+            'alasan_pembatalan' => $alasan,
+            'updated_at' => date('Y-m-d H:i:s')
         ], 'invoice', '=', $invoice)) {
             Flash::setFlash("Pesanan Berhasil Dibatalkan", "primary");
             Redirect::to('admin/transaksi/pesananbaru');
@@ -218,6 +219,7 @@ class Transaksi extends Controller
         $invoice = $_POST['invoice'];
         if ($this->db->update('`order`', [
             'status_order_id' => 3,
+            'updated_at' => date('Y-m-d H:i:s')
         ], 'invoice', '=', $invoice)) {
             Flash::setFlash("Pembayaran Berhasil Dikonfirmasi", "primary");
             Redirect::to('admin/transaksi/perludicek');
@@ -237,7 +239,8 @@ class Transaksi extends Controller
         if ($this->db->update('`order`', [
             'status_order_id' => 4,
             'kurir' => $kurir,
-            'nomor_resi' => $resi
+            'nomor_resi' => $resi,
+            'updated_at' => date('Y-m-d H:i:s')
         ], 'invoice', '=', $invoice)) {
             Flash::setFlash("Resi Berhasil Diinput", "primary");
             Redirect::to('admin/transaksi/perludikirim');
@@ -252,6 +255,7 @@ class Transaksi extends Controller
         $invoice = $_POST['invoice'];
         if ($this->db->update('`order`', [
             'status_order_id' => 5,
+            'updated_at' => date('Y-m-d H:i:s')
         ], 'invoice', '=', $invoice)) {
             Flash::setFlash("Pembayaran Berhasil Dikonfirmasi", "primary");
             Redirect::to('admin/transaksi/barangdikirim');

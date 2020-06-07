@@ -14,7 +14,6 @@ class DB
         $this->db = new Database();
     }
 
-    /*SELECT*/
     public function select(...$column)
     {
         $strColumn = '';
@@ -51,6 +50,13 @@ class DB
         return $this;
     }
 
+    public function whereDate($req, $operator, $value)
+    {
+        $this->sql = sprintf("%s WHERE %s %s %s", $this->sql, $req, $operator, $value);
+        return $this;
+    }
+
+
 
     public function whereIsNull($column)
     {
@@ -61,6 +67,12 @@ class DB
     public function andWhere($req, $operator, $value)
     {
         $this->sql = sprintf("%s AND %s %s '%s'", $this->sql, $req, $operator, $value);
+        return $this;
+    }
+
+    public function orWhereIsNull($column)
+    {
+        $this->sql = sprintf("%s OR %s IS NULL", $this->sql, $column);
         return $this;
     }
 
@@ -86,6 +98,8 @@ class DB
         $query = "";
         $table ? $query = sprintf('SELECT * FROM %s', $table) : $query = $this->sql;
 
+        // var_dump($query);
+        // die;
         $this->db->query($query);
         return $this->db->single();
     }
@@ -102,6 +116,13 @@ class DB
     public function groupBy($column)
     {
         $this->sql = sprintf('%s GROUP BY %s', $this->sql, $column);
+        return $this;
+    }
+
+
+    public function andLike($column, $value)
+    {
+        $this->sql = $this->sql . " AND " . $column . " LIKE '%" . $value . "%' ";
         return $this;
     }
 

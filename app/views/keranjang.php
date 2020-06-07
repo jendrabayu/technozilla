@@ -40,7 +40,7 @@
                       <td class="product-name" style="max-width: 300px;">
                         <h2 class="h5 text-black"><?= $produk['nama'] ?></h2>
                       </td>
-                      <td>Rp. <?= number_format($produk['harga'], 0, ".", ",") ?></td>
+                      <td><?= rupiahFormat($produk['harga']) ?></td>
 
                       <td class="text-center">
                         <p class="mb-1">Stok : <?= $produk['stok']; ?></p>
@@ -61,7 +61,7 @@
                         </div>
                       </td>
 
-                      <td>Rp. <?= number_format(($produk['harga'] * $produk['qty']), 0, ".", ",") ?></td>
+                      <td><?= rupiahFormat($produk['harga'] * $produk['qty']) ?></td>
                       <td><a href="<?= url('keranjang/destroy/' . $produk['id']) ?>" class="btn btn-primary btn-sm">Hapus</a></td>
 
                     </tr>
@@ -80,11 +80,6 @@
                 <button class="btn btn-primary btn-sm btn-block">Update Keranjang</button>
               </div>
               </form>
-
-
-
-
-
               <div class="col-md-6">
                 <a href="<?= url('produk') ?>" class="btn btn-outline-primary btn-sm btn-block">Lanjutkan Belanja</a>
               </div>
@@ -108,7 +103,7 @@
                     ?>
                     <strong class="text-black">
                       <h5>Gratis</h5>
-                      <h3 class="mt-4">Rp. <?= number_format($subtotal, 0, ".", ",")  ?></h3>
+                      <h3 class="mt-4"><?= rupiahFormat($subtotal) ?></h3>
                     </strong>
                   </div>
                 </div>

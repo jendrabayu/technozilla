@@ -71,6 +71,8 @@ class Auth extends Controller
                     'qty' => $qty['qty']
                 ]]
             );
+
+
             Redirect::to('');
         } else {
             Flash::setFlash('Email / Password Salah', 'danger');

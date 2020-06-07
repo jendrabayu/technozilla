@@ -13,14 +13,13 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10 text-center">
-                    <h3> Total Pembayaran : Rp. <?= number_format($data['order']['o_total'], 0, ".", ",")  ?></h3>
+                    <h3> Total Pembayaran : <?= rupiahFormat($data['order']['o_total']) ?></h3>
                     <p class="m-1">Pembayaran Via Transfer</p>
                     <h3>Bank <?= $data['order']['r_bank']; ?> <u><?= $data['order']['r_norek']; ?></u></h3>
                     <div class="row m-auto justify-content-center">
                         <div class="col-lg-7 p-3 mt-3 border">
                             <form action="<?= url('transaksi/uploadbuktitransfers/' . $data['order']['o_invoice']) ?>" method="POST" enctype="multipart/form-data">
                                 <label>Upload Bukti Transfer Disini</label>
-
 
                                 <div class="form-group mb-4 mt-3" style="padding: 0  150px;">
                                     <input class="input-file" id="my-file" type="file" name="bukti_transfer">

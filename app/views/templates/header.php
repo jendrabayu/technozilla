@@ -87,7 +87,7 @@
                     <div class="row align-items-center">
 
                         <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-                            <form action="<?= url('produk/cari') ?>" class="site-block-top-search" method="GET">
+                            <form action="<?= url('') ?>" class="site-block-top-search" method="GET">
                                 <span class="icon icon-search2"></span>
                                 <input type="text" name="q" class="form-control border-0" placeholder="Cari produk...">
                             </form>
@@ -166,7 +166,7 @@
                 <div class="container">
                     <ul class="site-menu js-clone-nav d-none d-md-block">
                         <li class=""><a href="<?= url('') ?>">Home</a></li>
-                        <li><a href="<?= url('produk') ?>">Shop</a></li>
+                        <li><a href="<?= url('produk') ?>">Product</a></li>
                         <li><a href="<?= url('kontak') ?>">Contact</a></li>
                     </ul>
                 </div>
