@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use PDO;
+use PDOException;
 
 class DB
 {
@@ -62,14 +63,8 @@ class DB
 
     public function execute()
     {
-        try {
-            $this->stmt->execute();
-        } catch (PDOException $e) {
-            return $e->errorInfo;
-        }
+        $this->stmt->execute();
     }
-
-
 
     public function resultSet()
     {
@@ -106,6 +101,8 @@ class DB
         }
         $this->sql = sprintf('SELECT %s', $strColumn);
         return $this;
+
+       
     }
 
     public function from($table)

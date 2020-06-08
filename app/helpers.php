@@ -55,3 +55,8 @@ function rupiahFormat($money)
 {
     return 'Rp. ' . number_format($money, 0, ".", ",");
 }
+
+function currentTimeStamp()
+{
+    return date("Y-m-d h:i:s");
+}

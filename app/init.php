@@ -8,6 +8,7 @@ require_once 'core/Controller.php';
 require_once 'core/DB.php';
 require_once 'core/Session.php';
 require_once 'core/Redirect.php';
+require_once 'core/Authentication.php';
 
 require_once 'helpers/Auth.php';
 require_once 'helpers/Image.php';
