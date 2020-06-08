@@ -237,8 +237,6 @@ class DB
             $this->bind($key, $value);
         }
 
-        var_dump($array);
-        die;
         $this->execute();
         return $this->rowCount();
     }

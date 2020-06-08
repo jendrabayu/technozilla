@@ -13,7 +13,7 @@ class Keranjang extends Controller
 
     public function __construct()
     {
-        // Authentication::auth('customer');
+        Authentication::auth('customer');
         $this->db = new DB;
     }
 
