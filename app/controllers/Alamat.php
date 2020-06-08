@@ -1,7 +1,6 @@
 <?php
 
 use App\Core\Controller;
-use App\Helpers\Auth;
 use App\Core\DB;
 use App\Core\Redirect;
 use App\Core\Session;
@@ -13,24 +12,22 @@ class Alamat extends Controller
 
     public function __construct()
     {
+        App\Core\Authentication::auth('customer');
         $this->db = new DB;
-        Auth::auth('customer');
     }
 
     public function index()
     {
+
         $data['judul'] = 'Alamat';
         $data['alamat'] = $this->db
             ->select('*')
             ->from('alamat')
-            ->where('customer_id', '=', Session::get('is_customer')['id'])
+            ->where('customer_id', '=', getUserId('customer'))
             ->first();
+
         $this->view('templates/header', $data);
-        if ($data['alamat']) {
-            $this->view('alamat/index', $data);
-        } else {
-            $this->view('alamat/edit', $data);
-        }
+        $data['alamat'] ? $this->view('alamat/index', $data) : $this->view('alamat/edit', $data);
         $this->view('templates/footer');
     }
 
@@ -40,8 +37,9 @@ class Alamat extends Controller
         $data['alamat'] = $this->db
             ->select('*')
             ->from('alamat')
-            ->where('customer_id', '=', Session::get('is_customer')['id'])
+            ->where('customer_id', '=', getUserId('customer'))
             ->first();
+
         $this->view('templates/header', $data);
         $this->view('alamat/edit', $data);
         $this->view('templates/footer');
@@ -51,13 +49,14 @@ class Alamat extends Controller
     {
         $this->db->insert('alamat', [
             'id' => null,
-            'customer_id' => Session::get('is_customer')['id'],
+            'customer_id' => getUserId('customer'),
             'nama' => $_POST['nama'],
             'no_telp' => $_POST['no_telp'],
             'alamat' => $_POST['alamat'],
             'created_at' => currentTimeStamp(),
             'updated_at' => currentTimeStamp()
         ]);
+
         Redirect::to('alamat');
     }
 

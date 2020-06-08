@@ -4,7 +4,7 @@
                     <div class="col-md-12">
                         <p>
                             Copyright &copy; 2020
-                            </script> All rights reserved | Develop By Jendra Bayu Nugaraha | Template By <a href="https://colorlib.com" target="_blank" class="text-primary">Colorlib</a>
+                            </script> All rights reserved | Develop By <a href="https://github.com/jendrabayu/technozilla">JeNdRa</a> | Template By <a href="https://colorlib.com" target="_blank" class="text-primary">Colorlib</a>
                         </p>
                     </div>
 

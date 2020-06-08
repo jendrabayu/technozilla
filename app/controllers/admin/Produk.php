@@ -1,12 +1,10 @@
 <?php
 
 use App\Core\Controller;
-use App\Helpers\Auth as Authentication;
 use App\Core\DB;
 use App\Core\Session;
 use App\Helpers\Image;
 use App\Core\Redirect;
-use App\Models\Produk as ProdukModel;
 
 class Produk extends Controller
 {
@@ -15,15 +13,34 @@ class Produk extends Controller
 
     public function __construct()
     {
-        Authentication::auth('admin');
+        App\Core\Authentication::auth('admin');
         $this->db = new DB;
-        $this->produkModel = new ProdukModel;
     }
 
     public function index()
     {
         $data['judul'] = 'Produk';
-        $data['produk'] = $this->produkModel->getAllProduk();
+        $data['produk'] =
+            $this->db->select(
+                'produk.id as p_id',
+                'produk.nama as p_nama',
+                'produk.slug as p_slug',
+                'produk.harga as p_harga',
+                'produk.stok as p_stok',
+                'produk.deskripsi as p_desk',
+                'produk.gambar as p_gambar',
+                'kategori.id as k_id',
+                'kategori.nama as k_nama',
+                'kategori.slug as k_slug',
+                'merk.id as m_id',
+                'merk.nama as m_nama',
+                'merk.slug as m_slug'
+            )
+            ->from('produk')
+            ->join('kategori', 'produk.kategori_id', '=', 'kategori.id')
+            ->join('merk', 'produk.merk_id', '=', 'merk.id')
+            ->whereIsNull('produk.deleted_at')
+            ->get();
         $this->view('admin/templates/header', $data);
         $this->view('admin/produk/index', $data);
         $this->view('admin/templates/footer');
@@ -68,7 +85,28 @@ class Produk extends Controller
     public function edit($slug)
     {
         $data['judul'] = 'Edit Produk';
-        $data['produk'] = $this->produkModel->getProdukBySlug($slug);
+        $data['produk'] =
+            $this->db->select(
+                'produk.id as p_id',
+                'produk.nama as p_nama',
+                'produk.slug as p_slug',
+                'produk.harga as p_harga',
+                'produk.stok as p_stok',
+                'produk.deskripsi as p_desk',
+                'produk.gambar as p_gambar',
+                'kategori.id as k_id',
+                'kategori.nama as k_nama',
+                'kategori.slug as k_slug',
+                'merk.id as m_id',
+                'merk.nama as m_nama',
+                'merk.slug as m_slug'
+            )
+            ->from('produk')
+            ->join('kategori', 'produk.kategori_id', '=', 'kategori.id')
+            ->join('merk', 'produk.merk_id', '=', 'merk.id')
+            ->whereIsNull('produk.deleted_at')
+            ->andWhere('produk.slug', '=', $slug)
+            ->first();
         $data['merk'] = $this->db->select('*')->from('merk')->whereIsNull('deleted_at')->get();
         $data['kategori'] = $this->db->select('*')->from('kategori')->whereIsNull('deleted_at')->get();
 
@@ -125,7 +163,7 @@ class Produk extends Controller
                 ->from('produk')
                 ->where('id', '=', $_POST['id'])
                 ->first();
-            unlink('public/images/' . $gambar['gambar']);
+            unlink(IMG_PATH . '' . $gambar['gambar']);
             Session::setFlash('Produk Berhasil Dihapus', 'success');
         } else {
             Session::setFlash('Produk Gagal Dihapus', 'danger');

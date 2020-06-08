@@ -11,6 +11,7 @@ use App\Core\DB;
 class Auth
 {
 
+    
 
     public static function auth($role)
     {
@@ -33,8 +34,8 @@ class Auth
             'nama' => $_POST['nama'],
             'email' => $_POST['email'],
             'password' => md5($_POST['password']),
-            'created_at' => date("Y-m-d h:i:sa"),
-            'updated_at' => date("Y-m-d h:i:sa")
+            'created_at' => currentTimeStamp(),
+            'updated_at' => currentTimeStamp()
         ]);
     }
 }

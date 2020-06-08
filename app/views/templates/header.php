@@ -166,8 +166,8 @@
                 <div class="container">
                     <ul class="site-menu js-clone-nav d-none d-md-block">
                         <li class=""><a href="<?= url('') ?>">Home</a></li>
-                        <li><a href="<?= url('produk') ?>">Product</a></li>
-                        <li><a href="<?= url('kontak') ?>">Contact</a></li>
+                        <li><a href="<?= url('produk') ?>">Produk</a></li>
+                        <li><a href="<?= url('transaksi') ?>">Transaksi</a></li>
                     </ul>
                 </div>
             </nav>

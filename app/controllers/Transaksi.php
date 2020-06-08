@@ -15,6 +15,7 @@ class Transaksi extends Controller
 
     public function __construct()
     {
+        \App\Core\Authentication::auth('customer');
         $this->db = new DB;
         $this->orderModel = new OrderModel;
     }

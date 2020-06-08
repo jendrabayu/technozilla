@@ -60,3 +60,8 @@ function currentTimeStamp()
 {
     return date("Y-m-d h:i:s");
 }
+
+function getUserId($user)
+{
+    return  \App\Core\Session::get("is_$user")['id'];
+}

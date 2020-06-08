@@ -21,7 +21,6 @@ class Home extends Controller
     public function index($slug = null)
     {
 
-
         if ($slug) {
 
             $data['produk'] = $this->produkModel->getProdukBySlug($slug);

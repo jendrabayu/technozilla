@@ -1,11 +1,9 @@
 <?php
 
 use App\Core\Controller;
-use App\Helpers\Auth as Authentication;
 use App\Core\DB;
 use App\Core\Session;
 use App\Core\Redirect;
-use App\Helpers\Flash;
 
 class Merk extends Controller
 {
@@ -13,7 +11,7 @@ class Merk extends Controller
 
     public function __construct()
     {
-        Authentication::auth('admin');
+        App\Core\Authentication::auth('admin');
         $this->db = new DB;
     }
 
@@ -79,7 +77,7 @@ class Merk extends Controller
         if ($this->db->update('merk', [
             'nama' => $_POST['merk'],
             'slug' => textToSlug($_POST['merk']) . '' . date('yds'),
-            'updated_at' => date("Y-m-d h:i:s"),
+            'updated_at' => currentTimeStamp(),
         ], 'id', '=', $id)) {
             Session::setFlash('Merk Berhasil  Diupdate', 'success');
         } else {
@@ -92,7 +90,7 @@ class Merk extends Controller
     {
         if ($this->db->update(
             'merk',
-            ['deleted_at' => date("Y-m-d h:i:s")],
+            ['deleted_at' => currentTimeStamp()],
             'id',
             '=',
             $_POST['id']

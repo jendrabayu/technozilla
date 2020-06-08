@@ -3,24 +3,42 @@
 use App\Core\Controller;
 use App\Core\DB;
 use App\Core\Redirect;
-use App\Models\Produk as ProdukModel;
 
 class Produk extends Controller
 {
     protected $db;
-    protected $produkModel;
 
     public function __construct()
     {
         $this->db = new DB;
-        $this->produkModel = new ProdukModel;
     }
 
     public function index()
     {
 
         $data['judul'] = 'Semua Produk';
-        $data['produk'] = $this->produkModel->getAllProduk();
+        $data['produk'] =
+            $this->db->select(
+                'produk.id as p_id',
+                'produk.nama as p_nama',
+                'produk.slug as p_slug',
+                'produk.harga as p_harga',
+                'produk.stok as p_stok',
+                'produk.deskripsi as p_desk',
+                'produk.gambar as p_gambar',
+                'kategori.id as k_id',
+                'kategori.nama as k_nama',
+                'kategori.slug as k_slug',
+                'merk.id as m_id',
+                'merk.nama as m_nama',
+                'merk.slug as m_slug'
+            )
+            ->from('produk')
+            ->join('kategori', 'produk.kategori_id', '=', 'kategori.id')
+            ->join('merk', 'produk.merk_id', '=', 'merk.id')
+            ->whereIsNull('produk.deleted_at')
+            ->get();
+
         $this->view('templates/header', $data);
         $this->view('produk', $data);
         $this->view('templates/footer');
@@ -28,7 +46,29 @@ class Produk extends Controller
 
     public function kategori($slug = null)
     {
-        $data['produk'] = $this->produkModel->getAllProdukByKategori($slug);
+        $data['produk'] =
+            $this->db->select(
+                'produk.id as p_id',
+                'produk.nama as p_nama',
+                'produk.slug as p_slug',
+                'produk.harga as p_harga',
+                'produk.stok as p_stok',
+                'produk.deskripsi as p_desk',
+                'produk.gambar as p_gambar',
+                'kategori.id as k_id',
+                'kategori.nama as k_nama',
+                'kategori.slug as k_slug',
+                'merk.id as m_id',
+                'merk.nama as m_nama',
+                'merk.slug as m_slug'
+            )
+            ->from('produk')
+            ->join('kategori', 'produk.kategori_id', '=', 'kategori.id')
+            ->join('merk', 'produk.merk_id', '=', 'merk.id')
+            ->whereIsNull('produk.deleted_at')
+            ->andWhere('kategori.slug', '=', $slug)
+            ->get();
+
         if ($data['produk']) {
             $data['judul'] = 'Kategori ' . $data['produk'][0]['k_nama'];
             $this->view('templates/header', $data);
@@ -41,7 +81,29 @@ class Produk extends Controller
 
     public function merk($slug = null)
     {
-        $data['produk'] = $this->produkModel->getAllProdukByMerk($slug);
+        $data['produk'] =
+            $this->db->select(
+                'produk.id as p_id',
+                'produk.nama as p_nama',
+                'produk.slug as p_slug',
+                'produk.harga as p_harga',
+                'produk.stok as p_stok',
+                'produk.deskripsi as p_desk',
+                'produk.gambar as p_gambar',
+                'kategori.id as k_id',
+                'kategori.nama as k_nama',
+                'kategori.slug as k_slug',
+                'merk.id as m_id',
+                'merk.nama as m_nama',
+                'merk.slug as m_slug'
+            )
+            ->from('produk')
+            ->join('kategori', 'produk.kategori_id', '=', 'kategori.id')
+            ->join('merk', 'produk.merk_id', '=', 'merk.id')
+            ->whereIsNull('produk.deleted_at')
+            ->andWhere('merk.slug', '=', $slug)
+            ->get();
+
         if ($data['produk']) {
             $data['judul'] = 'Merk ' . $data['produk'][0]['m_nama'];
             $this->view('templates/header', $data);
@@ -55,18 +117,13 @@ class Produk extends Controller
 
     public function cari()
     {
-
-
         $q = $_SERVER['REQUEST_URI'];
         $q = explode('?', $q);
         $q = end($q);
         $q = explode('=', $q);
         $q = end($q);
 
-
-
         if ($q) {
-
             $data['produk'] =  $this->db
                 ->select(
                     'produk.id as p_id',

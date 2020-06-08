@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use App\Core\DB;
+use App\Core\Session;
 
 class Authentication
 {
@@ -13,23 +14,45 @@ class Authentication
         $this->db = new DB;
     }
 
-    public function register($user, $data)
+    public static function auth($user)
     {
-        $query = "INSERT INTO $user VALUES('', :nama, :email, :password, :created_at, :updated_at)";
-        $this->db->query($query);
-        $this->db->bind('nama', $data['nama']);
-        $this->db->bind('email', $data['email']);
-        $this->db->bind('password', md5($data['password']));
-        $this->db->bind('created_at', currentTimeStamp());
-        $this->db->bind('updated_at', currentTimeStamp());
-        $this->db->execute();
-        return $this->db->rowCount();
+        if ($user == 'admin') {
+            if (!Session::get('is_admin')) {
+                Redirect::to('admin/auth/login');
+            }
+        } else if ($user == 'customer') {
+            if (!Session::get('is_customer')) {
+                Redirect::to('auth/login');
+            }
+        }
     }
 
-    public function login($user, $email, $password)
+    public function register($user)
     {
-        $password = md5($password);
-        $this->db->query("SELECT * FROM $user WHERE email = $email AND password = $password");
-        return $this->db->resultSet();
+        return   $this->db->insert($user, [
+            'id' => null,
+            'nama' => $_POST['nama'],
+            'email' => $_POST['email'],
+            'password' => md5($_POST['password']),
+            'created_at' => currentTimeStamp(),
+            'updated_at' => currentTimeStamp()
+        ]);
+    }
+
+    public function login($user)
+    {
+        $data = $this->db->select('*')->from($user)->where([['email', '=', $_POST['email']], ['password', '=', md5($_POST['password'])]])->first();
+
+        if ($data) {
+            Session::set(["is_$user" => $data]);
+            return true;
+        }
+        return false;
+    }
+
+    public function logout($user)
+    {
+        Session::remove("is_$user");
+        Redirect::to('');
     }
 }

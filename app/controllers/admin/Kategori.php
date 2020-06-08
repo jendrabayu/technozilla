@@ -1,7 +1,6 @@
 <?php
 
 use App\Core\Controller;
-use App\Helpers\Auth as Authentication;
 use App\Core\DB;
 use App\Core\Session;
 use App\Core\Redirect;
@@ -13,7 +12,7 @@ class Kategori extends Controller
 
     public function __construct()
     {
-        Authentication::auth('admin');
+        App\Core\Authentication::auth('admin');
         $this->db = new DB;
     }
 
@@ -91,7 +90,7 @@ class Kategori extends Controller
     {
         if ($this->db->update(
             'kategori',
-            ['deleted_at' => date("Y-m-d h:i:s")],
+            ['deleted_at' => currentTimeStamp()],
             'id',
             '=',
             $_POST['id']

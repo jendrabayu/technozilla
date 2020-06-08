@@ -1,7 +1,7 @@
 <?php
 
 use App\Core\Controller;
-use App\Helpers\Auth as Authentication;
+use App\Core\Authentication;
 use App\Core\DB;
 use App\Core\Redirect;
 use App\Core\Session;
@@ -9,9 +9,11 @@ use App\Core\Session;
 class Auth extends Controller
 {
     protected $db;
+    protected $auth;
 
     public function __construct()
     {
+        $this->auth = new Authentication;
         $this->db = new DB;
     }
 
@@ -27,23 +29,12 @@ class Auth extends Controller
 
     public function do_login()
     {
-        $admin = $this->db
-            ->select('*')
-            ->from('admin')
-            ->where([
-                ['email', '=', $_POST['email']],
-                ['password', '=', md5($_POST['password'])]
-            ])
-            ->first();
-
-        if ($admin) {
-            Session::set(
-                ['is_admin' => $admin]
-            );
-            Redirect::to('admin');
+        if ($this->auth->login('admin')) {
+            Redirect::to('admin/');
+        } else {
+            Session::setFlash('Email / Password Salah', 'danger');
+            Redirect::to('admin/auth');
         }
-
-        Redirect::to('admin/auth');
     }
 
     public function register()
@@ -56,15 +47,13 @@ class Auth extends Controller
     }
 
     public function store()
-
     {
-
         if ($_POST['password'] != $_POST['repassword']) {
             Session::setFlash('Password Harus Sama!', 'danger');
             Redirect::to('admin/auth/register');
         } else {
 
-            if (Authentication::register('admin')) {
+            if ($this->auth->register('admin')) {
                 Session::setFlash('Registrasi Berhasil Silahkan Login', 'primary');
                 Redirect::to('admin/auth');
             } else {
@@ -76,7 +65,6 @@ class Auth extends Controller
 
     public function do_logout()
     {
-        Session::destroy();
-        Redirect::to('admin/auth/login');
+        $this->auth->logout('admin');
     }
 }

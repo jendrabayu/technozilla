@@ -1,7 +1,6 @@
 <?php
 
 use App\Core\Controller;
-use App\Helpers\Auth;
 use App\Core\DB;
 use App\Core\Session;
 use App\Helpers\Image;
@@ -13,8 +12,8 @@ class Gallery extends Controller
 
     public function __construct()
     {
+        App\Core\Authentication::auth('admin');
         $this->db = new DB;
-        Auth::auth('admin');
     }
 
 
@@ -49,12 +48,9 @@ class Gallery extends Controller
 
     public function store()
     {
-
-
         $image = new Image;
         $gambar = $image->upload('gambar');
 
-        
         if ($gambar != false) {
 
             $insert = $this->db->insert('gambar_produk', [
@@ -85,16 +81,10 @@ class Gallery extends Controller
             ->where('id', '=', $id)
             ->first();
 
-
         $this->view('admin/templates/header', $data);
         $this->view('admin/gallery/edit', $data);
         $this->view('admin/templates/footer');
     }
-
-    public function update($id)
-    {
-    }
-
 
     public function destroy()
     {
@@ -102,7 +92,7 @@ class Gallery extends Controller
 
         $delete = $this->db->delete('gambar_produk', 'id', '=', $_POST['id']);
         if ($delete) {
-            unlink('public/images/' . $_POST['gambar']);
+            unlink(IMG_PATH . '' . $_POST['gambar']);
             Session::setFlash('Berhasil menghapus foto produk', 'success');
         } else {
             Session::setFlash('Gagal menghapus foto produk', 'danger');

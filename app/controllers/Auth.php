@@ -1,24 +1,24 @@
 <?php
 
 use App\Core\Controller;
-use App\Helpers\Auth as Authentication;
 use App\Core\Redirect;
 use App\Core\Session;
 use App\Core\DB;
+use App\Core\Authentication;
 
 class Auth extends Controller
 {
-
     protected $db;
+    protected $auth;
 
     public function __construct()
     {
         $this->db = new DB;
+        $this->auth = new Authentication;
     }
 
     public function index()
     {
-
         if (Session::get('is_customer')) {
             Redirect::to('');
         }
@@ -43,42 +43,7 @@ class Auth extends Controller
 
     public function do_login()
     {
-        if (Session::get('is_customer')) {
-            Redirect::to('');
-        }
-
-
-        $customer = $this->db
-            ->select('*')
-            ->from('customer')
-            ->where([
-                ['email', '=', $_POST['email']],
-                ['password', '=', md5($_POST['password'])]
-            ])
-            ->first();
-
-        if ($customer) {
-            Session::set(
-                ['is_customer' => $customer]
-            );
-            Redirect::to('');
-
-
-            //set session qty keranjang
-            $qty = $this->db
-                ->select('SUM(kuantitas) as qty')
-                ->from('keranjang')
-                ->where('customer_id', '=', $_SESSION['is_customer']['id'])
-                ->first();
-
-
-            Session::set(
-                ['is_keranjang' => [
-                    'qty' => $qty['qty']
-                ]]
-            );
-
-
+        if ($this->auth->login('customer')) {
             Redirect::to('');
         } else {
             Session::setFlash('Email / Password Salah', 'danger');
@@ -93,7 +58,7 @@ class Auth extends Controller
             Session::setFlash('Password Harus Sama!', 'danger');
             Redirect::to('auth/register');
         } else {
-            if (Authentication::register('customer')) {
+            if ($this->auth->register('customer')) {
                 Session::setFlash('Registrasi Berhasil Silahkan Login', 'primary');
                 Redirect::to('auth');
             } else {
@@ -105,7 +70,6 @@ class Auth extends Controller
 
     public function do_logout()
     {
-        Session::destroy();
-        Redirect::to('');
+        $this->auth->logout('customer');
     }
 }

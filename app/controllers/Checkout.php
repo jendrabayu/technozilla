@@ -1,11 +1,9 @@
 <?php
 
 use App\Core\Controller;
-use App\Helpers\Auth;
 use App\Core\DB;
 use App\Core\Redirect;
 use App\Core\Session;
-use App\Models\Keranjang as KeranjangModel;
 
 class Checkout extends Controller
 {
@@ -16,9 +14,8 @@ class Checkout extends Controller
 
     public function __construct()
     {
+        App\Core\Authentication::auth('customer');
         $this->db = new DB;
-        $this->keranjangModel = new KeranjangModel;
-        Auth::auth('customer');
     }
 
     public function index()
@@ -36,7 +33,7 @@ class Checkout extends Controller
         $data['alamat'] = $this->db
             ->select('*')
             ->from('alamat')
-            ->where('customer_id', '=', Session::get('is_customer')['id'])
+            ->where('customer_id', '=', getUserId('customer'))
             ->first();
         $data['bank'] = $this->db
             ->select('*')
@@ -52,9 +49,25 @@ class Checkout extends Controller
 
     public function store()
     {
+        // get data keranjang
+        $keranjang =
+            $this->db->select(
+                'keranjang.id as k_id',
+                'keranjang.kuantitas as k_qty',
+                'produk.id as p_id',
+                'produk.nama as p_nama',
+                'produk.slug as p_slug',
+                'produk.harga as p_harga',
+                'produk.stok as p_stok',
+                'produk.deskripsi as p_desk',
+                'produk.gambar as p_gambar'
+            )
+            ->from('keranjang')
+            ->join('produk', 'keranjang.produk_id', '=', 'produk.id')
+            ->where('keranjang.customer_id', '=', getUserId('customer'))
+            ->get();
 
-
-        $keranjang = $this->keranjangModel->getKeranjangByCustId(Session::get('is_customer')['id']);
+        //generate invoice
         $invoice = 'INV' . date('mYdihs');
 
         // update alamat
@@ -62,10 +75,11 @@ class Checkout extends Controller
             'nama' => $_POST['c_nama'],
             'no_telp' => $_POST['c_no_telp'],
             'alamat' => $_POST['c_alamat']
-        ], 'customer_id', '=', Session::get('is_customer')['id']);
+        ], 'customer_id', '=', getUserId('customer'));
 
         // get alamat id
-        $alamat_id = $this->db->select('id')->from('alamat')->where('customer_id', '=', Session::get('is_customer')['id'])->first()['id'];
+        $alamat_id = $this->db->select('id')->from('alamat')->where('customer_id', '=', getUserId('customer'))->first();
+        $alamat_id = $alamat_id['id'];
 
         //total
         $total = 0;
@@ -73,11 +87,10 @@ class Checkout extends Controller
             $total += $k['k_qty'] * $k['p_harga'];
         }
 
-
-        // insert to order
-        if ($this->db->insert('`order`', [
+        // insert ke table order
+        $insertToOrder = $this->db->insert('`order`', [
             'id' => null,
-            'customer_id' => Session::get('is_customer')['id'],
+            'customer_id' => getUserId('customer'),
             'rekening_bank_id' => $_POST['bank_id'],
             'alamat_id' => $alamat_id,
             'status_order_id' => 1,
@@ -90,17 +103,18 @@ class Checkout extends Controller
             'pesan' => $_POST['o_pesan'],
             'created_at' =>  currentTimeStamp(),
             'updated_at' =>  currentTimeStamp()
-        ])) {
+        ]);
+
+        if ($insertToOrder) {
             // get order id
             $order_id = $this->db
                 ->select('id')
                 ->from('`order`')
-                ->where('customer_id', '=', Session::get('is_customer')['id'])
+                ->where('customer_id', '=', getUserId('customer'))
                 ->orderBy('created_at', 'DESC')
                 ->first()['id'];
 
-
-            //insert to order_detail
+            //insert to table order_detail
             foreach ($keranjang as $k) {
                 $this->db->insert(
                     'order_detail',
@@ -121,7 +135,7 @@ class Checkout extends Controller
             }
 
             // hapus keranjang
-            $this->db->delete('keranjang', 'customer_id', '=', Session::get('is_customer')['id']);
+            $this->db->delete('keranjang', 'customer_id', '=',  getUserId('customer'));
         }
         Redirect::to('transaksi/payment/' . $invoice);
     }

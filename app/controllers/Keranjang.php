@@ -3,7 +3,6 @@
 use App\Core\Controller;
 use App\Core\DB;
 use App\Core\Redirect;
-use App\Helpers\Auth as Authentication;
 use App\Core\Session;
 
 class Keranjang extends Controller
@@ -13,7 +12,7 @@ class Keranjang extends Controller
 
     public function __construct()
     {
-        Authentication::auth('customer');
+        App\Core\Authentication::auth('customer');
         $this->db = new DB;
     }
 
@@ -33,8 +32,9 @@ class Keranjang extends Controller
             )
             ->from('keranjang')
             ->join('produk', 'keranjang.produk_id', '=', 'produk.id')
-            ->where('keranjang.customer_id', '=', Session::get('is_customer')['id'])
+            ->where('keranjang.customer_id', '=', getUserId('customer'))
             ->get();
+
         $data['judul'] = 'Home';
         $this->view('templates/header', $data);
         $this->view('keranjang', $data);
@@ -49,6 +49,7 @@ class Keranjang extends Controller
             ->where('id', '=', $_POST['produk_id'])
             ->first();
 
+        // jika add to cart produk yang sama
         $produk_sama = $this->db
             ->select('produk_id', 'kuantitas')
             ->from('keranjang')
@@ -101,8 +102,6 @@ class Keranjang extends Controller
         $this->db->delete('keranjang', 'id', '=', $id);
         Redirect::to('keranjang');
     }
-
-
 
     public function update()
     {

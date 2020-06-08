@@ -1,7 +1,6 @@
 <?php
 
 use App\Core\Controller;
-use App\Helpers\Auth as Authentication;
 use App\Core\DB;
 
 class Home extends Controller
@@ -11,7 +10,7 @@ class Home extends Controller
     public function __construct()
     {
         $this->db = new DB;
-        Authentication::auth('admin');
+        \App\Core\Authentication::auth('admin');
     }
 
     public function index()

@@ -60,4 +60,9 @@ class Session
             self::remove('flash_data');
         }
     }
+
+    public  static function getUserId($user)
+    {
+        return self::get("is_$user")['id'];
+    }
 }
