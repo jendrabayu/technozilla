@@ -6,7 +6,7 @@ $data['kategori'] =
     ->from('kategori')
     ->join('produk', 'kategori.id ', '=', ' produk.kategori_id')
     ->whereIsNull('produk.deleted_at')
-    ->groupBy('kategori.slug')
+    ->groupBy('kategori.id, produk.kategori_id')
     ->get();
 
 $data['merk'] =
@@ -19,7 +19,7 @@ $data['merk'] =
     ->from('merk')
     ->join('produk', 'merk.id ', '=', ' produk.merk_id')
     ->whereIsNull('produk.deleted_at')
-    ->groupBy('merk.slug')
+    ->groupBy('merk.id, produk.merk_id')
     ->get();
 ?>
 <div class="bg-light py-3">

@@ -24,6 +24,7 @@
                                     <thead>
                                         <tr class="text-center">
                                             <th>No.</th>
+                                            <th>Order date</th>
                                             <th>Invoice</th>
                                             <th>Customer</th>
                                             <th>Total</th>
@@ -33,17 +34,14 @@
                                     </thead>
                                     <tbody>
                                         <?php foreach ($data['order'] as $key => $order) : ?>
-                                            <tr>
+                                            <tr class="text-center">
                                                 <td><?= 1 + $key++; ?></td>
+                                                <td><?= $order['o_date']; ?></td>
                                                 <td><?= $order['o_invoice']; ?></td>
                                                 <td><?= $order['c_nama']; ?></td>
-                                                <td>Rp. <?= number_format(($order['o_total']), 0, ".", ",") ?></td>
-
-                                                <td>
-                                                    <?= $order['s_nama']; ?>
-                                                </td>
+                                                <td><?= rupiahFormat($order['o_total']) ?></td>
+                                                <td><?= $order['s_nama']; ?></td>
                                                 <td class="text-center">
-
                                                     <a href="<?= url('admin/transaksi/detail/' . $order['o_invoice'] . '/barangdikirim/' . $order['o_status_id']) ?>" class="btn btn-warning">Selesaikan Transaksi</a>
                                                 </td>
 

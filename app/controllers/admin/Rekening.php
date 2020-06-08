@@ -46,8 +46,8 @@ class Rekening extends Controller
             'atas_nama' => $_POST['atas_nama'],
             'nomor' => $_POST['no_rekening'],
             'slug' => textToSlug($_POST['no_rekening'] . '' . date('yds')),
-            'created_at' => date("Y-m-d h:i:sa"),
-            'updated_at' => date("Y-m-d h:i:sa"),
+            'created_at' => currentTimeStamp(),
+            'updated_at' => currentTimeStamp(),
             'deleted_at' => null
         ])) {
             Session::setFlash('Rekening Baru Berhasil Ditambahkan', 'success');

@@ -19,13 +19,14 @@
                           </div>
                           <div class=" card-body">
                               <?php
-                                \App\Helpers\Flash::getFlash();
+                                \App\Core\Session::getFlash();
                                 ?>
                               <div class="table-responsive">
                                   <table class="table table-striped" id="table-1">
                                       <thead>
                                           <tr class="text-center">
                                               <th>No.</th>
+                                              <th>Order Date</th>
                                               <th>Invoice</th>
                                               <th>Customer</th>
                                               <th>Total</th>
@@ -37,18 +38,14 @@
                                           <?php foreach ($data['order'] as $key => $order) : ?>
                                               <tr>
                                                   <td><?= 1 + $key++; ?></td>
+                                                  <td><?= $order['o_date']; ?></td>
                                                   <td><?= $order['o_invoice']; ?></td>
                                                   <td><?= $order['c_nama']; ?></td>
-                                                  <td>Rp. <?= number_format(($order['o_total']), 0, ".", ",") ?></td>
-
-                                                  <td>
-                                                      <?= $order['s_nama']; ?>
-                                                  </td>
+                                                  <td><?= rupiahFormat($order['o_total']) ?></td>
+                                                  <td><?= $order['s_nama']; ?></td>
                                                   <td class="text-center">
-
                                                       <a href="<?= url('admin/transaksi/detail/' . $order['o_invoice'] . '/' . 'selesai/' . $order['o_status_id']) ?>" class="btn btn-warning">Lihat Detail</a>
                                                   </td>
-
                                               </tr>
                                           <?php endforeach; ?>
                                       </tbody>

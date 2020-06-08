@@ -22,7 +22,8 @@
                                 <table class="table table-striped" id="table-1">
                                     <thead>
                                         <tr class="text-center">
-                                            <th class="text-center">No.</th>
+                                            <th>No.</th>
+                                            <th>Order Date</th>
                                             <th>Invoice</th>
                                             <th>Customer</th>
                                             <th>Total</th>
@@ -34,6 +35,7 @@
                                         <?php foreach ($data['order'] as $key => $order) : ?>
                                             <tr>
                                                 <td><?= 1 + $key++; ?></td>
+                                                <td><?= $order['o_date']; ?></td>
                                                 <td><?= $order['o_invoice']; ?></td>
                                                 <td><?= $order['c_nama']; ?></td>
                                                 <td>Rp. <?= number_format(($order['o_total']), 0, ".", ",") ?></td>

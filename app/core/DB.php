@@ -18,6 +18,9 @@ class DB
     private $dbh;
     private $stmt;
 
+
+    // ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION
+    // ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
     public function __construct()
     {
         try {
@@ -101,8 +104,6 @@ class DB
         }
         $this->sql = sprintf('SELECT %s', $strColumn);
         return $this;
-
-       
     }
 
     public function from($table)
@@ -194,6 +195,7 @@ class DB
 
     public function groupBy($column)
     {
+
         $this->sql = sprintf('%s GROUP BY %s', $this->sql, $column);
         return $this;
     }

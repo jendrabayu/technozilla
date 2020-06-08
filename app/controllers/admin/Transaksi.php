@@ -5,6 +5,7 @@ use App\Helpers\Auth as Authentication;
 use App\Core\DB;
 use App\Core\Redirect;
 use App\Models\Order as OrderModel;
+use App\Core\Session;
 
 class Transaksi extends Controller
 {
@@ -30,8 +31,21 @@ class Transaksi extends Controller
 
     public function pesananbaru()
     {
-        $data['judul'] = 'Belum Dibayar';
-        $data['order'] = $this->orderModel->getAllOrderByStatus(1);
+        $data['judul'] = 'Pesanan Baru';
+        $data['order'] = $this->db
+            ->select(
+                'DATE(order.created_at) as o_date',
+                'order.invoice as o_invoice',
+                'order.subtotal as o_total',
+                'order.status_order_id as o_status_id',
+                'customer.nama as c_nama',
+                'status_order.nama as s_nama'
+            )
+            ->from('`order`')
+            ->join('customer', 'order.customer_id', '=', 'customer.id')
+            ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
+            ->where('order.status_order_id', '=', 1)
+            ->get();
         $this->view('admin/templates/header', $data);
         $this->view('admin/transaksi/pesananbaru/index', $data);
         $this->view('admin/templates/footer');
@@ -40,7 +54,20 @@ class Transaksi extends Controller
     public function perludicek()
     {
         $data['judul'] = 'Perlu Dicek';
-        $data['order'] = $this->orderModel->getAllOrderByStatus(2);
+        $data['order'] = $this->db
+            ->select(
+                'DATE(order.created_at) as o_date',
+                'order.invoice as o_invoice',
+                'order.subtotal as o_total',
+                'order.status_order_id as o_status_id',
+                'customer.nama as c_nama',
+                'status_order.nama as s_nama'
+            )
+            ->from('`order`')
+            ->join('customer', 'order.customer_id', '=', 'customer.id')
+            ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
+            ->where('order.status_order_id', '=', 2)
+            ->get();
 
         $this->view('admin/templates/header', $data);
         $this->view('admin/transaksi/perludicek/index', $data);
@@ -50,7 +77,21 @@ class Transaksi extends Controller
     public function perludikirim()
     {
         $data['judul'] = 'Perlu Dikirim';
-        $data['order'] = $this->orderModel->getAllOrderByStatus(3);
+        $data['order'] = $this->db
+            ->select(
+                'DATE(order.created_at) as o_date',
+                'order.invoice as o_invoice',
+                'order.subtotal as o_total',
+                'order.status_order_id as o_status_id',
+                'customer.nama as c_nama',
+                'status_order.nama as s_nama'
+            )
+            ->from('`order`')
+            ->join('customer', 'order.customer_id', '=', 'customer.id')
+            ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
+            ->where('order.status_order_id', '=', 3)
+            ->get();
+
         $this->view('admin/templates/header', $data);
         $this->view('admin/transaksi/perludikirim/index', $data);
         $this->view('admin/templates/footer');
@@ -58,7 +99,20 @@ class Transaksi extends Controller
     public function barangdikirim()
     {
         $data['judul'] = 'Barang Dikirim';
-        $data['order'] = $this->orderModel->getAllOrderByStatus(4);
+        $data['order'] = $this->db
+            ->select(
+                'DATE(order.created_at) as o_date',
+                'order.invoice as o_invoice',
+                'order.subtotal as o_total',
+                'order.status_order_id as o_status_id',
+                'customer.nama as c_nama',
+                'status_order.nama as s_nama'
+            )
+            ->from('`order`')
+            ->join('customer', 'order.customer_id', '=', 'customer.id')
+            ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
+            ->where('order.status_order_id', '=', 4)
+            ->get();
         $this->view('admin/templates/header', $data);
         $this->view('admin/transaksi/barangdikirim/index', $data);
         $this->view('admin/templates/footer');
@@ -67,7 +121,21 @@ class Transaksi extends Controller
     public function selesai()
     {
         $data['judul'] = 'Pesanan Selesai';
-        $data['order'] = $this->orderModel->getAllOrderByStatus(5);
+        $data['order'] = $this->db
+            ->select(
+                'DATE(order.created_at) as o_date',
+                'order.invoice as o_invoice',
+                'order.subtotal as o_total',
+                'order.status_order_id as o_status_id',
+                'customer.nama as c_nama',
+                'status_order.nama as s_nama'
+            )
+            ->from('`order`')
+            ->join('customer', 'order.customer_id', '=', 'customer.id')
+            ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
+            ->where('order.status_order_id', '=', 5)
+            ->get();
+
         $this->view('admin/templates/header', $data);
         $this->view('admin/transaksi/selesai/index', $data);
         $this->view('admin/templates/footer');
@@ -76,7 +144,21 @@ class Transaksi extends Controller
     public function pembatalan()
     {
         $data['judul'] = 'Pesanan Dibatalkan';
-        $data['order'] = $this->orderModel->getAllOrderByStatus(6);
+        $data['order'] = $this->db
+            ->select(
+                'DATE(order.created_at) as o_date',
+                'order.invoice as o_invoice',
+                'order.subtotal as o_total',
+                'order.status_order_id as o_status_id',
+                'customer.nama as c_nama',
+                'status_order.nama as s_nama'
+            )
+            ->from('`order`')
+            ->join('customer', 'order.customer_id', '=', 'customer.id')
+            ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
+            ->where('order.status_order_id', '=', 6)
+            ->get();
+
         $this->view('admin/templates/header', $data);
         $this->view('admin/transaksi/pembatalan/index', $data);
         $this->view('admin/templates/footer');
