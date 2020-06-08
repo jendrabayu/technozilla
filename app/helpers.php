@@ -7,8 +7,13 @@ function url($url)
         str_replace(
             $_SERVER['DOCUMENT_ROOT'],
             '',
-            str_replace('\\', '/', INC_ROOT) . '/public'
+            str_replace('\\', '/', INC_ROOT)
         );
+
+    $images = explode('/', $url);
+    if ($images[0] == 'images') {
+        return $link . '/public/' . $url;
+    }
     return $link . '/' . $url;
 }
 

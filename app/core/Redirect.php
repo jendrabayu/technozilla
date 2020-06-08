@@ -11,7 +11,7 @@ class Redirect
             str_replace(
                 $_SERVER['DOCUMENT_ROOT'],
                 '',
-                str_replace('\\', '/', INC_ROOT) . '/public'
+                str_replace('\\', '/', INC_ROOT)
             );
 
         header('Location:' . $link . '/' . $url);
