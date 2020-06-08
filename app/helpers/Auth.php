@@ -29,7 +29,7 @@ class Auth
     {
         $db = new DB;
         return $db->insert($role, [
-            'id' => '',
+            'id' => null,
             'nama' => $_POST['nama'],
             'email' => $_POST['email'],
             'password' => md5($_POST['password']),

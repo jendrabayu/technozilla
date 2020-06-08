@@ -204,7 +204,7 @@ class Transaksi extends Controller
         if ($this->db->update('`order`', [
             'status_order_id' => 6,
             'alasan_pembatalan' => $alasan,
-            'updated_at' => date('Y-m-d H:i:s')
+            'updated_at' =>  currentTimeStamp()
         ], 'invoice', '=', $invoice)) {
             Session::setFlash("Pesanan Berhasil Dibatalkan", "primary");
             Redirect::to('admin/transaksi/pesananbaru');
@@ -220,7 +220,7 @@ class Transaksi extends Controller
         $invoice = $_POST['invoice'];
         if ($this->db->update('`order`', [
             'status_order_id' => 3,
-            'updated_at' => date('Y-m-d H:i:s')
+            'updated_at' =>  currentTimeStamp()
         ], 'invoice', '=', $invoice)) {
             Session::setFlash("Pembayaran Berhasil Dikonfirmasi", "primary");
             Redirect::to('admin/transaksi/perludicek');
@@ -241,7 +241,7 @@ class Transaksi extends Controller
             'status_order_id' => 4,
             'kurir' => $kurir,
             'nomor_resi' => $resi,
-            'updated_at' => date('Y-m-d H:i:s')
+            'updated_at' =>  currentTimeStamp()
         ], 'invoice', '=', $invoice)) {
             Session::setFlash("Resi Berhasil Diinput", "primary");
             Redirect::to('admin/transaksi/perludikirim');
@@ -256,7 +256,7 @@ class Transaksi extends Controller
         $invoice = $_POST['invoice'];
         if ($this->db->update('`order`', [
             'status_order_id' => 5,
-            'updated_at' => date('Y-m-d H:i:s')
+            'updated_at' => currentTimeStamp()
         ], 'invoice', '=', $invoice)) {
             Session::setFlash("Pembayaran Berhasil Dikonfirmasi", "primary");
             Redirect::to('admin/transaksi/barangdikirim');

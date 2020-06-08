@@ -82,7 +82,7 @@ class Rekening extends Controller
             'atas_nama' => $_POST['atas_nama'],
             'nomor' => $_POST['no_rekening'],
             'slug' => textToSlug($_POST['no_rekening'] . '' . date('yds')),
-            'updated_at' => date('Y-m-d H:i:s')
+            'updated_at' =>  currentTimeStamp()
         ], 'id', '=', $id)) {
             Session::setFlash('Rekening Berhasil Diupdate', 'success');
         } else {

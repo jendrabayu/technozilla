@@ -58,11 +58,11 @@ class Gallery extends Controller
         if ($gambar != false) {
 
             $insert = $this->db->insert('gambar_produk', [
-                'id' => '',
+                'id' => null,
                 'produk_id' => $_POST['id'],
                 'nama' => $gambar,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
+                'created_at' =>  currentTimeStamp(),
+                'updated_at' =>  currentTimeStamp()
             ]);
         }
 
@@ -102,7 +102,7 @@ class Gallery extends Controller
 
         $delete = $this->db->delete('gambar_produk', 'id', '=', $_POST['id']);
         if ($delete) {
-            unlink('images/' . $_POST['gambar']);
+            unlink('public/images/' . $_POST['gambar']);
             Session::setFlash('Berhasil menghapus foto produk', 'success');
         } else {
             Session::setFlash('Gagal menghapus foto produk', 'danger');

@@ -50,13 +50,13 @@ class Alamat extends Controller
     public function store()
     {
         $this->db->insert('alamat', [
-            'id' => '',
+            'id' => null,
             'customer_id' => Session::get('is_customer')['id'],
             'nama' => $_POST['nama'],
             'no_telp' => $_POST['no_telp'],
             'alamat' => $_POST['alamat'],
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'created_at' => currentTimeStamp(),
+            'updated_at' => currentTimeStamp()
         ]);
         Redirect::to('alamat');
     }
@@ -69,7 +69,7 @@ class Alamat extends Controller
                 'nama' => $_POST['nama'],
                 'no_telp' => $_POST['no_telp'],
                 'alamat' => $_POST['alamat'],
-                'updated_at' => date('Y-m-d H:i:s')
+                'updated_at' =>  currentTimeStamp()
             ],
             'customer_id',
             '=',

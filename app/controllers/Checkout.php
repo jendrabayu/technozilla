@@ -88,8 +88,8 @@ class Checkout extends Controller
             'kurir' => null,
             'nomor_resi' => null,
             'pesan' => $_POST['o_pesan'],
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
+            'created_at' =>  currentTimeStamp(),
+            'updated_at' =>  currentTimeStamp()
         ])) {
             // get order id
             $order_id = $this->db
@@ -109,8 +109,8 @@ class Checkout extends Controller
                         'order_id' => $order_id,
                         'produk_id' => $k['p_id'],
                         'kuantitas' => $k['k_qty'],
-                        'created_at' => date('Y-m-d H:i:s'),
-                        'updated_at' => date('Y-m-d H:i:s')
+                        'created_at' =>  currentTimeStamp(),
+                        'updated_at' =>  currentTimeStamp()
                     ]
                 );
 

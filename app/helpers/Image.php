@@ -52,3 +52,4 @@ class Image
         return $this->errors;
     }
 }
+//  /home/182410102043/uas/tes/public/images

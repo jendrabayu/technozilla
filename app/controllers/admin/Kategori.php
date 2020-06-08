@@ -44,8 +44,8 @@ class Kategori extends Controller
             'id' => null,
             'nama' => $_POST['kategori'],
             'slug' => textToSlug($_POST['kategori']) . '' . date('yds'),
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
+            'created_at' =>  currentTimeStamp(),
+            'updated_at' =>  currentTimeStamp(),
             'deleted_at' => null
         ])) {
             Session::setFlash('Berhasil Menambahkan Kategori Baru', 'success');

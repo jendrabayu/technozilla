@@ -83,12 +83,12 @@ class Keranjang extends Controller
                 Redirect::to('keranjang');
             } else {
                 $this->db->insert('keranjang', [
-                    'id' => '',
+                    'id' => null,
                     'customer_id' => $_SESSION['is_customer']['id'],
                     'produk_id' => $_POST['produk_id'],
                     'kuantitas' => $_POST['kuantitas'],
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s')
+                    'created_at' =>  currentTimeStamp(),
+                    'updated_at' =>  currentTimeStamp()
                 ]);
                 Redirect::to('keranjang');
             }

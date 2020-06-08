@@ -54,8 +54,8 @@ class Produk extends Controller
                 'stok' => $_POST['stok'],
                 'deskripsi' => $_POST['deskripsi'],
                 'gambar' => $gambar,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
+                'created_at' =>  currentTimeStamp(),
+                'updated_at' =>  currentTimeStamp(),
                 'deleted_at' => null
             ]);
         }
@@ -89,7 +89,7 @@ class Produk extends Controller
         $gambar = '';
         if ($gambarBaru != false && $gambarBaru != null) {
             $gambar = $gambarBaru;
-            unlink('images/' . $gambarLama);
+            unlink('public/images/' . $gambarLama);
         } else {
             $gambar = $gambarLama;
         }
@@ -103,7 +103,7 @@ class Produk extends Controller
             'stok' => $_POST['p_stok'],
             'deskripsi' => $_POST['deskripsi'],
             'gambar' => $gambar,
-            'updated_at' => date('Y-m-d H:i:s')
+            'updated_at' =>  currentTimeStamp()
         ], 'id', '=', $id);
 
         Session::setFlash('Produk berhasil di update', 'success');
@@ -115,7 +115,7 @@ class Produk extends Controller
     {
         if ($this->db->update(
             'produk',
-            ['deleted_at' => date('Y-m-d H:i:s')],
+            ['deleted_at' => currentTimeStamp()],
             'id',
             '=',
             $_POST['id']
@@ -125,7 +125,7 @@ class Produk extends Controller
                 ->from('produk')
                 ->where('id', '=', $_POST['id'])
                 ->first();
-            unlink('images/' . $gambar['gambar']);
+            unlink('public/images/' . $gambar['gambar']);
             Session::setFlash('Produk Berhasil Dihapus', 'success');
         } else {
             Session::setFlash('Produk Gagal Dihapus', 'danger');
