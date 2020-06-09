@@ -63,5 +63,8 @@ function currentTimeStamp()
 
 function getUserId($user)
 {
-    return  \App\Core\Session::get("is_$user")['id'];
+    if (App\Core\Session::get("is_$user")) {
+        return  \App\Core\Session::get("is_$user")['id'];
+    }
+    return false;
 }

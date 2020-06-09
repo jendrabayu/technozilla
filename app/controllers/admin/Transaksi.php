@@ -1,17 +1,14 @@
 <?php
 
 use App\Core\Controller;
-use App\Helpers\Auth as Authentication;
 use App\Core\DB;
 use App\Core\Redirect;
-use App\Models\Order as OrderModel;
 use App\Core\Session;
 
 class Transaksi extends Controller
 {
 
     protected $db;
-    protected $orderModel;
 
     /* status
         1. Belum Dibayar
@@ -24,9 +21,8 @@ class Transaksi extends Controller
 
     public function __construct()
     {
-        Authentication::auth('admin');
+        App\Core\Authentication::auth('admin');
         $this->db = new DB;
-        $this->orderModel = new OrderModel;
     }
 
     public function pesananbaru()
@@ -212,7 +208,7 @@ class Transaksi extends Controller
                 ['order.invoice', '=',  $invoice],
                 ['order.status_order_id', '=', $status]
             ])
-            ->groupBy('produk.id')
+            ->groupBy('produk.id', 'order_detail.produk_id')
             ->get();
 
         $data['judul'] = 'Pesanan ' . $invoice;
@@ -270,7 +266,7 @@ class Transaksi extends Controller
             ->join('order_detail', 'order.id', '=', 'order_detail.order_id')
             ->join('produk', 'order_detail.produk_id', '=', 'produk.id')
             ->where([['order.invoice', '=', $invoice], ['order.status_order_id', '=', $status]])
-            ->groupBy('produk.id')
+            ->groupBy('produk.id', 'order_detail.produk_id')
             ->get();
 
         $data['judul'] = 'Pesanan ' . $invoice;
@@ -283,6 +279,17 @@ class Transaksi extends Controller
     {
         $alasan = $_POST['alasan'];
         $invoice = $_POST['invoice'];
+
+        //tambahkan stok
+        $produk = $this->db
+            ->select('order_detail.produk_id', 'order_detail.kuantitas')
+            ->from('`order`')
+            ->join('order_detail', 'order.id', '=', 'order_detail.order_id')
+            ->where('order.invoice', '=', $invoice)
+            ->get();
+        var_dump($produk);
+        die;
+
         if ($this->db->update('`order`', [
             'status_order_id' => 6,
             'alasan_pembatalan' => $alasan,

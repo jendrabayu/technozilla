@@ -9,8 +9,6 @@ class Checkout extends Controller
 {
 
     protected $db;
-    protected $keranjangModel;
-
 
     public function __construct()
     {
@@ -29,7 +27,12 @@ class Checkout extends Controller
             )
             ->from('keranjang')
             ->join('produk', 'keranjang.produk_id', '=', 'produk.id')
+            ->where('customer_id', '=', getUserId('customer'))
             ->get();
+        if (!$data['order']) {
+            Session::setFlash('Keranjang Anda Kosong!', 'warning');
+            Redirect::to('keranjang');
+        }
         $data['alamat'] = $this->db
             ->select('*')
             ->from('alamat')

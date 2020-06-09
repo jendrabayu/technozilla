@@ -1,10 +1,9 @@
 <?php
 
 use App\Core\Controller;
-use App\Helpers\Auth as Authentication;
 use App\Core\DB;
 use App\Core\Redirect;
-use App\Helpers\Flash;
+use App\Core\Session;
 
 class Rekening extends Controller
 {
@@ -13,7 +12,7 @@ class Rekening extends Controller
 
     public function __construct()
     {
-        Authentication::auth('admin');
+        App\Core\Authentication::auth('admin');
         $this->db = new DB;
     }
 
@@ -71,7 +70,7 @@ class Rekening extends Controller
             $this->view('admin/rekening/edit', $data);
             $this->view('admin/templates/footer');
         } else {
-            Redirect::to('admin/rekening');
+            Redirect::error('404', 'admin');
         }
     }
 
@@ -96,7 +95,7 @@ class Rekening extends Controller
         if ($this->db
             ->update(
                 'rekening_bank',
-                ['deleted_at' => date("Y-m-d h:i:sa")],
+                ['deleted_at' => currentTimeStamp()],
                 'id',
                 '=',
                 $_POST['id']

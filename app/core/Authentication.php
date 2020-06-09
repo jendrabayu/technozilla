@@ -18,10 +18,12 @@ class Authentication
     {
         if ($user == 'admin') {
             if (!Session::get('is_admin')) {
+                Session::setFlash('Anda Harus Login', 'warning');
                 Redirect::to('admin/auth/login');
             }
         } else if ($user == 'customer') {
             if (!Session::get('is_customer')) {
+                Session::setFlash('Anda Harus Login', 'warning');
                 Redirect::to('auth/login');
             }
         }

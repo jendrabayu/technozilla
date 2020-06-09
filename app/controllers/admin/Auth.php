@@ -67,4 +67,42 @@ class Auth extends Controller
     {
         $this->auth->logout('admin');
     }
+
+    public function resetpassword()
+    {
+        $data['judul'] = 'Ubah Password';
+        $this->view('admin/auth/reset_password', $data);
+    }
+
+    public function updatepassword()
+    {
+
+        $currentPassword = Session::get('is_admin');
+        $currentPassword = $currentPassword['password'];
+
+        if ($_POST['new_password'] != $_POST['re_newpassword']) {
+            Session::setFlash('Password Baru Anda Tidak Sama', 'warning');
+            Redirect::back();
+        } else if ($currentPassword != md5($_POST['old_password'])) {
+            Session::setFlash('Password Lama Anda Salah', 'warning');
+            Redirect::back();
+        } else {
+            if ($this->db->update(
+                'admin',
+                [
+                    'password' => md5($_POST['new_password']),
+                    'updated_at' => currentTimeStamp()
+                ],
+                'id',
+                '=',
+                getUserId('admin')
+            )) {
+                Session::setFlash('Password Berhasil Diubah Silahkan Login Ulang', 'primary');
+                Session::remove('is_admin');
+                Redirect::to('admin/auth');
+            } else {
+                Session::setFlash('Password Gagal Diubah', 'danger');
+            }
+        }
+    }
 }

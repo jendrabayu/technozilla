@@ -2,6 +2,7 @@
 
 session_start();
 date_default_timezone_set('Asia/Jakarta');
+ini_set('display_errors', E_ALL);
 
 require_once 'core/App.php';
 require_once 'core/Controller.php';
@@ -12,9 +13,5 @@ require_once 'core/Authentication.php';
 
 require_once 'helpers/Auth.php';
 require_once 'helpers/Image.php';
-
-require_once 'models/Keranjang.php';
-require_once 'models/Order.php';
-require_once 'models/Produk.php';
 
 require_once 'functions.php';

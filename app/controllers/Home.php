@@ -3,27 +3,41 @@
 use App\Core\Controller;
 use App\Core\DB;
 use App\Core\Redirect;
-use App\Models\Produk as  ProdukModel;
 
 class Home extends Controller
 {
-
     protected $db;
-    protected $produkModel;
 
     public function __construct()
     {
         $this->db = new DB;
-        $this->produkModel = new ProdukModel;
     }
-
 
     public function index($slug = null)
     {
-
         if ($slug) {
-
-            $data['produk'] = $this->produkModel->getProdukBySlug($slug);
+            $data['produk'] =
+                $this->db->select(
+                    'produk.id as p_id',
+                    'produk.nama as p_nama',
+                    'produk.slug as p_slug',
+                    'produk.harga as p_harga',
+                    'produk.stok as p_stok',
+                    'produk.deskripsi as p_desk',
+                    'produk.gambar as p_gambar',
+                    'kategori.id as k_id',
+                    'kategori.nama as k_nama',
+                    'kategori.slug as k_slug',
+                    'merk.id as m_id',
+                    'merk.nama as m_nama',
+                    'merk.slug as m_slug'
+                )
+                ->from('produk')
+                ->join('kategori', 'produk.kategori_id', '=', 'kategori.id')
+                ->join('merk', 'produk.merk_id', '=', 'merk.id')
+                ->whereIsNull('produk.deleted_at')
+                ->andWhere('produk.slug', '=', $slug)
+                ->first();
 
             if ($data['produk']) {
                 $data['foto'] = $this->db
@@ -36,6 +50,7 @@ class Home extends Controller
                 $this->view('detail_produk', $data);
                 $this->view('templates/footer');
             } else {
+                Redirect::error('404', 'customer');
             }
         } else {
             $data['judul'] = 'Home';

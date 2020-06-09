@@ -24,7 +24,7 @@
                                             <th>Harga</th>
                                             <th>Stok</th>
                                             <th>Gambar</th>
-                                            <th style="min-width: 50px;">Aksi</th>
+                                            <th style="min-width: 40px;">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -34,10 +34,10 @@
                                                 <td><?= $produk['p_nama'] ?></td>
                                                 <td><?= $produk['k_nama'] ?></td>
                                                 <td><?= $produk['m_nama'] ?></td>
-                                                <td><?= number_format($produk['p_harga'], 0, ".", ",") ?></td>
+                                                <td><?= rupiahFormat($produk['p_harga']) ?></td>
                                                 <td><?= $produk['p_stok'] ?></td>
                                                 <td>
-                                                    <img style="max-width: 70px;" src=" <?= url('images/' . $produk['p_gambar']) ?>" alt="">
+                                                    <img style="max-width: 70px;" src=" <?= IMG_URL . $produk['p_gambar'] ?>" alt="">
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-icon btn-sm btn-warning mr-1" href="<?= url('admin/produk/edit/' . $produk['p_slug']) ?>">

@@ -16,14 +16,13 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="single_product_image">
-
-                    <img src="<?= url('images/' . $data['produk']['p_gambar']) ?>" alt="Image" class="img-fluid">
+                    <img src="<?= IMG_URL . $data['produk']['p_gambar'] ?>" alt="Image" class="img-fluid">
                 </div>
                 <div class="single_product_thumbnails">
 
                     <ul class="d-flex flex-wrap mt-5 list-unstyled">
                         <li class="mr-3 mb-3 border p-1 active-image">
-                            <img style="width: 100px" src="<?= url('images/' . $data['produk']['p_gambar']) ?>" alt="" data-image="<?= url('images/' . $data['produk']['p_gambar']) ?>">
+                            <img style="width: 100px" src="<?= IMG_URL . $data['produk']['p_gambar'] ?>" alt="" data-image="<?= IMG_URL . $data['produk']['p_gambar'] ?>">
                         </li>
 
                         <?php foreach ($data['foto'] as $foto) : ?>

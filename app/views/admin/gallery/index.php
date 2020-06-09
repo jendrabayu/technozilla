@@ -32,7 +32,7 @@
                                                   <td class="text-center"><?= 1 + $key++; ?></td>
                                                   <td><?= $foto['nama']; ?></td>
 
-                                                  <td><img style="max-width: 150px;" src="<?= url('images/' . $foto['gambar']) ?>" alt=""></td>
+                                                  <td><img style="max-width: 150px;" src="<?= IMG_URL . $foto['gambar'] ?>" alt=""></td>
                                                   <td>
                                                       <a class="btn btn-icon btn-sm btn-warning mr-1" href="<?= url('admin/gallery/edit/' . $foto['id']) ?>">
                                                           <i class="fa fa-edit" aria-hidden="true"></i>

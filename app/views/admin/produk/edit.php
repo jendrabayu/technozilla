@@ -62,7 +62,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label>Gambar Thumbnail</label>
-                                    <img class="d-block m-2" style="max-width: 200px;" src="<?= url('images/' . $data['produk']['p_gambar']) ?>" alt="">
+                                    <img class="d-block m-2" style="max-width: 200px;" src="<?= IMG_URL . $data['produk']['p_gambar'] ?>" alt="">
                                     <input type="file" class="form-control" name="p_gambar">
                                 </div>
                             </div>

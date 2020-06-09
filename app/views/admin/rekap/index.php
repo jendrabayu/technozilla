@@ -202,7 +202,7 @@
                                                             <?= $order['terkirim']; ?>
                                                         </td>
                                                         <td>
-                                                            <a href="<?= url('admin/rekap/detail/' . $order['inv']) ?>" class="btn btn-info">Detail</a>>
+                                                            <a href="<?= url('admin/rekap/detail/' . $order['inv']) ?>" class="btn btn-info">Detail</a>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>

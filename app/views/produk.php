@@ -52,7 +52,7 @@ $data['merk'] =
                         <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                             <div class="block-4 text-center border">
                                 <figure class="block-4-image">
-                                    <a href="<?= url($produk['p_slug']) ?>"><img src="<?= url('images/' . $produk['p_gambar']) ?>" alt="Image placeholder" class="img-fluid"></a>
+                                    <a href="<?= url($produk['p_slug']) ?>"><img src="<?= IMG_URL . $produk['p_gambar'] ?>" alt="Image placeholder" class="img-fluid"></a>
                                 </figure>
                                 <div class="p-2">
                                     <a href="<?= url($produk['p_slug']) ?>">

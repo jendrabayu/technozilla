@@ -2,7 +2,12 @@
      <div class="container">
          <div class="row">
              <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+                 <div class="my-3 text-muted text-center">
+                     <a class="btn btn-secondary " href="<?= url('auth/register') ?>">Buat Akun Baru <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                 </div>
+
                  <div class="card card-primary">
+
                      <div class="card-header">
                          <h4 class="m-0 pt-1 text-black text-center">Login</h4>
                      </div>
@@ -22,7 +27,7 @@
 
                              <div class="form-group">
                                  <div class="custom-control custom-checkbox">
-                                     <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
+                                     <input type="checkbox" name="remember" class="custom-control-input">
                                      <label class="custom-control-label" for="remember-me">Ingat Saya</label>
                                  </div>
                              </div>

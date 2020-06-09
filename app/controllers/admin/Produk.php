@@ -9,7 +9,6 @@ use App\Core\Redirect;
 class Produk extends Controller
 {
     protected $db;
-    protected $produkModel;
 
     public function __construct()
     {

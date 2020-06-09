@@ -18,7 +18,6 @@ class Alamat extends Controller
 
     public function index()
     {
-
         $data['judul'] = 'Alamat';
         $data['alamat'] = $this->db
             ->select('*')

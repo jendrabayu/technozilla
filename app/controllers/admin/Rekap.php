@@ -1,22 +1,17 @@
 <?php
 
 use App\Core\Controller;
-use App\Helpers\Auth;
 use App\Core\DB;
-use App\Models\Order;
 
 class Rekap extends Controller
 {
 
-
     protected $db;
-    protected $orderModel;
 
     public function __construct()
     {
+        App\Core\Authentication::auth('admin');
         $this->db = new DB;
-        $this->orderModel = new Order;
-        Auth::auth('admin');
     }
 
     public function index()
@@ -74,9 +69,7 @@ class Rekap extends Controller
             ->where('status_order_id', '=', 5)
             ->get();;
 
-
         $data['judul'] = 'Rekap Data Penjualan';
-
         $this->view('admin/templates/header', $data);
         $this->view('admin/rekap/index', $data);
         $this->view('admin/templates/footer');
@@ -87,7 +80,6 @@ class Rekap extends Controller
     public function detail($invoice)
     {
         $data['judul'] = 'Order ' . $invoice;
-
 
         $data['order'] = $this->db
             ->select(
@@ -135,10 +127,8 @@ class Rekap extends Controller
                 ['order.invoice', '=', $invoice],
                 ['order.status_order_id', '=', 5]
             ])
-            ->groupBy('produk.id')
+            ->groupBy('produk.id, order_detail.produk_id')
             ->get();
-
-
         $this->view('admin/templates/header', $data);
         $this->view('admin/rekap/detail', $data);
         $this->view('admin/templates/footer');

@@ -15,7 +15,6 @@ class Produk extends Controller
 
     public function index()
     {
-
         $data['judul'] = 'Semua Produk';
         $data['produk'] =
             $this->db->select(
@@ -75,7 +74,7 @@ class Produk extends Controller
             $this->view('produk', $data);
             $this->view('templates/footer');
         } else {
-            Redirect::to('produk');
+            Redirect::error(404, 'customer');
         }
     }
 
@@ -110,7 +109,7 @@ class Produk extends Controller
             $this->view('produk', $data);
             $this->view('templates/footer');
         } else {
-            Redirect::to('produk');
+            Redirect::error(404, 'customer');
         }
     }
 
@@ -151,7 +150,12 @@ class Produk extends Controller
                 ->andLike('merk.nama', $q)
                 ->get();
 
-            $data['judul'] = sprintf("Pencarian untuk <i>%s</i> <small> %s hasil</small>", $q, count($data['produk']));
+            if ($data['produk']) {
+                $data['judul'] = sprintf("Pencarian untuk <i>%s</i> <small> %s hasil</small>", $q, count($data['produk']));
+            } else {
+                $data['judul'] = 'Produk Tidak Tersedia';
+            }
+
             $this->view('templates/header', $data);
             $this->view('produk', $data);
             $this->view('templates/footer');

@@ -5,19 +5,22 @@
             <a href="<?= url('') ?>">Home</a>
             <span class="mx-2 mb-0">/</span>
 
-            <strong class="text-black">Keranjang</strong></div>
+            <strong class="text-black">Keranjang</strong>
+          </div>
+
         </div>
       </div>
     </div>
 
     <div class="site-section">
       <div class="container">
+        <?= \App\Core\Session::getFlash() ?>
         <div class="row mb-5">
 
           <form class="col-md-12" method="post" action="<?= url('keranjang/update') ?>">
             <div class="site-blocks-table">
 
-              <?= \App\Core\Session::getFlash() ?>
+
 
               <table class="table table-bordered">
                 <thead>
@@ -35,7 +38,7 @@
                   <?php foreach ($data['produk'] as $produk) : ?>
                     <tr>
                       <td class="product-thumbnail">
-                        <img src="<?= url('images/' . $produk['gambar']) ?>" alt="Image" class="img-fluid">
+                        <img src="<?= IMG_URL . $produk['gambar'] ?>" alt="Image" class="img-fluid">
                       </td>
                       <td class="product-name" style="max-width: 300px;">
                         <h2 class="h5 text-black"><?= $produk['nama'] ?></h2>

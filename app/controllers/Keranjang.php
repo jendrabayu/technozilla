@@ -55,7 +55,7 @@ class Keranjang extends Controller
             ->from('keranjang')
             ->where([
                 ['produk_id', '=', $_POST['produk_id']],
-                ['customer_id', '=', $_SESSION['is_customer']['id']]
+                ['customer_id', '=', getUserId('customer')]
             ])
             ->first();
 

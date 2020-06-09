@@ -2,12 +2,15 @@
 <html lang="en">
 
 <head>
-    <title>Technozilla &mdash; <?= $data['judul']; ?></title>
+    <title>Technozilla &mdash;
+
+        <?= $data['judul']; ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
     <link rel="stylesheet" href="<?= asset('frontend/fonts/icomoon/style.css') ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.min.css">
 
     <link rel="stylesheet" href="<?= asset('frontend/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?= asset('frontend/css/magnific-popup.css') ?>">
@@ -19,8 +22,6 @@
     <link rel="stylesheet" href="<?= asset('frontend/css/aos.css') ?>">
 
     <link rel="stylesheet" href="<?= asset('frontend/css/style.css') ?>">
-
-
 
     <style>
         .active-image {
@@ -138,6 +139,7 @@
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item" href="<?= url('transaksi') ?>">Transaksi</a>
                                                 <a class="dropdown-item" href="<?= url('alamat') ?>">Pengaturan Alamat</a>
+                                                <a class="dropdown-item" href="<?= url('auth/resetpassword') ?>">Ubah Password</a>
                                                 <a class="dropdown-item" href="<?= url('auth/do_logout') ?>">Keluar</a>
                                             </div>
                                         </li>
@@ -158,7 +160,6 @@
                                 </ul>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -167,7 +168,28 @@
                     <ul class="site-menu js-clone-nav d-none d-md-block">
                         <li class=""><a href="<?= url('') ?>">Home</a></li>
                         <li><a href="<?= url('produk') ?>">Produk</a></li>
-                        <li><a href="<?= url('transaksi') ?>">Transaksi</a></li>
+                        <li><a href="<?= url('transaksi') ?>">Transaksi
+
+                                <?php
+                                if (getUserId('customer')) {
+
+                                    $db = new App\Core\DB;
+                                    $belumBayar = $db
+                                        ->select('COUNT(invoice) as jumlah')
+                                        ->from('`order`')
+                                        ->where([
+                                            ['customer_id', '=', getUserId('customer')],
+                                            ['status_order_id', '=', 1]
+                                        ])
+                                        ->first();
+
+                                    if ($belumBayar) {
+                                        echo '<span class="badge badge-pill badge-primary">' . $belumBayar['jumlah'] . '</span>';
+                                    }
+                                }
+                                ?>
+                            </a></li>
+
                     </ul>
                 </div>
             </nav>

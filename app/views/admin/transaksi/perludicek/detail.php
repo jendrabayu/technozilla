@@ -76,7 +76,7 @@
                                                         </div>
                                                         <div class="col-md-8">
                                                             <label for=""><i class="text-danger">Klik Untuk Memperbesar</i></label>
-                                                            <img class="img_bukti_transfer" style="max-width: 120px;" src="<?= url('images/' . $data['order']['o_bukti_transfer']) ?>" alt="">
+                                                            <img class="img_bukti_transfer" style="max-width: 120px;" src="<?= IMG_URL . $data['order']['o_bukti_transfer'] ?>" alt="">
                                                         </div>
                                                     </div>
                                                 </div>

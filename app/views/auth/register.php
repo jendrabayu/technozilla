@@ -9,20 +9,16 @@
 
                      <div class="card-body">
                          <?php App\Core\Session::getFlash(); ?>
-                         <form method="POST" action="<?= url('auth/store') ?>" class="needs-validation" novalidate="">
+                         <form method="POST" action="<?= url('auth/store') ?>">
                              <div class="form-group">
                                  <label for="nama">Nama</label>
-                                 <input id="nama" type="text" class="form-control" name="nama" tabindex="1" required autofocus>
-                                 <div class="invalid-feedback">
-                                     Please fill in your email
-                                 </div>
+                                 <input id="nama" type="text" class="form-control" name="nama" required>
+
                              </div>
                              <div class="form-group">
                                  <label for="email">Email</label>
-                                 <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
-                                 <div class="invalid-feedback">
-                                     Please fill in your email
-                                 </div>
+                                 <input id="email" type="email" class="form-control" name="email" required>
+
                              </div>
 
                              <div class="form-group">
@@ -30,9 +26,7 @@
                                  <label for="password" class="control-label">Password</label>
 
                                  <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
-                                 <div class="invalid-feedback">
-                                     please fill in your password
-                                 </div>
+
                              </div>
 
                              <div class="form-group">
@@ -40,9 +34,7 @@
                                  <label for="password" class="control-label">Konfirmasi Password</label>
 
                                  <input id="password" type="password" class="form-control" name="repassword" tabindex="2" required>
-                                 <div class="invalid-feedback">
-                                     please fill in your password confirmation
-                                 </div>
+
                              </div>
                              <div class="form-group">
                                  <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">

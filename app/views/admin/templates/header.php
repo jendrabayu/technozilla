@@ -147,8 +147,8 @@
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="features-settings.html" class="dropdown-item has-icon">
-                                <i class="fas fa-cog"></i> Pengaturan
+                            <a href="<?= url('admin/auth/resetpassword') ?>" class="dropdown-item has-icon">
+                                <i class="fas fa-cog"></i> Ubah Password
                             </a>
                             <div class="dropdown-divider"></div>
                             <a href="<?= url('admin/auth/do_logout') ?>" class="dropdown-item has-icon text-danger">
