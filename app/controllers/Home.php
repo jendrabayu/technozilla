@@ -62,6 +62,8 @@ class Home extends Controller
                 ->orderBy('produk.created_at')
                 ->limit(0, 6)
                 ->get();
+            $data['merk'] = $this->db->get('merk');
+
             $this->view('templates/header', $data);
             $this->view('home', $data);
             $this->view('templates/footer');

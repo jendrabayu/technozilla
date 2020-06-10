@@ -41,7 +41,7 @@
 
                       <td class="text-center">
                         <p class="mb-1">Stok : <?= $produk['stok']; ?></p>
-                        <div class="input-group m-auto" style="max-width: 120px;">
+                        <div class="input-group m-auto" style="max-width: 140px;">
 
                           <div class="input-group-prepend">
                             <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
@@ -50,7 +50,7 @@
                           <input type="hidden" name="id[]" value="<?= $produk['id'] ?>">
                           <input type="hidden" name="produk_id[]" value="<?= $produk['produk_id'] ?>">
 
-                          <input type="number" name="qty[]" class="form-control text-center" value="<?= $produk['qty'] ?>" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                          <input type="number" min="1" max="<?= $produk['stok'] ?>" name="qty[]" class="form-control text-center" value="<?= $produk['qty'] ?>" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
 
                           <div class="input-group-append">
                             <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>

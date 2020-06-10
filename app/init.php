@@ -7,11 +7,7 @@ ini_set('display_errors', E_ALL);
 
 require_once 'config.php';
 
-require_once 'helpers/Image.php';
 require_once 'helpers/helpers.php';
-require_once 'helpers/string.php';
-require_once 'helpers/url.php';
-
 
 require_once 'core/App.php';
 require_once 'core/Controller.php';

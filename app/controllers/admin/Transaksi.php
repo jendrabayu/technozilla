@@ -26,6 +26,11 @@ class Transaksi extends Controller
     }
 
 
+    public function index()
+    {
+        Redirect::error(404, 'admin');
+    }
+
     public function getOrderByStatus($status)
     {
         return  $this->db
@@ -177,18 +182,27 @@ class Transaksi extends Controller
         $alasan = $_POST['alasan'];
 
         //tambahkan stok
-        $produk = $this->db
-            ->select('order_detail.produk_id', 'order_detail.kuantitas')
-            ->from('`order`')
-            ->join('order_detail', 'order.id', '=', 'order_detail.order_id')
-            ->where('order.invoice', '=', $invoice)
-            ->get();
+
 
         if ($this->db->update('`order`', [
             'status_order_id' => 6,
             'alasan_pembatalan' => $alasan,
             'updated_at' =>  currentTimeStamp()
         ], 'invoice', '=', $invoice)) {
+
+            $produkInOrder = $this->db
+                ->select('order_detail.produk_id as id', 'order_detail.kuantitas as qty')
+                ->from('`order`')
+                ->join('order_detail', 'order.id', '=', 'order_detail.order_id')
+                ->where('order.invoice', '=', $invoice)
+                ->get();
+
+            foreach ($produkInOrder as $key => $produk) {
+                $stok = $this->db->select('stok')->from('produk')->where('id', '=', $produk['id'])->first();
+
+                $this->db->update('produk', ['stok' => $produk['qty'] + $stok['stok']], 'id', '=', $produk['id']);
+            }
+
             Session::setFlash("Pesanan Berhasil Dibatalkan, Cek di halaman pembatalan", "primary");
             Redirect::back();
         } else {

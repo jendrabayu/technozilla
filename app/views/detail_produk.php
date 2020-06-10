@@ -30,7 +30,7 @@
 
                         <?php foreach ($data['foto'] as $foto) : ?>
                             <li class="mr-3 mb-3 border p-1">
-                                <img style="width: 100px" src="<?= IMG_URL . $foto['nama'] ?>" alt="" data-image="<?= MG_URL . $foto['nama'] ?>">
+                                <img style="width: 100px" src="<?= IMG_URL . $foto['nama'] ?>" alt="" data-image="<?= IMG_URL . $foto['nama'] ?>">
                             </li>
                         <?php endforeach ?>
 
@@ -71,12 +71,12 @@
                         <div class="col-md-9">
                             <p class="mb-1">Stok : <?= $data['produk']['p_stok'] ?></p>
                             <div class="mb-5">
-                                <div class="input-group mb-3" style="max-width: 120px;">
+                                <div class="input-group mb-3" style="max-width: 140px;">
                                     <input type="hidden" name="produk_id" value="<?= $data['produk']['p_id']; ?>">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
                                     </div>
-                                    <input type="number" name="kuantitas" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                    <input type="number" name="kuantitas" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" min="1" max="<?= $data['produk']['p_stok'] ?>">
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
                                     </div>

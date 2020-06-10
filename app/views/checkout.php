@@ -74,7 +74,7 @@
                                        <label class="text-black">Pilihan Pembayaran</label>
                                        <?php foreach ($data['bank'] as $bank) : ?>
                                            <div class="form-check mb-3">
-                                               <input class="form-check-input" type="radio" name="bank_id" value="<?= $bank['id'] ?>" checked>
+                                               <input class="form-check-input" type="radio" name="bank_id" value="<?= $bank['id'] ?>" required>
                                                <label class="form-check-label">
                                                    <h5 class="text-dark"> <?= $bank['nama']; ?>
                                                        &nbsp; <span style="font-size: 16px;">a/n <?= $bank['atas_nama']; ?></span>

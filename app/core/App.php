@@ -17,6 +17,7 @@ class App
             $url = explode('/', filter_var(rtrim($_GET['page'], '/'), FILTER_SANITIZE_URL));
         }
 
+
         if (isset($url[0])) {
             $url[0] == 'admin' ? $admin = true : $admin = false;
         }

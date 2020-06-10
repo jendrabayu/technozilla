@@ -39,6 +39,7 @@ class Transaksi extends Controller
                 'order.invoice as o_invoice',
                 'order.subtotal as o_total',
                 'rekening_bank.nama as r_bank',
+                'rekening_bank.atas_nama as r_atas_bank',
                 'rekening_bank.nomor as r_norek'
             )
             ->from('`order`')
