@@ -5,7 +5,7 @@
         </div>
         <div class="section-body">
             <div class="row">
-                <div class="col-12">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
                             <h4>Data Produk</h4>

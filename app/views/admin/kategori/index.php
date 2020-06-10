@@ -6,7 +6,7 @@
 
         <div class="section-body">
             <div class="row">
-                <div class="col-8">
+                <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
                             <h4>Data Kategori</h4>

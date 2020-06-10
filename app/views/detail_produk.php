@@ -30,7 +30,7 @@
 
                         <?php foreach ($data['foto'] as $foto) : ?>
                             <li class="mr-3 mb-3 border p-1">
-                                <img style="width: 100px" src="<?= url('images/' . $foto['nama']) ?>" alt="" data-image="<?= url('images/' . $foto['nama']) ?>">
+                                <img style="width: 100px" src="<?= IMG_URL . $foto['nama'] ?>" alt="" data-image="<?= MG_URL . $foto['nama'] ?>">
                             </li>
                         <?php endforeach ?>
 
@@ -42,7 +42,7 @@
                 <h2 class="text-black font-weight-bold"><?= $data['produk']['p_nama']; ?></h2>
                 <div class="row mt-4 mb-1 border-bottom">
                     <div class="col-md-3">
-                        <strong class="h5 text-dark">Harga</strong>
+                        <strong class="h5 43">Harga</strong>
                     </div>
 
                     <div class="col-md-9">

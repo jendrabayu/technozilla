@@ -115,21 +115,21 @@ class Rekap extends Controller
 
         $data['produk'] =  $this->db
             ->select(
-                'produk.nama as p_nama',
+                'order.id as o_id',
+                'order.invoice as o_invoice',
+                'order.subtotal as o_total',
                 'produk.harga as p_harga',
+                'produk.nama as p_nama',
+                'produk.gambar as p_gambar',
                 'order_detail.kuantitas as od_qty',
                 'order_detail.harga_satuan as od_harga'
-
             )
             ->from('`order`')
             ->join('order_detail', 'order.id', '=', 'order_detail.order_id')
             ->join('produk', 'order_detail.produk_id', '=', 'produk.id')
-            ->where([
-                ['order.invoice', '=', $invoice],
-                ['order.status_order_id', '=', 5]
-            ])
-            ->groupBy('produk.id, order_detail.produk_id')
+            ->where([['order.invoice', '=', $invoice], ['order.status_order_id', '=', 5]])
             ->get();
+
         $this->view('admin/templates/header', $data);
         $this->view('admin/rekap/detail', $data);
         $this->view('admin/templates/footer');

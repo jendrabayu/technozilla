@@ -6,7 +6,7 @@
 
         <div class="section-body">
             <div class="row justify-content-center">
-                <div class="col-lg-8">
+                <div class="col-lg-10">
                     <div class="card">
                         <div class="card-body">
                             <table class="table table-bordered">
@@ -104,11 +104,31 @@
                                             Produk
                                         </td>
                                         <td>
-                                            <?php foreach ($data['produk'] as $key => $p) : ?>
-                                                <?= 1 + $key++; ?>. <?= $p['p_nama'] ?> <span class="font-weight-bold text-black">(<?= $p['od_qty']; ?> X <?= rupiahFormat($p['od_harga']); ?> = <?= rupiahFormat($p['od_qty'] * $p['od_harga']); ?>)</span>
-                                                <br>
-                                            <?php endforeach; ?>
-                                            <br>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <td>No.</td>
+                                                        <td>Produk</td>
+                                                        <td>Harga</td>
+                                                        <td>Qty</td>
+                                                        <td>Total</td>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <?php foreach ($data['produk'] as $key => $p) : ?>
+                                                        <tr>
+                                                            <td><?= 1 + $key++; ?></td>
+                                                            <td><?= $p['p_nama'] ?></td>
+                                                            <td><?= rupiahFormat($p['od_harga']); ?></td>
+                                                            <td><?= $p['od_qty']; ?></td>
+                                                            <td><?= rupiahFormat($p['od_qty'] * $p['od_harga']); ?></td>
+                                                        </tr>
+
+                                                    <?php endforeach; ?>
+
+                                                </tbody>
+                                            </table>
                                         </td>
                                     </tr>
 

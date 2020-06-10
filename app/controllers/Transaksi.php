@@ -105,7 +105,7 @@ class Transaksi extends Controller
                 'alamat.alamat as a_alamat',
                 'rekening_bank.nama as r_nama',
                 'rekening_bank.atas_nama as r_atas_nama',
-                'rekening_bank.nomor as r_nomor',
+                'rekening_bank.nomor as r_nomor'
 
             )
             ->from('`order`')
