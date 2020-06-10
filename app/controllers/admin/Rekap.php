@@ -2,6 +2,7 @@
 
 use App\Core\Controller;
 use App\Core\DB;
+use App\Core\Redirect;
 
 class Rekap extends Controller
 {
@@ -112,6 +113,10 @@ class Rekap extends Controller
                 ['order.status_order_id', '=', 5]
             ])
             ->first();
+
+        if (!$data['order']) {
+            Redirect::error(404, 'admin');
+        }
 
         $data['produk'] =  $this->db
             ->select(

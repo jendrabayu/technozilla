@@ -5,7 +5,6 @@ namespace App\Helpers;
 class Image
 {
 
-
     protected $errors;
 
     public function upload($name)
@@ -40,4 +39,3 @@ class Image
         return $this->errors;
     }
 }
-//  /home/182410102043/uas/tes/public/images

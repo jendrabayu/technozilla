@@ -137,11 +137,8 @@ class Transaksi extends Controller
     }
 
 
-    public function getOrderByCustId($id = null, $status = null)
+    public function getOrderByCustId($id, $status)
     {
-        if ($id == null && $status == null) {
-            Redirect::error(404, 'customer');
-        }
         $order_info = $this->db
             ->select(
                 'order.id as o_id',

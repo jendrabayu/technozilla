@@ -24,6 +24,7 @@ class Rekening extends Controller
             ->from('rekening_bank')
             ->whereIsNull('deleted_at')
             ->get();
+
         $this->view('admin/templates/header', $data);
         $this->view('admin/rekening/index', $data);
         $this->view('admin/templates/footer');
@@ -32,6 +33,7 @@ class Rekening extends Controller
     public function create()
     {
         $data['judul'] = 'Tambah Rekening Bank';
+
         $this->view('admin/templates/header', $data);
         $this->view('admin/rekening/tambah');
         $this->view('admin/templates/footer');

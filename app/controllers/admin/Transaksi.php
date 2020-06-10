@@ -25,10 +25,10 @@ class Transaksi extends Controller
         $this->db = new DB;
     }
 
-    public function pesananbaru()
+
+    public function getOrderByStatus($status)
     {
-        $data['judul'] = 'Pesanan Baru - Belum Dibayar';
-        $data['order'] = $this->db
+        return  $this->db
             ->select(
                 'DATE(order.created_at) as o_date',
                 'order.invoice as o_invoice',
@@ -40,9 +40,14 @@ class Transaksi extends Controller
             ->from('`order`')
             ->join('customer', 'order.customer_id', '=', 'customer.id')
             ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
-            ->where('order.status_order_id', '=', 1)
+            ->where('order.status_order_id', '=', $status)
             ->get();
+    }
 
+    public function pesananbaru()
+    {
+        $data['judul'] = 'Pesanan Baru - Belum Dibayar';
+        $data['order'] = $this->getOrderByStatus(1);
         $data['status_id'] = 1;
 
         $this->view('admin/templates/header', $data);
@@ -53,22 +58,7 @@ class Transaksi extends Controller
     public function perludicek()
     {
         $data['judul'] = 'Pembayaran Perlu Dicek';
-        $data['order'] = $this->db
-            ->select(
-                'DATE(order.created_at) as o_date',
-                'order.invoice as o_invoice',
-                'order.subtotal as o_total',
-                'order.bukti_transfer as o_bukti_transfer',
-                'order.status_order_id as o_status_id',
-                'customer.nama as c_nama',
-                'status_order.nama as s_nama'
-            )
-            ->from('`order`')
-            ->join('customer', 'order.customer_id', '=', 'customer.id')
-            ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
-            ->where('order.status_order_id', '=', 2)
-            ->get();
-
+        $data['order'] = $this->getOrderByStatus(2);
         $data['status_id'] = 2;
 
         $this->view('admin/templates/header', $data);
@@ -79,21 +69,7 @@ class Transaksi extends Controller
     public function perludikirim()
     {
         $data['judul'] = 'Pesanan Perlu Dikirim';
-        $data['order'] = $this->db
-            ->select(
-                'DATE(order.created_at) as o_date',
-                'order.invoice as o_invoice',
-                'order.subtotal as o_total',
-                'order.status_order_id as o_status_id',
-                'customer.nama as c_nama',
-                'status_order.nama as s_nama'
-            )
-            ->from('`order`')
-            ->join('customer', 'order.customer_id', '=', 'customer.id')
-            ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
-            ->where('order.status_order_id', '=', 3)
-            ->get();
-
+        $data['order'] = $this->getOrderByStatus(3);
         $data['status_id'] = 3;
 
         $this->view('admin/templates/header', $data);
@@ -103,21 +79,9 @@ class Transaksi extends Controller
     public function barangdikirim()
     {
         $data['judul'] = 'Pesanan Sedang Dikirim';
-        $data['order'] = $this->db
-            ->select(
-                'DATE(order.created_at) as o_date',
-                'order.invoice as o_invoice',
-                'order.subtotal as o_total',
-                'order.status_order_id as o_status_id',
-                'customer.nama as c_nama',
-                'status_order.nama as s_nama'
-            )
-            ->from('`order`')
-            ->join('customer', 'order.customer_id', '=', 'customer.id')
-            ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
-            ->where('order.status_order_id', '=', 4)
-            ->get();
+        $data['order'] = $this->getOrderByStatus(4);
         $data['status_id'] = 4;
+
         $this->view('admin/templates/header', $data);
         $this->view('admin/transaksi/index', $data);
         $this->view('admin/templates/footer');
@@ -126,22 +90,9 @@ class Transaksi extends Controller
     public function selesai()
     {
         $data['judul'] = 'Pesanan Selesai - Pesanan Telah Tiba';
-        $data['order'] = $this->db
-            ->select(
-                'DATE(order.created_at) as o_date',
-                'order.invoice as o_invoice',
-                'order.subtotal as o_total',
-                'order.status_order_id as o_status_id',
-                'customer.nama as c_nama',
-                'status_order.nama as s_nama'
-            )
-            ->from('`order`')
-            ->join('customer', 'order.customer_id', '=', 'customer.id')
-            ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
-            ->where('order.status_order_id', '=', 5)
-            ->get();
-
+        $data['order'] = $this->getOrderByStatus(5);
         $data['status_id'] = 5;
+
         $this->view('admin/templates/header', $data);
         $this->view('admin/transaksi/index', $data);
         $this->view('admin/templates/footer');
@@ -150,22 +101,9 @@ class Transaksi extends Controller
     public function pembatalan()
     {
         $data['judul'] = 'Pesanan Dibatalkan';
-        $data['order'] = $this->db
-            ->select(
-                'DATE(order.created_at) as o_date',
-                'order.invoice as o_invoice',
-                'order.subtotal as o_total',
-                'order.status_order_id as o_status_id',
-                'customer.nama as c_nama',
-                'status_order.nama as s_nama'
-            )
-            ->from('`order`')
-            ->join('customer', 'order.customer_id', '=', 'customer.id')
-            ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
-            ->where('order.status_order_id', '=', 6)
-            ->get();
-
+        $data['order'] = $this->getOrderByStatus(6);
         $data['status_id'] = 6;
+
         $this->view('admin/templates/header', $data);
         $this->view('admin/transaksi/index', $data);
         $this->view('admin/templates/footer');
@@ -206,6 +144,10 @@ class Transaksi extends Controller
             ])
             ->first();
 
+        if (!$data['order']) {
+            Redirect::error(404, 'admin');
+        }
+
         $data['produk'] =  $this->db
             ->select(
                 'order.id as o_id',
@@ -222,7 +164,7 @@ class Transaksi extends Controller
             ->join('produk', 'order_detail.produk_id', '=', 'produk.id')
             ->where('order.invoice', '=', $invoice)
             ->get();
-      
+
         $this->view('admin/templates/header', $data);
         $this->view('admin/transaksi/detail', $data);
         $this->view('admin/templates/footer');
