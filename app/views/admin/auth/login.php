@@ -44,19 +44,18 @@
                                         Login
                                     </button>
                                 </div>
+
+                                <?php if (ADMIN_REGISTER == true) : ?>
+                                    <div class=" text-muted text-center">
+                                        Belum Punya Akun? <a href="<?= url('admin/auth/register') ?>">Buat Akun</a>
+                                    </div>
+                                <?php endif; ?>
                             </form>
-
-
                         </div>
                     </div>
-                    <div class="mt-5 text-muted text-center">
-                        Belum Punya Akun? <a href="<?= url('admin/auth/register') ?>">Buat Akun</a>
-                    </div>
-
                 </div>
             </div>
         </div>
     </section>
 </div>
-
 <?= require_once 'templates/footer.php' ?>

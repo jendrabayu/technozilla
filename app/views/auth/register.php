@@ -4,7 +4,7 @@
              <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                  <div class="card card-primary">
                      <div class="card-header">
-                         <h4 class="m-0 pt-1 text-black text-center">Registrasi</h4>
+                         <h4 class="m-0 pt-1 text-black text-center">REGISTRASI</h4>
                      </div>
 
                      <div class="card-body">
@@ -41,12 +41,14 @@
                                      Submit
                                  </button>
                              </div>
+
+                             <div class="mt-3 text-muted text-center">
+                                 Sudah Punya Akun ? <a href="<?= url('auth') ?> ">Login</a>
+                             </div>
                          </form>
                      </div>
                  </div>
-                 <div class="mt-3 text-muted text-center">
-                     Sudah Punya Akun ? <a href="<?= url('auth') ?> ">Login</a>
-                 </div>
+
 
              </div>
          </div>

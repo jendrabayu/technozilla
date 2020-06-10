@@ -23,6 +23,8 @@
 
     <link rel="stylesheet" href="<?= asset('frontend/css/style.css') ?>">
 
+    <script src="<?= asset('frontend/js/jquery-3.3.1.min.js') ?>"></script>
+
     <style>
         .active-image {
             filter: blur(3px);

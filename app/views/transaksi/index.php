@@ -55,10 +55,10 @@
                                                                             <img style="max-width: 70px" src="<?= IMG_URL . $o['p_gambar'] ?>" alt="">
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <p class="m-1 text-dark"><?= $o['p_nama']; ?> (qty : <?= $o['od_qty']; ?>)</p>
-                                                                            <h6 class="text-primary m-1"><?= rupiahFormat($o['p_harga']) ?>
-                                                                                <span style="font-size: 13px;" class="text-secondary">(Harga satuan saat ini)</span>
-                                                                            </h6>
+                                                                            <p class="m-1 text-dark"><?= $o['p_nama']; ?></p>
+                                                                            <h5 class="text-primary m-1"><?= $o['od_qty']; ?> X <?= rupiahFormat($o['od_harga']) ?> = <?= rupiahFormat($o['od_harga'] * $o['od_qty']) ?>
+
+                                                                            </h5>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -111,10 +111,10 @@
                                                                             <img style="max-width: 70px" src="<?= IMG_URL . $o['p_gambar'] ?>" alt="">
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <p class="m-1 text-dark"><?= $o['p_nama']; ?> (qty : <?= $o['od_qty']; ?>)</p>
-                                                                            <h6 class="text-primary m-1"><?= rupiahFormat($o['p_harga']) ?>
-                                                                                <span style="font-size: 13px;" class="text-secondary">(Harga satuan saat ini)</span>
-                                                                            </h6>
+                                                                            <p class="m-1 text-dark"><?= $o['p_nama']; ?></p>
+                                                                            <h5 class="text-primary m-1"><?= $o['od_qty']; ?> X <?= rupiahFormat($o['od_harga']) ?> = <?= rupiahFormat($o['od_harga'] * $o['od_qty']) ?>
+
+                                                                            </h5>
 
                                                                         </div>
 
@@ -174,10 +174,10 @@
                                                                             <img style="max-width: 70px" src="<?= IMG_URL . $o['p_gambar'] ?>" alt="">
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <p class="m-1 text-dark"><?= $o['p_nama']; ?> (qty : <?= $o['od_qty']; ?>)</p>
-                                                                            <h6 class="text-primary m-1"><?= rupiahFormat($o['p_harga']) ?>
-                                                                                <span style="font-size: 13px;" class="text-secondary">(Harga satuan saat ini)</span>
-                                                                            </h6>
+                                                                            <p class="m-1 text-dark"><?= $o['p_nama']; ?></p>
+                                                                            <h5 class="text-primary m-1"><?= $o['od_qty']; ?> X <?= rupiahFormat($o['od_harga']) ?> = <?= rupiahFormat($o['od_harga'] * $o['od_qty']) ?>
+
+                                                                            </h5>
 
                                                                         </div>
                                                                     </div>
@@ -239,10 +239,10 @@
                                                                             <img style="max-width: 70px" src="<?= IMG_URL . $o['p_gambar'] ?>" alt="">
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <p class="m-1 text-dark"><?= $o['p_nama']; ?> (qty : <?= $o['od_qty']; ?>)</p>
-                                                                            <h6 class="text-primary m-1"><?= rupiahFormat($o['p_harga']) ?>
-                                                                                <span style="font-size: 13px;" class="text-secondary">(Harga satuan saat ini)</span>
-                                                                            </h6>
+                                                                            <p class="m-1 text-dark"><?= $o['p_nama']; ?></p>
+                                                                            <h5 class="text-primary m-1"><?= $o['od_qty']; ?> X <?= rupiahFormat($o['od_harga']) ?> = <?= rupiahFormat($o['od_harga'] * $o['od_qty']) ?>
+
+                                                                            </h5>
                                                                         </div>
                                                                     </div>
 
@@ -303,10 +303,10 @@
                                                                             <img style="max-width: 70px" src="<?= IMG_URL . $o['p_gambar'] ?>" alt="">
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <p class="m-1 text-dark"><?= $o['p_nama']; ?> (qty : <?= $o['od_qty']; ?>)</p>
-                                                                            <h6 class="text-primary m-1"><?= rupiahFormat($o['p_harga']) ?>
-                                                                                <span style="font-size: 13px;" class="text-secondary">(Harga satuan saat ini)</span>
-                                                                            </h6>
+                                                                            <p class="m-1 text-dark"><?= $o['p_nama']; ?></p>
+                                                                            <h5 class="text-primary m-1"><?= $o['od_qty']; ?> X <?= rupiahFormat($o['od_harga']) ?> = <?= rupiahFormat($o['od_harga'] * $o['od_qty']) ?>
+
+                                                                            </h5>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -356,10 +356,10 @@
                                                                             <img style="max-width: 70px" src="<?= IMG_URL . $o['p_gambar'] ?>" alt="">
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <p class="m-1 text-dark"><?= $o['p_nama']; ?> (qty : <?= $o['od_qty']; ?>)</p>
-                                                                            <h6 class="text-primary m-1"><?= rupiahFormat($o['p_harga']) ?>
-                                                                                <span style="font-size: 13px;" class="text-secondary">(Harga satuan saat ini)</span>
-                                                                            </h6>
+                                                                            <p class="m-1 text-dark"><?= $o['p_nama']; ?></p>
+                                                                            <h5 class="text-primary m-1"><?= $o['od_qty']; ?> X <?= rupiahFormat($o['od_harga']) ?> = <?= rupiahFormat($o['od_harga'] * $o['od_qty']) ?>
+
+                                                                            </h5>
                                                                         </div>
                                                                     </div>
                                                                 </div>

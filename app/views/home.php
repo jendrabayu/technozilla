@@ -53,7 +53,7 @@
                                     <a href="<?= url($produk['slug']) ?>">
                                         <h4 class="text-dark">
 
-                                            <?= stringLimit($produk['nama'], 50) ?>
+                                            <?= stringLimit($produk['nama'], 45) ?>
 
                                         </h4>
                                     </a>

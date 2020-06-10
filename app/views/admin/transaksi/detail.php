@@ -125,7 +125,7 @@
                                 </tbody>
                             </table>
                             <div class="d-flex justify-content-end">
-                                <a href="<?= url('admin/rekap') ?>" class="btn btn-warning">Kembali</a>
+                                <button onclick="window.history.back()" class="btn btn-warning">Kembali</button>
                             </div>
                         </div>
                     </div>

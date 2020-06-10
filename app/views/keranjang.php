@@ -4,10 +4,8 @@
           <div class="col-md-12 mb-0">
             <a href="<?= url('') ?>">Home</a>
             <span class="mx-2 mb-0">/</span>
-
             <strong class="text-black">Keranjang</strong>
           </div>
-
         </div>
       </div>
     </div>
@@ -16,12 +14,8 @@
       <div class="container">
         <?= \App\Core\Session::getFlash() ?>
         <div class="row mb-5">
-
           <form class="col-md-12" method="post" action="<?= url('keranjang/update') ?>">
             <div class="site-blocks-table">
-
-
-
               <table class="table table-bordered">
                 <thead>
                   <tr>

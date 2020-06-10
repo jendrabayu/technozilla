@@ -50,7 +50,7 @@ class Transaksi extends Controller
             ->first();
 
         if (!$data['order']) {
-            Redirect::error('404', 'customer');
+            Redirect::error(404, 'customer');
         }
 
         $this->view('templates/header', $data);
@@ -124,7 +124,7 @@ class Transaksi extends Controller
         }
 
         $data['produk'] = $this->db
-            ->select('produk.nama as nama', 'order_detail.kuantitas as qty')
+            ->select('produk.nama as nama', 'order_detail.kuantitas as qty', 'order_detail.harga_satuan as harga')
             ->from('order_detail')
             ->join('produk', 'order_detail.produk_id', '=', 'produk.id')
             ->where('order_detail.order_id', '=', $data['order']['o_id'])
@@ -171,7 +171,8 @@ class Transaksi extends Controller
                 'produk.harga as p_harga',
                 'produk.nama as p_nama',
                 'produk.gambar as p_gambar',
-                'order_detail.kuantitas as od_qty'
+                'order_detail.kuantitas as od_qty',
+                'order_detail.harga_satuan as od_harga'
             )
             ->from('`order`')
             ->join('order_detail', 'order.id', '=', 'order_detail.order_id')

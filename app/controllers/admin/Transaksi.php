@@ -27,7 +27,7 @@ class Transaksi extends Controller
 
     public function pesananbaru()
     {
-        $data['judul'] = 'Pesanan Baru';
+        $data['judul'] = 'Pesanan Baru - Belum Dibayar';
         $data['order'] = $this->db
             ->select(
                 'DATE(order.created_at) as o_date',
@@ -42,19 +42,23 @@ class Transaksi extends Controller
             ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
             ->where('order.status_order_id', '=', 1)
             ->get();
+
+        $data['status_id'] = 1;
+
         $this->view('admin/templates/header', $data);
-        $this->view('admin/transaksi/pesananbaru/index', $data);
+        $this->view('admin/transaksi/index', $data);
         $this->view('admin/templates/footer');
     }
 
     public function perludicek()
     {
-        $data['judul'] = 'Perlu Dicek';
+        $data['judul'] = 'Pembayaran Perlu Dicek';
         $data['order'] = $this->db
             ->select(
                 'DATE(order.created_at) as o_date',
                 'order.invoice as o_invoice',
                 'order.subtotal as o_total',
+                'order.bukti_transfer as o_bukti_transfer',
                 'order.status_order_id as o_status_id',
                 'customer.nama as c_nama',
                 'status_order.nama as s_nama'
@@ -65,14 +69,16 @@ class Transaksi extends Controller
             ->where('order.status_order_id', '=', 2)
             ->get();
 
+        $data['status_id'] = 2;
+
         $this->view('admin/templates/header', $data);
-        $this->view('admin/transaksi/perludicek/index', $data);
+        $this->view('admin/transaksi/index', $data);
         $this->view('admin/templates/footer');
     }
 
     public function perludikirim()
     {
-        $data['judul'] = 'Perlu Dikirim';
+        $data['judul'] = 'Pesanan Perlu Dikirim';
         $data['order'] = $this->db
             ->select(
                 'DATE(order.created_at) as o_date',
@@ -88,13 +94,15 @@ class Transaksi extends Controller
             ->where('order.status_order_id', '=', 3)
             ->get();
 
+        $data['status_id'] = 3;
+
         $this->view('admin/templates/header', $data);
-        $this->view('admin/transaksi/perludikirim/index', $data);
+        $this->view('admin/transaksi/index', $data);
         $this->view('admin/templates/footer');
     }
     public function barangdikirim()
     {
-        $data['judul'] = 'Barang Dikirim';
+        $data['judul'] = 'Pesanan Sedang Dikirim';
         $data['order'] = $this->db
             ->select(
                 'DATE(order.created_at) as o_date',
@@ -109,14 +117,15 @@ class Transaksi extends Controller
             ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
             ->where('order.status_order_id', '=', 4)
             ->get();
+        $data['status_id'] = 4;
         $this->view('admin/templates/header', $data);
-        $this->view('admin/transaksi/barangdikirim/index', $data);
+        $this->view('admin/transaksi/index', $data);
         $this->view('admin/templates/footer');
     }
 
     public function selesai()
     {
-        $data['judul'] = 'Pesanan Selesai';
+        $data['judul'] = 'Pesanan Selesai - Pesanan Telah Tiba';
         $data['order'] = $this->db
             ->select(
                 'DATE(order.created_at) as o_date',
@@ -132,8 +141,9 @@ class Transaksi extends Controller
             ->where('order.status_order_id', '=', 5)
             ->get();
 
+        $data['status_id'] = 5;
         $this->view('admin/templates/header', $data);
-        $this->view('admin/transaksi/selesai/index', $data);
+        $this->view('admin/transaksi/index', $data);
         $this->view('admin/templates/footer');
     }
 
@@ -155,15 +165,17 @@ class Transaksi extends Controller
             ->where('order.status_order_id', '=', 6)
             ->get();
 
+        $data['status_id'] = 6;
         $this->view('admin/templates/header', $data);
-        $this->view('admin/transaksi/pembatalan/index', $data);
+        $this->view('admin/transaksi/index', $data);
         $this->view('admin/templates/footer');
     }
 
 
-
-    public function detail($invoice, $folder, $status)
+    public function detail($invoice)
     {
+        $data['judul'] = 'Order ' . $invoice;
+
         $data['order'] = $this->db
             ->select(
                 'customer.nama as c_nama',
@@ -190,95 +202,37 @@ class Transaksi extends Controller
             ->join('customer', 'order.customer_id', '=', 'customer.id')
             ->join('alamat', 'customer.id', '=', 'alamat.customer_id')
             ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
-            ->where([['order.invoice', '=', $invoice], ['order.status_order_id', '=', $status]])
+            ->where([
+                ['order.invoice', '=', $invoice]
+            ])
             ->first();
-
 
         $data['produk'] =  $this->db
             ->select(
                 'produk.nama as p_nama',
                 'produk.harga as p_harga',
-                'order_detail.kuantitas as od_qty'
+                'order_detail.kuantitas as od_qty',
+                'order_detail.harga_satuan as od_harga'
 
             )
             ->from('`order`')
             ->join('order_detail', 'order.id', '=', 'order_detail.order_id')
             ->join('produk', 'order_detail.produk_id', '=', 'produk.id')
             ->where([
-                ['order.invoice', '=',  $invoice],
-                ['order.status_order_id', '=', $status]
+                ['order.invoice', '=', $invoice]
             ])
-            ->groupBy('produk.id', 'order_detail.produk_id')
+            ->groupBy('produk.id, order_detail.produk_id')
             ->get();
-
-        $data['judul'] = 'Pesanan ' . $invoice;
         $this->view('admin/templates/header', $data);
-        $this->view('admin/transaksi/' . $folder . '/detail', $data);
+        $this->view('admin/transaksi/detail', $data);
         $this->view('admin/templates/footer');
     }
 
 
-    public function batal()
-    {
-        $invoice = $_POST['invoice'];
-        $status = 1;
 
-        $data['order'] = $this->db
-            ->select(
-                'customer.nama as c_nama',
-                'customer.email as c_email',
-                'rekening_bank.nama as r_nama_bank',
-                'rekening_bank.atas_nama as r_atas_nama',
-                'rekening_bank.nomor as r_no_rekening',
-                'alamat.nama as a_nama',
-                'alamat.no_telp as a_no_telp',
-                'alamat.alamat as a_alamat',
-                'order.invoice as o_invoice',
-                'order.subtotal as o_total',
-                'order.bukti_transfer as o_bukti_transfer',
-                'order.kurir as o_kurir',
-                'order.nomor_resi as o_no_resi',
-                'order.pesan as o_pesan',
-                'order.created_at as o_date',
-                'order.status_order_id as o_status_id',
-                'status_order.nama as s_nama'
-            )
-            ->from('`order`')
-            ->join('rekening_bank', 'order.rekening_bank_id', '=', 'rekening_bank.id')
-            ->join('customer', 'order.customer_id', '=', 'customer.id')
-            ->join('alamat', 'customer.id', '=', 'alamat.customer_id')
-            ->join('status_order', 'order.status_order_id', '=', 'status_order.id')
-            ->where([
-                ['order.invoice', '=', $invoice],
-                ['order.status_order_id', '=', $status]
-            ])
-            ->first();
-
-
-        $data['produk'] =  $this->db
-            ->select(
-                'produk.nama as p_nama',
-                'produk.harga as p_harga',
-                'order_detail.kuantitas as od_qty'
-
-            )
-            ->from('`order`')
-            ->join('order_detail', 'order.id', '=', 'order_detail.order_id')
-            ->join('produk', 'order_detail.produk_id', '=', 'produk.id')
-            ->where([['order.invoice', '=', $invoice], ['order.status_order_id', '=', $status]])
-            ->groupBy('produk.id', 'order_detail.produk_id')
-            ->get();
-
-        $data['judul'] = 'Pesanan ' . $invoice;
-        $this->view('admin/templates/header', $data);
-        $this->view('admin/transaksi/pembatalan', $data);
-        $this->view('admin/templates/footer');
-    }
-
-    public function storepembatalan()
+    public function prosespembatalan($invoice)
     {
         $alasan = $_POST['alasan'];
-        $invoice = $_POST['invoice'];
 
         //tambahkan stok
         $produk = $this->db
@@ -287,70 +241,70 @@ class Transaksi extends Controller
             ->join('order_detail', 'order.id', '=', 'order_detail.order_id')
             ->where('order.invoice', '=', $invoice)
             ->get();
-        var_dump($produk);
-        die;
 
         if ($this->db->update('`order`', [
             'status_order_id' => 6,
             'alasan_pembatalan' => $alasan,
             'updated_at' =>  currentTimeStamp()
         ], 'invoice', '=', $invoice)) {
-            Session::setFlash("Pesanan Berhasil Dibatalkan", "primary");
-            Redirect::to('admin/transaksi/pesananbaru');
+            Session::setFlash("Pesanan Berhasil Dibatalkan, Cek di halaman pembatalan", "primary");
+            Redirect::back();
         } else {
-
-            Redirect::to('admin/transaksi/pesananbaru');
+            Session::setFlash("Pesanan Gagal Dibatalkan", "danger");
+            Redirect::back();
         }
     }
 
 
-    public function updatepembayaran()
+    public function proseskonfirmasipembayaran($invoice)
     {
-        $invoice = $_POST['invoice'];
         if ($this->db->update('`order`', [
             'status_order_id' => 3,
             'updated_at' =>  currentTimeStamp()
         ], 'invoice', '=', $invoice)) {
-            Session::setFlash("Pembayaran Berhasil Dikonfirmasi", "primary");
-            Redirect::to('admin/transaksi/perludicek');
+            Session::setFlash("Pembayaran Berhasil Dikonfirmasi, Cek di halaman perlu dikirim", "primary");
+            Redirect::back();
         } else {
-
-            Redirect::to('admin/transaksi/perludicek');
+            Redirect::back();
+            Session::setFlash("Pembayaran Gagal Dikonfirmasi", "danger");
         }
     }
 
 
 
-    public function updateresi()
+
+    public function prosesinputresi($invoice)
     {
-        $invoice = $_POST['invoice'];
         $kurir = $_POST['kurir'];
-        $resi = $_POST['resi'];
+        $resi = $_POST['no_resi'];
         if ($this->db->update('`order`', [
             'status_order_id' => 4,
             'kurir' => $kurir,
             'nomor_resi' => $resi,
             'updated_at' =>  currentTimeStamp()
         ], 'invoice', '=', $invoice)) {
-            Session::setFlash("Resi Berhasil Diinput", "primary");
-            Redirect::to('admin/transaksi/perludikirim');
+            Session::setFlash("No Resi Berhasil Diinput, Cek dihalaman barang dikirim", "primary");
+            Redirect::back();
         } else {
 
-            Redirect::to('admin/transaksi/perludikirim');
+            Session::setFlash("No Resi Gagal Diinput", "danger");
+            Redirect::back();
         }
     }
 
-    public function updatebarangtiba()
+
+
+    public function prosesselesai($invoice)
     {
-        $invoice = $_POST['invoice'];
         if ($this->db->update('`order`', [
             'status_order_id' => 5,
             'updated_at' => currentTimeStamp()
         ], 'invoice', '=', $invoice)) {
-            Session::setFlash("Pembayaran Berhasil Dikonfirmasi", "primary");
-            Redirect::to('admin/transaksi/barangdikirim');
+            Session::setFlash("Transaksi Selesai (Barang Telah Tiba), Cek dihalamn selesai", "primary");
+            Redirect::back();
         } else {
-            Redirect::to('admin/transaksi/barangdikirim');
+            Session::setFlash("Transaksi Gagal Diupdate", "danger");
+            Redirect::back();
         }
     }
 }

@@ -39,15 +39,25 @@ class Auth extends Controller
 
     public function register()
     {
+        if (ADMIN_REGISTER == false) {
+            Redirect::back();
+        }
+
         if (Session::get('is_admin')) {
             Redirect::to('admin');
         }
+
         $data['judul'] = 'Regsiter';
         $this->view('admin/auth/register', $data);
     }
 
     public function store()
     {
+
+        if (ADMIN_REGISTER == false) {
+            Redirect::back();
+        }
+
         if ($_POST['password'] != $_POST['repassword']) {
             Session::setFlash('Password Harus Sama!', 'danger');
             Redirect::to('admin/auth/register');
@@ -76,7 +86,6 @@ class Auth extends Controller
 
     public function updatepassword()
     {
-
         $currentPassword = Session::get('is_admin');
         $currentPassword = $currentPassword['password'];
 

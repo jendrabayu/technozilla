@@ -68,7 +68,7 @@ class Kategori extends Controller
             $this->view('admin/kategori/edit', $data);
             $this->view('admin/templates/footer');
         } else {
-            Redirect::to('admin/kategori');
+            Redirect::error(404, 'admin');
         }
     }
 

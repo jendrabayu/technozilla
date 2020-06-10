@@ -126,6 +126,7 @@ class Checkout extends Controller
                         'order_id' => $order_id,
                         'produk_id' => $k['p_id'],
                         'kuantitas' => $k['k_qty'],
+                        'harga_satuan' => $k['p_harga'],
                         'created_at' =>  currentTimeStamp(),
                         'updated_at' =>  currentTimeStamp()
                     ]
@@ -141,12 +142,5 @@ class Checkout extends Controller
             $this->db->delete('keranjang', 'customer_id', '=',  getUserId('customer'));
         }
         Redirect::to('transaksi/payment/' . $invoice);
-    }
-
-    public function sukses()
-    {
-        $this->view('templates/header');
-        $this->view('invoice');
-        $this->view('templates/footer');
     }
 }

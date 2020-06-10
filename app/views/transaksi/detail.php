@@ -101,7 +101,7 @@
                                         </td>
                                         <td>
                                             <?php foreach ($data['produk'] as $key => $p) : ?>
-                                                <?= 1 + $key++; ?>. <?= $p['nama'] ?> (qty : <?= $p['qty']; ?>)
+                                                <?= 1 + $key++; ?>. <?= $p['nama'] ?> <span class="font-weight-bold text-black">(<?= $p['qty']; ?> X <?= rupiahFormat($p['harga']); ?> = <?= rupiahFormat($p['qty'] * $p['harga']); ?>)</span>
                                                 <br>
                                             <?php endforeach; ?>
                                             <br>

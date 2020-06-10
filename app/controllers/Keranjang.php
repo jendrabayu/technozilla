@@ -16,7 +16,6 @@ class Keranjang extends Controller
         $this->db = new DB;
     }
 
-
     public function index()
     {
         $data['produk'] = $this->db
@@ -60,8 +59,8 @@ class Keranjang extends Controller
             ->first();
 
         if ($_POST['kuantitas'] + $produk_sama['kuantitas'] > $qty['stok']) {
-            Session::setFlash('Gagal Menambahkan produk, Kuantitas melebihi stok yang tersedia!', 'warning');
-            Redirect::to('keranjang');
+            Session::setFlash('Gagal Menambahkan produk, Kuantitas melebihi stok yang tersedia!', 'danger');
+            Redirect::back();
         } else {
             if ($produk_sama) {
                 $qty_awal = $this->db
@@ -99,8 +98,12 @@ class Keranjang extends Controller
 
     public function destroy($id)
     {
-        $this->db->delete('keranjang', 'id', '=', $id);
-        Redirect::to('keranjang');
+        if ($this->db->delete('keranjang', 'id', '=', $id)) {
+            Session::setFlash('Produk Berhasil Dihapus');
+            Redirect::back();
+        }
+        Session::setFlash('Produk Gagal Dihapus');
+        Redirect::back();
     }
 
     public function update()
@@ -122,8 +125,8 @@ class Keranjang extends Controller
         // pengecekkan stok
         for ($i = 0; $i < count($stoks); $i++) {
             if ($stoks[$i] < $_POST['qty'][$i]) {
-                Session::setFlash('Keranjang gagal diupdate, Kuantitas melebihi stok yang tersedia!', 'warning');
-                Redirect::to('keranjang');
+                Session::setFlash('Keranjang gagal diupdate, Kuantitas melebihi stok yang tersedia!', 'danger');
+                Redirect::back();
             }
         }
 
@@ -139,6 +142,6 @@ class Keranjang extends Controller
         }
 
         Session::setFlash('Keranjang berhasil diupdate', 'primary');
-        Redirect::to('keranjang');
+        Redirect::back();
     }
 }

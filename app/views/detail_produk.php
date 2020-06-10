@@ -14,6 +14,9 @@
 <div class="site-section">
     <div class="container">
         <div class="row">
+            <div class="col-lg-12">
+                <?= App\Core\Session::getFlash() ?>
+            </div>
             <div class="col-md-6">
                 <div class="single_product_image">
                     <img src="<?= IMG_URL . $data['produk']['p_gambar'] ?>" alt="Image" class="img-fluid">

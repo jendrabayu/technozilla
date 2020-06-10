@@ -40,6 +40,7 @@ class Produk extends Controller
             ->join('merk', 'produk.merk_id', '=', 'merk.id')
             ->whereIsNull('produk.deleted_at')
             ->get();
+
         $this->view('admin/templates/header', $data);
         $this->view('admin/produk/index', $data);
         $this->view('admin/templates/footer');
@@ -106,6 +107,9 @@ class Produk extends Controller
             ->whereIsNull('produk.deleted_at')
             ->andWhere('produk.slug', '=', $slug)
             ->first();
+        if (!$data['produk']) {
+            Redirect::error(404, 'admin');
+        }
         $data['merk'] = $this->db->select('*')->from('merk')->whereIsNull('deleted_at')->get();
         $data['kategori'] = $this->db->select('*')->from('kategori')->whereIsNull('deleted_at')->get();
 

@@ -46,8 +46,8 @@ class Auth extends Controller
         if ($this->auth->login('customer')) {
             Redirect::to('');
         } else {
-            Session::setFlash('Email / Password Salah', 'danger');
-            Redirect::to('auth');
+            Session::setFlash('Email atau Password Salah', 'danger');
+            Redirect::back();
         }
     }
 
@@ -56,14 +56,14 @@ class Auth extends Controller
     {
         if ($_POST['password'] != $_POST['repassword']) {
             Session::setFlash('Password Harus Sama!', 'danger');
-            Redirect::to('auth/register');
+            Redirect::back();
         } else {
             if ($this->auth->register('customer')) {
                 Session::setFlash('Registrasi Berhasil Silahkan Login', 'primary');
                 Redirect::to('auth');
             } else {
                 Session::setFlash('Registrasi Gagal', 'danger');
-                Redirect::to('auth/register');
+                Redirect::back();
             }
         }
     }
@@ -71,5 +71,46 @@ class Auth extends Controller
     public function do_logout()
     {
         $this->auth->logout('customer');
+    }
+
+
+    public function resetpassword()
+    {
+        $data['judul'] = 'Ubah Password';
+        $this->view('templates/header', $data);
+        $this->view('auth/reset_password');
+        $this->view('templates/footer');
+    }
+
+
+    public function updatepassword()
+    {
+        $currentPassword = Session::get('is_customer');
+        $currentPassword = $currentPassword['password'];
+
+        if ($_POST['new_password'] != $_POST['re_newpassword']) {
+            Session::setFlash('Password Baru Anda Tidak Sama', 'warning');
+            Redirect::back();
+        } else if ($currentPassword != md5($_POST['old_password'])) {
+            Session::setFlash('Password Lama Anda Salah', 'warning');
+            Redirect::back();
+        } else {
+            if ($this->db->update(
+                'customer',
+                [
+                    'password' => md5($_POST['new_password']),
+                    'updated_at' => currentTimeStamp()
+                ],
+                'id',
+                '=',
+                getUserId('customer')
+            )) {
+                Session::setFlash('Password Berhasil Diubah Silahkan Login Ulang', 'primary');
+                Session::remove('is_customer');
+                Redirect::to('auth');
+            } else {
+                Session::setFlash('Password Gagal Diubah', 'danger');
+            }
+        }
     }
 }

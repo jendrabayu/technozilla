@@ -50,7 +50,7 @@ class Home extends Controller
                 $this->view('detail_produk', $data);
                 $this->view('templates/footer');
             } else {
-                Redirect::error('404', 'customer');
+                Redirect::error(404, 'customer');
             }
         } else {
             $data['judul'] = 'Home';

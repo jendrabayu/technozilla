@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.4/css/select.bootstrap4.min.css">
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script src="<?= asset('backend/modules/jquery.min.js') ?>"></script>
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="<?= asset('backend/css/style.css') ?>">

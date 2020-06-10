@@ -117,7 +117,8 @@ class Rekap extends Controller
             ->select(
                 'produk.nama as p_nama',
                 'produk.harga as p_harga',
-                'order_detail.kuantitas as od_qty'
+                'order_detail.kuantitas as od_qty',
+                'order_detail.harga_satuan as od_harga'
 
             )
             ->from('`order`')

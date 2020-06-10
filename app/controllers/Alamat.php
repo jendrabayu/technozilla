@@ -46,7 +46,8 @@ class Alamat extends Controller
 
     public function store()
     {
-        $this->db->insert('alamat', [
+
+        if ($this->db->insert('alamat', [
             'id' => null,
             'customer_id' => getUserId('customer'),
             'nama' => $_POST['nama'],
@@ -54,14 +55,18 @@ class Alamat extends Controller
             'alamat' => $_POST['alamat'],
             'created_at' => currentTimeStamp(),
             'updated_at' => currentTimeStamp()
-        ]);
-
-        Redirect::to('alamat');
+        ])) {
+            Session::setFlash('Alamat Berhasil Ditambahkan', 'primary');
+            Redirect::to('alamat');
+        } else {
+            Session::setFlash('Alamat Gagal Ditambahkan', 'danger');
+            Redirect::back();
+        }
     }
 
     public function update()
     {
-        $this->db->update(
+        if ($this->db->update(
             'alamat',
             [
                 'nama' => $_POST['nama'],
@@ -71,9 +76,13 @@ class Alamat extends Controller
             ],
             'customer_id',
             '=',
-            Session::get('is_customer')['id']
-        );
-        Session::setFlash('Alamat berhasil di update', 'primary');
-        Redirect::to('alamat');
+            getUserId('customer')
+        )) {
+            Session::setFlash('Alamat berhasil di update', 'primary');
+            Redirect::to('alamat');
+        } else {
+            Session::setFlash('Alamat Gagal di update', 'danger');
+            Redirect::back();
+        }
     }
 }

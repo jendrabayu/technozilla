@@ -68,7 +68,7 @@ class Merk extends Controller
             $this->view('admin/merk/edit', $data);
             $this->view('admin/templates/footer');
         } else {
-            Redirect::to('admin/merk');
+            Redirect::error(404, 'admin');
         }
     }
 

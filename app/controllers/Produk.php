@@ -159,7 +159,6 @@ class Produk extends Controller
             $this->view('templates/header', $data);
             $this->view('produk', $data);
             $this->view('templates/footer');
-            die;
         }
     }
 }

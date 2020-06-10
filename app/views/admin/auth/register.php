@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                         <div class="login-brand">
-                            <h3>Register Admin</h3>
+                            <h3>REGISTRASI ADMIN</h3>
                         </div>
 
                         <div class="card card-primary">
@@ -59,14 +59,15 @@
                                             Register
                                         </button>
                                     </div>
+                                    <div class="text-muted text-center">
+                                        Sudah Punya Akun ? <a href="<?= url('admin/auth/login') ?>">Login</a>
+                                    </div>
                                 </form>
 
 
                             </div>
                         </div>
-                        <div class="mt-5 text-muted text-center mb-5">
-                            Sudah Punya Akun ? <a href="<?= url('admin/auth/login') ?>">Login</a>
-                        </div>
+
 
                     </div>
                 </div>
