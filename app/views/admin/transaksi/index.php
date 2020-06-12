@@ -65,7 +65,7 @@
                                                 <td><?= $order['c_nama']; ?></td>
                                                 <td><?= rupiahFormat($order['o_total']) ?></td>
                                                 <td><?= $order['s_nama']; ?></td>
-                                                <td class="text-center">
+                                                <td class="text-center" style="min-width: 200px;">
                                                     <a href="<?= url('admin/transaksi/detail/' . $order['o_invoice']) ?>" class="btn btn-info">Detail</a>
 
                                                     <?php if ($order['o_status_id'] == 1) : ?>
@@ -74,7 +74,7 @@
 
                                                     <?php if ($order['o_status_id'] == 2) : ?>
 
-                                                        <button class="btn btn-warning btn-konfirmasi-pembayaran" data-toggle="modal" data-target="#modal-konfirmasi-pembayaran" data-image="<?= IMG_URL . '' . $order['o_bukti_transfer'] ?>" data-id="<?= url('admin/transaksi/proseskonfirmasipembayaran/' . $order['o_invoice']) ?>">Konfirmasi Pembayaran</button>
+                                                        <button class="btn btn-warning btn-konfirmasi-pembayaran" data-toggle="modal" data-target="#modal-konfirmasi-pembayaran" data-image="<?= IMG_URL . '' . $order['o_bukti_transfer'] ?>" data-id="<?= url('admin/transaksi/proseskonfirmasipembayaran/' . $order['o_invoice']) ?>">Konfirmasi</button>
                                                         <button class="btn btn-danger btn-batal" data-toggle="modal" data-target="#modal-pembatalan" data-id="<?= url('admin/transaksi/prosespembatalan/' . $order['o_invoice']) ?>">Batalkan</button>
                                                     <?php endif; ?>
 

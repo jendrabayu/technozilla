@@ -106,17 +106,26 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <?php
-                    $db =  new \App\Core\DB;
-                    $alamat = $db->select('*')
-                      ->from('alamat')
-                      ->where('customer_id', '=', $_SESSION['is_customer']['id'])
-                      ->first();
-                    if ($alamat) : ?>
-                      <a href="<?= url('checkout') ?>" class="btn btn-primary btn-lg py-3 btn-block">Checkout</a>
+
+
+                    <?php if (getUserId('customer')) : ?>
+
+                      <?php
+                      $db =  new \App\Core\DB;
+                      $alamat = $db->select('*')
+                        ->from('alamat')
+                        ->where('customer_id', '=', getUserId('customer'))
+                        ->first();
+                      ?>
+                      <?php if ($alamat) : ?>
+                        <a href="<?= url('checkout') ?>" class="btn btn-primary btn-lg py-3 btn-block">Checkout</a>
+                      <?php else : ?>
+                        <p>Anda belum mengatur alamat pengiriman</p>
+                        <a href="<?= url('alamat/edit')  ?>" class="btn btn-primary btn-lg py-3 btn-block">Atur Alamat</a>
+                      <?php endif; ?>
+
                     <?php else : ?>
-                      <p>Anda belum mengatur alamat pengiriman</p>
-                      <a href="<?= url('alamat/edit')  ?>" class="btn btn-primary btn-lg py-3 btn-block">Atur Alamat</a>
+                      <a href="<?= url('auth') ?>" class="btn btn-primary btn-lg py-3 btn-block">Checkout</a>
                     <?php endif; ?>
 
                   </div>

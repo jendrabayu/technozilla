@@ -44,6 +44,47 @@ class Auth extends Controller
     public function do_login()
     {
         if ($this->auth->login('customer')) {
+
+            // simpan ke keranjang jika ada session keranjang
+            if (Session::get('is_keranjang')) {
+                $keranjangInSession = Session::get('is_keranjang');
+                foreach ($keranjangInSession as $key => $value) {
+                    $keranjang = $this->db
+                        ->select('*')
+                        ->from('keranjang')
+                        ->where([['produk_id', '=', $value['produk_id']], ['customer_id', '=', getUserId('customer')]])
+                        ->first();
+
+                    if ($keranjang) {
+                        $stok = $this->db
+                            ->select('stok')
+                            ->from('produk')
+                            ->where('id', '=', $value['produk_id'])
+                            ->first();
+
+                        //Qty lama + Qty Bary > Stok 
+                        if ($value['qty'] + $keranjang['kuantitas'] > $stok['stok']) {
+                            $this->db->update('keranjang', [
+                                'kuantitas' => $value['qty']
+                            ], 'id', '=', $keranjang['id']);
+                        } else {
+                            $this->db->update('keranjang', [
+                                'kuantitas' => $value['qty'] + $value['qty']
+                            ], 'id', '=', $keranjang['id']);
+                        }
+                    } else {
+                        $this->db->insert('keranjang', [
+                            'id' => null,
+                            'customer_id' => getUserId('customer'),
+                            'produk_id' => $value['produk_id'],
+                            'kuantitas' => $value['qty'],
+                            'created_at' =>  currentTimeStamp(),
+                            'updated_at' =>  currentTimeStamp()
+                        ]);
+                    }
+                }
+            }
+            Session::remove('is_keranjang');
             Redirect::to('');
         } else {
             Session::setFlash('Email atau Password Salah', 'danger');

@@ -151,6 +151,12 @@ class DB
         return $this;
     }
 
+    public function andWhereNull($column)
+    {
+        $this->sql = sprintf("%s AND %s IS NULL", $this->sql, $column);
+        return $this;
+    }
+
     public function andWhere($req, $operator, $value)
     {
         $this->sql = sprintf("%s AND %s %s '%s'", $this->sql, $req, $operator, $value);

@@ -97,3 +97,42 @@
         </div>
     </div>
 </div>
+
+
+<div class="site-section block-3 site-blocks-2 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 site-section-heading text-center pt-4">
+                <h2>Produk Terkait</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="nonloop-block-3 owl-carousel">
+
+                    <?php foreach ($data['produk_terkait']  as $produk) : ?>
+                        <div class="item">
+                            <div class="block-4 text-center">
+                                <figure class="block-4-image">
+                                    <a href="<?= url($produk['slug']) ?>"> <img src="<?= IMG_URL .  $produk['gambar'] ?>"></a>
+                                </figure>
+                                <div class="block-4-text p-4">
+                                    <a href="<?= url($produk['slug']) ?>">
+                                        <h4 class="text-dark">
+
+                                            <?= stringLimit($produk['nama'], 45) ?>
+
+                                        </h4>
+                                    </a>
+                                    <p class="text-primary font-weight-bold h5">
+                                        <?= rupiahFormat($produk['harga']) ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

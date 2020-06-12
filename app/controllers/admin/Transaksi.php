@@ -39,6 +39,7 @@ class Transaksi extends Controller
                 'order.invoice as o_invoice',
                 'order.subtotal as o_total',
                 'order.status_order_id as o_status_id',
+                'order.bukti_transfer as o_bukti_transfer',
                 'customer.nama as c_nama',
                 'status_order.nama as s_nama'
             )

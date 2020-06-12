@@ -19,6 +19,29 @@ class Checkout extends Controller
     public function index()
     {
         $data['judul'] = 'Checkout';
+
+
+        //pengecekkan stok
+        $keranjang =
+            $this->db->select(
+                'keranjang.id as k_id',
+                'keranjang.kuantitas as k_qty',
+                'produk.id as p_id',
+                'produk.harga as p_harga',
+                'produk.stok as p_stok',
+            )
+            ->from('keranjang')
+            ->join('produk', 'keranjang.produk_id', '=', 'produk.id')
+            ->where('keranjang.customer_id', '=', getUserId('customer'))
+            ->get();
+
+        foreach ($keranjang as $keranjang) {
+            if ($keranjang['k_qty'] > $keranjang['p_stok']) {
+                Session::setFlash('Kuantitas' . $keranjang['p_nama'] . 'melebihi batas, silahkan update Kembali keranjang Anda', 'warning');
+                Redirect::back();
+            }
+        }
+
         $data['order'] = $this->db
             ->select(
                 'produk.nama',
@@ -69,6 +92,8 @@ class Checkout extends Controller
             ->join('produk', 'keranjang.produk_id', '=', 'produk.id')
             ->where('keranjang.customer_id', '=', getUserId('customer'))
             ->get();
+
+
 
         //generate invoice
         $invoice = 'INV' . date('mYdihs');

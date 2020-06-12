@@ -42,6 +42,7 @@ class Rekap extends Controller
             ->join('customer', 'order.customer_id', '=', 'customer.id')
             ->whereDate('MONTH(order.updated_at)', '=', 'MONTH(CURRENT_DATE())')
             ->andWhere('status_order_id', '=', 5)
+
             ->get();
         $data['rekap_tahunan'] =
             $this->db->select(

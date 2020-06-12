@@ -5,7 +5,7 @@
                 <div class="col-lg-7">
                     <div class="card">
                         <div class="card-body">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered" id="printTable">
                                 <tbody>
 
                                     <tr>
@@ -121,7 +121,8 @@
                                 </tbody>
                             </table>
                             <div class="d-flex justify-content-end">
-                                <a href="<?= url('transaksi') ?>" class="btn btn-warning">Kembali</a>
+                                <a href="<?= url('transaksi') ?>" class="btn btn-warning mr-2">Kembali</a>
+                                <button onclick="printData()" class="btn btn-secondary"><i class="fa fa-print" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>

@@ -58,10 +58,12 @@ class App
             }
         }
         $this->params = $url ? array_values($url) : [];
-        try {
-            call_user_func_array([$this->controller, $this->method], $this->params);
-        } catch (\Throwable $th) {
-            Redirect::error(404, 'customer');
-        }
+
+        call_user_func_array([$this->controller, $this->method], $this->params);
+        // try {
+        //     call_user_func_array([$this->controller, $this->method], $this->params);
+        // } catch (\Throwable $th) {
+        //     Redirect::error(404, 'customer');
+        // }
     }
 }

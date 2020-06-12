@@ -46,6 +46,23 @@ class Home extends Controller
                     ->where('produk_id', '=', $data['produk']['p_id'])
                     ->get();
                 $data['judul'] = $data['produk']['p_nama'];
+
+                // produk terkait merk & kategori
+                $data['produk_terkait'] =
+                    $this->db->select(
+                        'produk.nama',
+                        'produk.harga',
+                        'produk.slug',
+                        'produk.gambar'
+                    )
+                    ->from('produk')
+                    ->join('kategori', 'produk.kategori_id', '=', 'kategori.id')
+                    ->join('merk', 'produk.merk_id', '=', 'merk.id')
+                    ->whereIsNull('produk.deleted_at')
+                    ->andWhere('kategori.nama', '=',   $data['produk']['k_nama'])
+                    ->andWhere('merk.nama', '=',   $data['produk']['m_nama'])
+                    ->get();
+
                 $this->view('templates/header', $data);
                 $this->view('detail_produk', $data);
                 $this->view('templates/footer');
@@ -59,10 +76,24 @@ class Home extends Controller
                 ->from('produk')
                 ->join('merk', 'merk.id', '=', ' produk.merk_id')
                 ->whereIsNull('produk.deleted_at')
-                ->orderBy('produk.created_at')
+                ->orderBy('produk.created_at', 'DESC')
                 ->limit(0, 6)
                 ->get();
             $data['merk'] = $this->db->get('merk');
+
+            // penjualan terbanyak bulan ini
+            $data['produk_terlaris'] = $this->db
+                ->select('produk.nama', 'produk.harga', 'produk.slug', 'produk.gambar', 'order_detail.produk_id', 'SUM(order_detail.kuantitas) as terjual')
+                ->from('`order`')
+                ->join('order_detail', 'order_detail.order_id', '=', 'order.id')
+                ->join('produk', 'order_detail.produk_id', '=', 'produk.id')
+                ->whereDate('MONTH(order.updated_at)', '=', 'MONTH(CURRENT_DATE())')
+                ->andWhere('order.status_order_id', '=', 5)
+                ->andWhereNull('produk.deleted_at')
+                ->groupBy('order_detail.produk_id, produk.id')
+                ->orderBy('SUM(order_detail.kuantitas)', 'DESC')
+                ->limit(0, 6)
+                ->get();
 
             $this->view('templates/header', $data);
             $this->view('home', $data);

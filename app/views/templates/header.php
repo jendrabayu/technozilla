@@ -4,85 +4,26 @@
 <head>
     <title>Technozilla &mdash;
 
+
         <?= $data['judul']; ?></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700">
-    <link rel="stylesheet" href="<?= asset('frontend/fonts/icomoon/style.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.min.css">
-
+    <link rel="stylesheet" href="<?= asset('frontend/fonts/icomoon/style.css') ?>">
     <link rel="stylesheet" href="<?= asset('frontend/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?= asset('frontend/css/magnific-popup.css') ?>">
     <link rel="stylesheet" href="<?= asset('frontend/css/jquery-ui.css') ?>">
     <link rel="stylesheet" href="<?= asset('frontend/css/owl.carousel.min.css') ?>">
     <link rel="stylesheet" href="<?= asset('frontend/css/owl.theme.default.min.css') ?>">
-
-
     <link rel="stylesheet" href="<?= asset('frontend/css/aos.css') ?>">
-
     <link rel="stylesheet" href="<?= asset('frontend/css/style.css') ?>">
-
-    <script src="<?= asset('frontend/js/jquery-3.3.1.min.js') ?>"></script>
-
-    <style>
-        .active-image {
-            filter: blur(3px);
-        }
-
-        .js .input-file-trigger {
-            display: block;
-            padding: 14px 45px;
-            background: #39D2B4;
-            color: #fff;
-            font-size: 1em;
-            transition: all .4s;
-            cursor: pointer;
-        }
-
-        .js .input-file {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 225px;
-            opacity: 0;
-            padding: 14px 0;
-            cursor: pointer;
-        }
-
-        .js .input-file:hover+.input-file-trigger,
-        .js .input-file:focus+.input-file-trigger,
-        .js .input-file-trigger:hover,
-        .js .input-file-trigger:focus {
-            background: #34495E;
-            color: #39D2B4;
-        }
-
-        .file-return {
-            margin: 0;
-        }
-
-        .file-return:not(:empty) {
-            margin: 1em 0;
-        }
-
-        .js .file-return {
-            font-style: italic;
-            font-size: .9em;
-            font-weight: bold;
-        }
-
-        .js .file-return:not(:empty):before {
-            content: "File yang dipilih: ";
-            font-style: normal;
-            font-weight: normal;
-        }
-    </style>
+    <link rel="stylesheet" href="<?= asset('frontend/css/mystyle.css') ?>">
 
 </head>
 
 <body>
-
     <div class="site-wrap">
         <header class="site-navbar" role="banner">
             <div class="site-navbar-top">
@@ -106,26 +47,38 @@
                             <div class="site-top-icons">
                                 <ul>
 
-                                    <?php if (isset($_SESSION['is_customer'])) : ?>
+                                    <!-- Keranjang -->
+                                    <?php
+                                    $db = new \App\Core\DB;
 
-                                        <?php
+                                    use App\Core\Session;
 
-                                        $db = new \App\Core\DB;
-
+                                    if (getUserId('customer')) {
                                         $qty = $db->select('SUM(kuantitas) as qty')
                                             ->from('keranjang')
-                                            ->where('customer_id', '=', $_SESSION['is_customer']['id'])
+                                            ->where('customer_id', '=', getUserId('customer'))
                                             ->first();
+                                    } else {
+                                        $qty = 0;
+                                        if (Session::get('is_keranjang')) {
+                                            foreach (Session::get('is_keranjang') as $keranjang) {
+                                                $qty += $keranjang['qty'];
+                                            }
+                                        }
+                                        $qty = ['qty' => $qty];
+                                    }
+                                    ?>
+                                    <li class="mr-2">
+                                        <a href="<?= url('keranjang') ?>" class="site-cart">
+                                            <span class="icon icon-shopping_cart"></span>
+                                            <?php if ($qty['qty'] != null) : ?>
+                                                <span class="count"><?= $qty['qty']; ?></span>
+                                            <?php endif; ?>
+                                        </a>
+                                    </li>
 
-                                        ?>
-                                        <li class="mr-2">
-                                            <a href="<?= url('keranjang') ?>" class="site-cart">
-                                                <span class="icon icon-shopping_cart"></span>
-                                                <?php if ($qty['qty'] != null) : ?>
-                                                    <span class="count"><?= $qty['qty']; ?></span>
-                                                <?php endif; ?>
-                                            </a>
-                                        </li>
+
+                                    <?php if (isset($_SESSION['is_customer'])) : ?>
                                         <li class="dropdown">
                                             <a style="cursor: pointer;" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <span class="">

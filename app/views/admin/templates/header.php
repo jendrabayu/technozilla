@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Toko Online &mdash; <?= $data['judul'] ?></title>
+    <title>Technozilla &mdash; <?= $data['judul'] ?></title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -22,6 +20,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="<?= asset('backend/css/style.css') ?>">
     <link rel="stylesheet" href="<?= asset('backend/css/components.css') ?>">
+    <link rel="stylesheet" href="<?= asset('backend/css/mystyle.css') ?>">
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
