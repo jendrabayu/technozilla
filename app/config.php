@@ -4,7 +4,7 @@
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'pweb_online_shop');
+define('DB_NAME', 'technozilla');
 
 define('INC_ROOT', dirname(__DIR__));
 

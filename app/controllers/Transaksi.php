@@ -178,6 +178,10 @@ class Transaksi extends Controller
             ->where([['order.customer_id', '=', $id], ['order.status_order_id', '=', $status]])
             ->get();
 
+        if ($order_info == null || $order == null) {
+            Redirect::error(404, 'customer');
+        }
+
         return [
             'detail' => $order_info,
             'order' => $order
